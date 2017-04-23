@@ -26,14 +26,7 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.SimpleFSDirectory;
 
 public class App {
-	public static final boolean DEBUG = true;
-	public static final String FILES_TO_INDEX = "files";
-	public static final String FIELD_PATH = "path";
-	public static final String FIELD_CONTENTS = "cotents";
-	public static final String FIELD_CATEGORY = "category";
-	public static final String INDEX_DIRECTORY = "index";
-	public static final boolean recreate = true;
-	public static final int hitsPerPage = 10;
+	
 
 	public static void main(String[] args) throws IOException, ParseException {
 
@@ -55,10 +48,7 @@ public class App {
 			}
 
 		}
-		File indexes = new File(INDEX_DIRECTORY);
-		if (indexing_flag) {
-			createIndex(indexes);
-		}
+		File indexes = new File(Constants.INDEX_DIRECTORY);
 
 		if (query_flag) {
 			searchIndex(indexes.toPath(), queryString);
@@ -67,54 +57,11 @@ public class App {
 		// searchIndex(indexes.toPath(), "formally");
 	}
 
-	public static void createIndex(File indexes) throws IOException {
-		if (DEBUG) {
-			System.out.println("Starting Index");
-		}
-		Directory directory = new SimpleFSDirectory(indexes.toPath());
-		StandardAnalyzer analyzer = new StandardAnalyzer();
-		IndexWriterConfig config = new IndexWriterConfig(analyzer);
-		IndexWriter indexWriter = new IndexWriter(directory, config);
-		File dir = new File(FILES_TO_INDEX);
-		File[] files = dir.listFiles();
-		int debugCounter = 0;
-		for (File file : files) {
-
-			Document document = new Document();
-			String path = file.getCanonicalPath();
-			Reader reader = new FileReader(file);
-			BufferedReader br = new BufferedReader(reader);
-
-			String line = br.readLine();
-			document.add(new TextField(FIELD_CATEGORY, line, Field.Store.YES));
-			
-			for (line = br.readLine(); line != null; line = br.readLine()) {
-				if (!line.equals("")) {
-					debugCounter++;
-					if (DEBUG && (debugCounter % 100 == 0)) {
-						System.out.println(debugCounter);
-					}
-					
-					if ( !isCategory(line)){
-						document.add(new TextField(FIELD_CONTENTS, line, Field.Store.YES));
-					} else {
-						indexWriter.addDocument(document);
-						document = new Document();
-						document.add(new TextField(FIELD_CATEGORY, line, Field.Store.YES));
-					}
-				}
-			}
-
-		}
-		indexWriter.close();
-		if (DEBUG) {
-			System.out.println("Indexing finished");
-		}
-	}
 	
-	public static boolean isCategory(String line){
-		return (line.length() > 2 && line.charAt(0) == '[' && line.charAt(1) == '[') ;
-	}
+	
+
+
+
 
 	public static String parseCategory(String s) {
 		String returnString = s.substring(2, s.length() - 2);
@@ -127,20 +74,28 @@ public class App {
 		IndexReader indexReader = DirectoryReader.open(directory);
 		IndexSearcher indexSearcher = new IndexSearcher(indexReader);
 		StandardAnalyzer analyzer = new StandardAnalyzer();
-		QueryParser queryParser = new QueryParser(FIELD_CONTENTS, analyzer);
+		QueryParser queryParser = new QueryParser(Constants.FIELD_CONTENTS, analyzer);
 		Query query = queryParser.parse(searchString);
-		System.out.println(query.toString());
+		if (Constants.DEBUG){
+			System.out.println("SearchString: " + searchString);
+			System.out.println("Query: " + query);
+		}
 
-		TopDocs docs = indexSearcher.search(query, hitsPerPage);
+		TopDocs docs = indexSearcher.search(query, Constants.HITSPERPAGE);
 		ScoreDoc[] hits = docs.scoreDocs;
 		printResults(hits, indexSearcher);
-		System.out.println(indexSearcher.doc(0).get(FIELD_CATEGORY));
+		System.out.println(indexSearcher.doc(0).get(Constants.FIELD_CATEGORY));
 
 	}
 
 	public static void printResults(ScoreDoc[] hits, IndexSearcher indexSearcher) throws IOException {
+		if (Constants.DEBUG) {
+			System.out.println("PrintResults:");
+		}
 		for (int i = 0; i < hits.length; i++) {
-			System.out.println(hits[i].score + ", " + hits[i].doc + ", " + indexSearcher.doc(hits[i].doc).get(FIELD_CATEGORY));
+
+			System.out.println(
+					hits[i].score + ", " + hits[i].doc + ", " + indexSearcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY));
 		}
 	}
 }
