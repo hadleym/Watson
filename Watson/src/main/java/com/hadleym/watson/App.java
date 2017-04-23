@@ -1,20 +1,12 @@
 package com.hadleym.watson;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.file.Path;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
@@ -23,19 +15,14 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.store.SimpleFSDirectory;
 
 public class App {
-	
 
 	public static void main(String[] args) throws IOException, ParseException {
-
-		boolean indexing_flag = false;
 		boolean query_flag = false;
 		String queryString = "";
 		if (args.length > 0) {
 			if (args[0].equals("-index")) {
-				indexing_flag = true;
 			} else if (args[0].equals("-q")) {
 				query_flag = true;
 				if (args.length > 1) {
@@ -57,12 +44,6 @@ public class App {
 		// searchIndex(indexes.toPath(), "formally");
 	}
 
-	
-	
-
-
-
-
 	public static String parseCategory(String s) {
 		String returnString = s.substring(2, s.length() - 2);
 		return returnString;
@@ -76,7 +57,7 @@ public class App {
 		StandardAnalyzer analyzer = new StandardAnalyzer();
 		QueryParser queryParser = new QueryParser(Constants.FIELD_CONTENTS, analyzer);
 		Query query = queryParser.parse(searchString);
-		if (Constants.DEBUG){
+		if (Constants.DEBUG) {
 			System.out.println("SearchString: " + searchString);
 			System.out.println("Query: " + query);
 		}
@@ -94,8 +75,8 @@ public class App {
 		}
 		for (int i = 0; i < hits.length; i++) {
 
-			System.out.println(
-					hits[i].score + ", " + hits[i].doc + ", " + indexSearcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY));
+			System.out.println(hits[i].score + ", " + hits[i].doc + ", "
+					+ indexSearcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY));
 		}
 	}
 }
