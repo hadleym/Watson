@@ -38,5 +38,11 @@
 			<artifactId>lucene-test-framework</artifactId>
 			<version>6.4.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-wordnet -->
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-wordnet</artifactId>
+			<version>3.3.0</version>
+		</dependency>
 	</dependencies>
 </project>
