@@ -39,9 +39,19 @@ public class QueryHelper {
 		String initialQuery2 = "The practice of pre-authorizing presidential use of force dates to a 1955 resolution re: this island near mainland China";
 		String initialQuery3 = "Daniel Hertzberg & James B. Stewart of this paper shared a 1988 Pulitzer for their stories about insider trading";
 		String initialQuery = initialQuery3;
-		StopAnalyzer analyzer = new StopAnalyzer();
-		App.preprocessLine(initialQuery);
-		
+		doQuery(initialQuery1, index);
+		doQuery(initialQuery2, index);
+		doQuery(initialQuery3, index);
+		// System.out.println(q);
+	}
+
+	public static void doQuery(String initialQuery, File index) throws IOException, ParseException {
+		String ppQuery = App.preprocessLine(initialQuery);
+		Query q = new QueryParser(Constants.FIELD_CATEGORY, Constants.analyzer).parse(ppQuery);
+		IndexReader reader = DirectoryReader.open(Constants.getDirectory(index.toPath()));
+		IndexSearcher searcher = new IndexSearcher(reader);
+		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);
+		printResults(docs.scoreDocs, searcher);
 	}
 
 	public static List<String> analyze(Analyzer analyzer, List<String> words) throws IOException, ParseException {
@@ -87,9 +97,9 @@ public class QueryHelper {
 				}
 
 				System.out.println(words.get(i) + " : " + java.util.Arrays.asList(syn).toString());
-			} 
+			}
 			synonyms.add(words.get(i));
-			
+
 		}
 		return synonyms;
 

@@ -29,15 +29,6 @@ public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		System.out.println("Starting preprocessing...");
-		/*
-		File inputDir = new File(Constants.FILES_TO_INDEX);
-		for (File inputFile : inputDir.listFiles()) {
-			Path p = Paths.get(inputFile.toString());
-			String filename = p.getFileName().toString();
-			File outputFile = new File("out/" + filename + "_nlp");
-			preprocessingFile(inputFile, outputFile);
-		}
-		*/
 		File inputFile = new File(Constants.FILES_TO_INDEX + "/enwiki-20140602-pages-articles.xml-0124.txt");
 		File outputFile = new File("enwiki-0124_pp.txt");
 		preprocessingFile(inputFile, outputFile);
