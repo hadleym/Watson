@@ -15,7 +15,7 @@ import org.apache.lucene.store.FSDirectory;
 public class ReaderHelper {
 
 	public static void main(String[] args) throws IOException{
-		Path indexPath = new File(Constants.INDEX_DIRECTORY).toPath();
+		Path indexPath = new File(Constants.INDEX_DIR).toPath();
 		Directory directory = FSDirectory.open(indexPath);
 		IndexReader indexReader = DirectoryReader.open(directory);
 		IndexSearcher indexSearcher = new IndexSearcher(indexReader);
@@ -24,6 +24,8 @@ public class ReaderHelper {
 		System.out.println(indexReader);
 		Term t = new Term(Constants.FIELD_CONTENTS,"science");
 		System.out.println(indexReader.totalTermFreq(t));
-		System.out.println(indexReader.document(1));
+		for ( int i = 200; i < 250; i++){
+			System.out.println(indexReader.document(i));
+		}
 	}
 }

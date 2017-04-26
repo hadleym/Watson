@@ -1,8 +1,13 @@
 package com.hadleym.watson;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.DirectoryReader;
@@ -16,42 +21,121 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
+import edu.stanford.nlp.ling.Word;
+import edu.stanford.nlp.simple.Document;
+import edu.stanford.nlp.simple.Sentence;
+
 public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
-		boolean query_flag = false;
-		// String queryString = Constants.FIELD_CONTENTS + ":newspaper AND " +
-		// Constants.FIELD_CONTENTS + ":washington";
-		String queryString = Constants.FIELD_CONTENTS + ":newspaper AND " + 
-				Constants.FIELD_CONTENTS + ":washington AND " + 
-				Constants.FIELD_CONTENTS + ":capital ";
-		if (args.length > 0) {
-			if (args[0].equals("-index")) {
-			} else if (args[0].equals("-q")) {
-				query_flag = true;
-				if (args.length > 1) {
-//					queryString = args[1];
-				} else {
-					System.out.println("Incorrect query phrase.");
-					System.out.println("Exiting...");
-					System.exit(1);
+		System.out.println("Starting preprocessing...");
+		/*
+		File inputDir = new File(Constants.FILES_TO_INDEX);
+		for (File inputFile : inputDir.listFiles()) {
+			Path p = Paths.get(inputFile.toString());
+			String filename = p.getFileName().toString();
+			File outputFile = new File("out/" + filename + "_nlp");
+			preprocessingFile(inputFile, outputFile);
+		}
+		*/
+		File inputFile = new File(Constants.FILES_TO_INDEX + "/enwiki-20140602-pages-articles.xml-0124.txt");
+		File outputFile = new File("enwiki-0124_pp.txt");
+		preprocessingFile(inputFile, outputFile);
+		System.out.println("Preprocessing finished.");
+	}
+	
+	public static void preprocessingFile(File inputFile, File outputFile) throws IOException {
+		String line;
+		BufferedWriter bw = null;
+		FileWriter fw = null;
+		fw = new FileWriter(outputFile);
+		bw = new BufferedWriter(fw);
+		BufferedReader br = new BufferedReader(new FileReader(inputFile));
+		for (line = br.readLine(); line != null; line = br.readLine()) {
+			bw.write(preprocessLine(line));
+			/*
+			if (!beginsWith(line, "[[")) {
+				if (!beginsWith(line, "==") && !beginsWith(line, "#RED")) {
+					Document doc = new Document(line);
+					for (Sentence sent : doc.sentences()) {
+						StringBuilder sb = new StringBuilder();
+						for (int i = 0; i < sent.posTags().size(); i++) {
+							if (keepPartOfSpeech(sent.posTag(i))) {
+								sb.append(sent.lemma(i).toString() + " ");
+							}
+						}
+						bw.write(sb.toString() + "\n");
+					}
 				}
+			} else {
+				bw.write(line + "\n");
 			}
-
+			*/
 		}
-		File indexes = new File(Constants.INDEX_DIRECTORY);
 
-		if (query_flag) {
-			searchIndex(indexes.toPath(), queryString);
-		}
-		// searchIndex(indexes.toPath(), "CATEGORIES");
-		// searchIndex(indexes.toPath(), "formally");
+		br.close();
+		bw.close();
+		System.out.println("File " + outputFile.toPath() + " created");
 	}
 
+	public static String preprocessLine(String line) {
+		StringBuilder sb = new StringBuilder();
+		if (!beginsWith(line, "[[")) {
+			if (!beginsWith(line, "==") && !beginsWith(line, "#RED")) {
+				Document doc = new Document(line);
+				for (Sentence sent : doc.sentences()) {
+					for (int i = 0; i < sent.posTags().size(); i++) {
+						if (keepPartOfSpeech(sent.posTag(i))) {
+							sb.append(sent.lemma(i).toString() + " ");
+						}
+					}
+				}
+			}
+		} else {
+			sb.append(line + "\n");
+		}
+		return sb.toString();
+	}
+
+	public static boolean keepPartOfSpeech(String pos) {
+		if (pos.length() == 1) {
+			if (pos.equals("V")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		String firstTwo = pos.substring(0, 2);
+		if ((pos.charAt(0) == 'V') || firstTwo.equals("RB") || firstTwo.equals("JJ") || firstTwo.equals("NN")) {
+			return true;
+		}
+		return false;
+	}
+
+	// strip the leading 2 characters from a line.
 	public static String parseCategory(String s) {
 		String returnString = s.substring(2, s.length() - 2);
 		return returnString;
+	}
 
+	// This returns if the line of text is a section
+	// for example:
+	// ==Information==
+	// or
+	// #REDIRECT
+	// is a section, and is most likely not relevant.
+	public static boolean beginsWith(String line, String prefix) {
+		if (line.length() >= prefix.length()) {
+			return line.substring(0, prefix.length()).equals(prefix);
+		}
+		return false;
+	}
+
+	// Determines if a string is a category, denoted by
+	// a leading '=='. Should be added to the Category field
+	// of the index.
+	public static boolean isCategory(String line) {
+		return (line.length() > 2 && line.charAt(0) == '[' && line.charAt(1) == '[');
 	}
 
 	public static void searchIndex(Path directoryPath, String searchString) throws IOException, ParseException {

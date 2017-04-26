@@ -33,37 +33,15 @@ import org.apache.lucene.analysis.tokenattributes.*;
 
 public class QueryHelper {
 	public static void main(String[] args) throws IOException, ParseException {
-		File index = new File(Constants.INDEX_DIRECTORY);
+		File index = new File(Constants.INDEX_DIR);
 		// String initialQuery = "newspaper capital 10 papers u.s. circulation";
-		String initialQuery = "newspaper The dominant paper in our nation's capital, it's among the top 10 U.S. papers in circulation";
-		// String query = parseQuery(initialQuery.split("\\s+"));
-		// searchIndex(index.toPath(), query);
-		// StandardAnalyzer analyzer = new StandardAnalyzer();
-		// WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer();
+		String initialQuery1 = "newspaper The dominant paper in our nation's capital, it's among the top 10 U.S. papers in circulation";
+		String initialQuery2 = "The practice of pre-authorizing presidential use of force dates to a 1955 resolution re: this island near mainland China";
+		String initialQuery3 = "Daniel Hertzberg & James B. Stewart of this paper shared a 1988 Pulitzer for their stories about insider trading";
+		String initialQuery = initialQuery3;
 		StopAnalyzer analyzer = new StopAnalyzer();
-
-		List<String> results = new ArrayList<String>();
-		String[] rawWords = initialQuery.split("\\s+");
-		for (int i = 0; i < rawWords.length; i++){
-			results.add(rawWords[i]);
-		}
-		results = analyze(new StandardAnalyzer(), results);
-//		System.out.print(results);
-//		results = analyze(new SimpleAnalyzer(), results);
-//		System.out.print(results);
-//		results = analyze(new StandardAnalyzer(), results);
-//		System.out.print(results);
-//		results = analyze(new WhitespaceAnalyzer(), results);
-		QueryParser queryParser = new QueryParser(Constants.FIELD_CONTENTS, analyzer);
-		String q = new String();
-		results = createSynonyms(results);
-		for ( String s : results){
-			q += s + " ";
-		}
-		Query query = queryParser.parse(q);
-		System.out.println(query);
-		// ArrayList<String> words = createSynonyms(initialQuery.split("\\s+"));
-		searchIndex(index.toPath(), query);
+		App.preprocessLine(initialQuery);
+		
 	}
 
 	public static List<String> analyze(Analyzer analyzer, List<String> words) throws IOException, ParseException {
