@@ -43,10 +43,15 @@ public class Preprocessor {
 		BufferedWriter bw = null;
 		bw = new BufferedWriter(new FileWriter(dest));
 		BufferedReader br = new BufferedReader(new FileReader(src));
+		int i = 0;
 		for (line = br.readLine(); line != null; line = br.readLine()){
+			i++;
+			if (i%500 == 0){
+				System.out.print('.');
+			}
 			bw.write(preprocessLine(line));
 		}
-		
+		System.out.println("");
 		br.close();
 		bw.close();
 		System.out.println("Finished preprocessing file: " + src.getName());
