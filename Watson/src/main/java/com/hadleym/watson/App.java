@@ -28,25 +28,26 @@ import edu.stanford.nlp.simple.Sentence;
 public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
-		if (args[0].equals("preprocess"){
-			preProcessAllFiles(Constants.)
+		if (args.length > 0) {
+			if (args[0].equals("-p")) {
+				preProcessAllFiles(new File(Constants.RAW_FILE_DIR), new File(Constants.PREPROCESS_DIR));
+			}
 		}
 	}
 
-	public static void preProcessAllFiles(File inputDir, File outputDir){
-		File inputDir = new File("files");
-		File outputDir = new File("preprocessedFiles");
+	public static void preProcessAllFiles(File inputDir, File outputDir) {
 		System.out.println("Starting preprocessing...");
 		Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
-		try { 
+		try {
 			preprocessor.preprocessDirectory(inputDir, outputDir);
-		} catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("Error with input or output directory");
 		}
 		System.out.println("Preprocessing finished.");
-		
+
 	}
+
 	public static void preprocessingFile(File inputFile, File outputFile) throws IOException {
 		String line;
 		BufferedWriter bw = null;

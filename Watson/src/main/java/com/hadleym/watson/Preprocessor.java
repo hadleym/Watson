@@ -38,7 +38,7 @@ public class Preprocessor {
 		
 	}
 	public void preprocessFile(File src, File dest) throws IOException {
-		System.out.println("preprocessing file: " + src.getName());
+		System.out.print("preprocessing file: " + src.getName());
 		String line;
 		BufferedWriter bw = null;
 		bw = new BufferedWriter(new FileWriter(dest));

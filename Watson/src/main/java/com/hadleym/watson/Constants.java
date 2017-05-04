@@ -12,8 +12,6 @@ import org.apache.lucene.store.SimpleFSDirectory;
 public class Constants {
 	public static final Analyzer analyzer = new WhitespaceAnalyzer();
 	public static final boolean DEBUG = false;
-//	public static final String FILES_TO_INDEX = "files_testing";
-
 
 	public static final String RAW_FILE_DIR = "rawFiles";
 	public static final String PREPROCESS_DIR = "preprocessedFiles";
