@@ -1,5 +1,11 @@
 package com.hadleym.watson;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashSet;
 
 import edu.stanford.nlp.simple.Document;
@@ -11,6 +17,23 @@ public class Preprocessor {
 	public Preprocessor(HashSet<String> sw, String[] parts){
 		stopWords = sw;
 		partsOfSpeechToKeep = parts;
+	}
+	
+	public void preprocessDirectory(File src, File dest){
+		
+	}
+	public void preprocessFile(File src, File dest) throws IOException {
+		String line;
+		BufferedWriter bw = null;
+		bw = new BufferedWriter(new FileWriter(dest));
+		BufferedReader br = new BufferedReader(new FileReader(src));
+		for (line = br.readLine(); line != null; line = br.readLine()){
+			bw.write(preprocessLine(line));
+		}
+		
+		br.close();
+		bw.close();
+		
 	}
 	public static String preprocessLine(String line) {
 		StringBuilder sb = new StringBuilder();
