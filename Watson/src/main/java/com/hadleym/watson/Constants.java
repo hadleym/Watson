@@ -25,6 +25,11 @@ public class Constants {
 	public static final String PPFILES_TEST = "PPFILES_TEST";
 	public static final String[] PARTS_OF_SPEECH = {"JJ", "JJR", "JJS", "NN", "NNS", "NNP", 
 			"NNPS", "RB", "RBR", "RBS", "VB", "VBD", "VBG" ,"VBN", "VBP", "VBZ"};
+	public static final String[] STOP_WORDS = {"a", "an", "and", "are", "as", "at", "be", "but", "by",
+			"for", "if", "in", "into", "is", "it",
+			"no", "not", "of", "on", "or", "such",
+			"that", "the", "their", "then", "there", "these",
+			"they", "this", "to", "was", "will", "with"};
 	
 	public static final String CATEGORY_PREFIX = "[[";
 	public static final String[] IGNORE_PREFIX = { "==", "#RED" };

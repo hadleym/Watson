@@ -28,8 +28,7 @@ import edu.stanford.nlp.simple.Sentence;
 public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
-
-		Preprocessor preprocessor = new Preprocessor("pp", null, Constants.PARTS_OF_SPEECH);
+		Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
 		System.out.println("Starting preprocessing...");
 		File inputDir = new File("files");
 		File outputDir = new File("preprocessedFiles");

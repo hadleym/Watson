@@ -15,12 +15,10 @@ public class Preprocessor {
 	public HashSet<String> stopWords;
 	public HashSet<String> parts;
 	private String tag;
-	String[] partsOfSpeechToKeep;
-	public Preprocessor(String tag, HashSet<String> sw, String[] parts){
+	public Preprocessor(String tag, String[] sw, String[] parts){
 		this.tag = tag;
-		stopWords = sw;
-		partsOfSpeechToKeep = parts;
 		this.parts = generateHashSet(parts);
+		this.stopWords = generateHashSet(sw);
 	}
 	public HashSet<String> generateHashSet(String[] p){
 		HashSet<String> set = new HashSet<String>();
@@ -61,7 +59,7 @@ public class Preprocessor {
 				Document doc = new Document(line);
 				for (Sentence sent : doc.sentences()) {
 					for (int i = 0; i < sent.posTags().size(); i++) {
-						if ( parts.contains(sent.posTag(i))){ 
+						if ( parts.contains(sent.posTag(i)) && !stopWords.contains(sent.lemma(i))){ 
 							sb.append(sent.lemma(i).toString() + " ");
 						}
 					}
