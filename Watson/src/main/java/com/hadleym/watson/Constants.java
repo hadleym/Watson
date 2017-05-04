@@ -23,8 +23,11 @@ public class Constants {
 	public static final String PPFILES_DIR = "PPFILES";
 	public static final String INDEX_TEST_DIR = "index_test";
 	public static final String PPFILES_TEST = "PPFILES_TEST";
-		
-
+	public static final String[] PARTS_OF_SPEECH = {"JJ", "JJR", "JJS", "NN", "NNS", "NNP", 
+			"NNPS", "RB", "RBR", "RBS", "VB", "VBD", "VBG" ,"VBN", "VBP", "VBZ"};
+	
+	public static final String CATEGORY_PREFIX = "[[";
+	public static final String[] IGNORE_PREFIX = { "==", "#RED" };
 	public static Directory getDirectory(Path p) {
 		try { 
 			return new SimpleFSDirectory(p);

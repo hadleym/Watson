@@ -28,13 +28,15 @@ import edu.stanford.nlp.simple.Sentence;
 public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
+
+		Preprocessor preprocessor = new Preprocessor("pp", null, Constants.PARTS_OF_SPEECH);
 		System.out.println("Starting preprocessing...");
-		File inputFile = new File(Constants.FILES_TO_INDEX + "/enwiki-20140602-pages-articles.xml-0124.txt");
-		File outputFile = new File("enwiki-0124_pp.txt");
-		preprocessingFile(inputFile, outputFile);
+		File inputDir = new File("files");
+		File outputDir = new File("preprocessedFiles");
+		preprocessor.preprocessDirectory(inputDir, outputDir);
 		System.out.println("Preprocessing finished.");
 	}
-	
+
 	public static void preprocessingFile(File inputFile, File outputFile) throws IOException {
 		String line;
 		BufferedWriter bw = null;
@@ -45,23 +47,15 @@ public class App {
 		for (line = br.readLine(); line != null; line = br.readLine()) {
 			bw.write(preprocessLine(line));
 			/*
-			if (!beginsWith(line, "[[")) {
-				if (!beginsWith(line, "==") && !beginsWith(line, "#RED")) {
-					Document doc = new Document(line);
-					for (Sentence sent : doc.sentences()) {
-						StringBuilder sb = new StringBuilder();
-						for (int i = 0; i < sent.posTags().size(); i++) {
-							if (keepPartOfSpeech(sent.posTag(i))) {
-								sb.append(sent.lemma(i).toString() + " ");
-							}
-						}
-						bw.write(sb.toString() + "\n");
-					}
-				}
-			} else {
-				bw.write(line + "\n");
-			}
-			*/
+			 * if (!beginsWith(line, "[[")) { if (!beginsWith(line, "==") &&
+			 * !beginsWith(line, "#RED")) { Document doc = new Document(line);
+			 * for (Sentence sent : doc.sentences()) { StringBuilder sb = new
+			 * StringBuilder(); for (int i = 0; i < sent.posTags().size(); i++)
+			 * { if (keepPartOfSpeech(sent.posTag(i))) {
+			 * sb.append(sent.lemma(i).toString() + " "); } }
+			 * bw.write(sb.toString() + "\n"); } } } else { bw.write(line +
+			 * "\n"); }
+			 */
 		}
 
 		br.close();

@@ -12,17 +12,35 @@ import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 
 public class Preprocessor {
-	public String[] partsOfSpeechToKeep = { "V", "RB", "JJ", "NN" };
 	public HashSet<String> stopWords;
-	public Preprocessor(HashSet<String> sw, String[] parts){
+	public HashSet<String> parts;
+	private String tag;
+	String[] partsOfSpeechToKeep;
+	public Preprocessor(String tag, HashSet<String> sw, String[] parts){
+		this.tag = tag;
 		stopWords = sw;
 		partsOfSpeechToKeep = parts;
+		this.parts = generateHashSet(parts);
 	}
-	
-	public void preprocessDirectory(File src, File dest){
+	public HashSet<String> generateHashSet(String[] p){
+		HashSet<String> set = new HashSet<String>();
+		for ( String s: p){
+			set.add(s);
+		}
+		return set;
+	}
+	public void preprocessDirectory(File srcDir, File destDir) throws IOException{
+		String destPath = destDir.getPath();
+		String separator = File.separator;
+		for ( File srcFile : srcDir.listFiles()){
+			String filename = destPath + separator + srcFile.getName() + ".pp";
+			File destFile = new File(filename);
+			preprocessFile(srcFile, destFile );
+		}
 		
 	}
 	public void preprocessFile(File src, File dest) throws IOException {
+		System.out.println("preprocessing file: " + src.getName());
 		String line;
 		BufferedWriter bw = null;
 		bw = new BufferedWriter(new FileWriter(dest));
@@ -33,16 +51,17 @@ public class Preprocessor {
 		
 		br.close();
 		bw.close();
+		System.out.println("Finished preprocessing file: " + src.getName());
 		
 	}
-	public static String preprocessLine(String line) {
+	public String preprocessLine(String line) {
 		StringBuilder sb = new StringBuilder();
-		if (!beginsWith(line, "[[")) {
+		if (!isCategory(line)) {
 			if (!beginsWith(line, "==") && !beginsWith(line, "#RED")) {
 				Document doc = new Document(line);
 				for (Sentence sent : doc.sentences()) {
 					for (int i = 0; i < sent.posTags().size(); i++) {
-						if (keepPartOfSpeech(sent.posTag(i))) {
+						if ( parts.contains(sent.posTag(i))){ 
 							sb.append(sent.lemma(i).toString() + " ");
 						}
 					}
@@ -71,22 +90,11 @@ public class Preprocessor {
 	// a leading '=='. Should be added to the Category field
 	// of the index.
 	public static boolean isCategory(String line) {
-		return (line.length() > 2 && line.charAt(0) == '[' && line.charAt(1) == '[');
-	}
-
-	public static boolean keepPartOfSpeech(String pos) {
-		if (pos.length() == 1) {
-			if (pos.equals("V")) {
-				return true;
-			} else {
-				return false;
-			}
+		String prefix = Constants.CATEGORY_PREFIX;
+		if ( line.length() < prefix.length()){
+			return false;
 		}
-		String firstTwo = pos.substring(0, 2);
-		if ((pos.charAt(0) == 'V') || firstTwo.equals("RB") || firstTwo.equals("JJ") || firstTwo.equals("NN")) {
-			return true;
-		}
-		return false;
+		return line.substring(0, prefix.length()).equals(prefix);
 	}
 
 }
