@@ -17,6 +17,7 @@ public class Constants {
 
 	public static final String RAW_FILE_DIR = "rawFiles";
 	public static final String PREPROCESS_DIR = "preprocessedFiles";
+	public static final String STANDARD_ANALYZE_DIR = "standardIndex";
 	public static final String NLP_INDEX = "nlpIndex";
 	public static final String LUCENE_INDEX = "luceneIndex";
 	public static final String FIELD_CONTENTS = "contents";

@@ -31,10 +31,15 @@ public class App {
 		if (args.length > 0) {
 			if (args[0].equals("-p")) {
 				preProcessAllFiles(new File(Constants.RAW_FILE_DIR), new File(Constants.PREPROCESS_DIR));
+			} else if (args[0].equals("-s")){
+				standardAnalyze(new File(Constants.RAW_FILE_DIR), new File(Constants.STANDARD_ANALYZE_DIR));
 			}
 		}
 	}
 
+	public static void standardAnalyze(File inputDir, File outputDir){
+		System.out.println("Starting standard analyzer on directory: " + inputDir.getName() + " to ouput to " + outputDir.getName());
+	}
 	public static void preProcessAllFiles(File inputDir, File outputDir) {
 		System.out.println("Starting preprocessing...");
 		Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
