@@ -35,49 +35,68 @@ import org.apache.lucene.analysis.tokenattributes.*;
 
 public class QueryHelper {
 
-	public static void main(String[] args) throws IOException, ParseException {
+	public static void evaluate(File questionsFile, File indexDir, Analyzer a, Preprocessor pp, boolean verbose)
+			throws IOException, ParseException {
+		Preprocessor preprocessor = pp;
+		Analyzer analyzer = a;
 		int[] ranks = new int[10];
-		Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
-		File questions = new File("questions.txt");
-		File index = new File(Constants.NLP_INDEX);
+		File questions = questionsFile;
+		File index = indexDir;
 		BufferedReader br = new BufferedReader(new FileReader(questions));
 		int total = 0;
-		for (String subject = br.readLine(); subject !=null; subject = br.readLine()){
+		for (String subject = br.readLine(); subject != null; subject = br.readLine()) {
 			if (subject.equals("POTPOURRI")) {
 				subject = "";
 			}
 			String question = br.readLine();
 			String answer = br.readLine();
-			String blank = br.readLine();
-			String query = preprocessor.preprocessLine(subject + " " + question);
-			System.out.println("QUESTION: " + query ); 
-			System.out.println("ANSWER: " + answer);
-			int rank = doQuery(query, index, answer);
-			if ( rank >= 0 ){
+
+			// read blank line
+			br.readLine();
+
+			String query = subject + " " + question;
+			
+			// if the NLP_FLAG is false, then there is no 'preprocessing' to do on this query
+			if (preprocessor != null ){
+				query = preprocessor.preprocessLine(query);
+			}
+			if (verbose) {
+				System.out.println("QUESTION: " + query);
+				System.out.println("ANSWER: " + answer);
+			}
+			int rank = doQuery(query, index, answer, analyzer, verbose);
+			if (rank >= 0) {
 				ranks[rank]++;
 			}
-			System.out.println("");
+			if (verbose) {
+				System.out.println("");
+			}
 			total++;
 		}
 		br.close();
-		for (int i = 0; i < ranks.length; i++){
+		for (int i = 0; i < ranks.length; i++) {
 			System.out.println("Rank " + i + ": " + ranks[i]);
 		}
 		System.out.println("Total: " + total);
 	}
+	
 
-	public static int doQuery(String query, File index, String answer) throws IOException, ParseException {
-		Query q = new QueryParser(Constants.FIELD_CONTENTS, Constants.whitespaceAnalyzer).parse(query);
+	public static int doQuery(String query, File index, String answer, Analyzer analyzer, boolean verbose) throws IOException, ParseException {
+		Query q = new QueryParser(Constants.FIELD_CONTENTS, analyzer).parse(query);
 		IndexReader reader = DirectoryReader.open(Constants.getDirectory(index.toPath()));
 		IndexSearcher searcher = new IndexSearcher(reader);
 		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);
 		ScoreDoc[] hits = docs.scoreDocs;
-		System.out.println("Results:");
-		for ( int i = 0; i < hits.length; i++){
+		if (verbose) {
+			System.out.println("Results:");
+		}
+		for (int i = 0; i < hits.length; i++) {
 			String result = searcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY);
-			//strip '[[' and ']]'
-			result = result.substring(2, result.length()-2);
-			if (result.equals(answer)){
+
+			// strip '[[' and ']]'
+			result = result.substring(2, result.length() - 2);
+
+			if (result.equals(answer)) {
 				System.out.println(i + ": " + result);
 				return i;
 			}
