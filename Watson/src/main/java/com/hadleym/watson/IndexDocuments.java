@@ -20,30 +20,23 @@ import org.apache.lucene.store.SimpleFSDirectory;
 public class IndexDocuments {
 
 	public static void main(String[] args) throws IOException {
-		File destDir = new File(Constants.INDEX_DIR);
-		File srcDir = new File(Constants.PPFILES_DIR);
+		File destDir = new File(Constants.NLP_INDEX);
+		File srcDir = new File(Constants.PREPROCESS_DIR);
 		Directory directory = new SimpleFSDirectory(destDir.toPath());
 		Analyzer analyzer = new WhitespaceAnalyzer();
 		IndexWriterConfig config = new IndexWriterConfig(analyzer);
 		IndexWriter indexWriter = new IndexWriter(directory, config);
-
+		
+		int total = srcDir.listFiles().length;
+		int count = 1;
 		for (File srcFile : srcDir.listFiles()){
+			System.out.print(count + " of " + total +", ");
 			indexFile(srcFile, destDir, indexWriter);
 		}
 		indexWriter.close();
 	}
 
-	// File srcDir = new File(Constants.PPNLP);
-	// File[] files = srcDir.listFiles();
-	// int fileCount = files.length;
-	// for (File file : files) {
-	// System.out.println(file.getPath());
-	// double progress = (double) current / (double) fileCount * 100;
-	// String progressString = String.format("%.2f\n", progress);
 	public static void indexFile(File srcFile, File destDir, IndexWriter indexWriter) throws IOException {
-		if (Constants.DEBUG) {
-			System.out.println("Indexing File " + srcFile + " to directory " + destDir);
-		}
 		Reader reader = new FileReader(srcFile);
 		BufferedReader br = new BufferedReader(reader);
 
@@ -51,6 +44,7 @@ public class IndexDocuments {
 		String line = br.readLine();
 		Document document = new Document();
 		addTextField(document, Constants.FIELD_CATEGORY, line);
+		addTextField(document, Constants.FIELD_CONTENTS, line);
 		for (line = br.readLine(); line != null; line = br.readLine()) {
 			if (!isCategory(line)) {
 				if (Constants.DEBUG) {
@@ -62,11 +56,12 @@ public class IndexDocuments {
 				indexWriter.addDocument(document);
 				document = new Document();
 				addTextField(document, Constants.FIELD_CATEGORY, line);
+				addTextField(document, Constants.FIELD_CONTENTS, line);
 			}
 		}
 		br.close();
 
-		System.out.println("Indexing of file " + srcFile + " finished");
+		System.out.println( srcFile.getName() + " finished");
 	}
 
 	public static void addTextField(Document document, String field, String line) {

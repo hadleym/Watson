@@ -5,21 +5,25 @@ import java.nio.file.Path;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.SimpleFSDirectory;
 
 public class Constants {
-	public static final Analyzer analyzer = new WhitespaceAnalyzer();
+	public static final Analyzer whitespaceAnalyzer = new WhitespaceAnalyzer();
+	public static final Analyzer standardAnalyzer = new StandardAnalyzer();
 	public static final boolean DEBUG = false;
 
 	public static final String RAW_FILE_DIR = "rawFiles";
 	public static final String PREPROCESS_DIR = "preprocessedFiles";
+	public static final String NLP_INDEX = "nlpIndex";
+	public static final String LUCENE_INDEX = "luceneIndex";
 	public static final String FIELD_CONTENTS = "contents";
 	public static final String FIELD_CATEGORY = "category";
 	public static final String INDEX_DIR = "index";
 	public static final boolean recreate = true;
-	public static final int HITSPERPAGE = 1;
+	public static final int HITSPERPAGE = 10;
 	public static final String[] PARTS_OF_SPEECH = {"JJ", "JJR", "JJS", "NN", "NNS", "NNP", 
 			"NNPS", "RB", "RBR", "RBS", "VB", "VBD", "VBG" ,"VBN", "VBP", "VBZ"};
 	public static final String[] STOP_WORDS = {"a", "an", "and", "are", "as", "at", "be", "but", "by",

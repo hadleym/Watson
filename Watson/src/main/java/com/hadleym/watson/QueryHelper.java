@@ -1,7 +1,9 @@
 package com.hadleym.watson;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Path;
@@ -32,26 +34,55 @@ import org.apache.lucene.wordnet.SynonymMap;
 import org.apache.lucene.analysis.tokenattributes.*;
 
 public class QueryHelper {
+
 	public static void main(String[] args) throws IOException, ParseException {
-		File index = new File(Constants.INDEX_DIR);
-		// String initialQuery = "newspaper capital 10 papers u.s. circulation";
-		String initialQuery1 = "newspaper The dominant paper in our nation's capital, it's among the top 10 U.S. papers in circulation";
-		String initialQuery2 = "The practice of pre-authorizing presidential use of force dates to a 1955 resolution re: this island near mainland China";
-		String initialQuery3 = "Daniel Hertzberg & James B. Stewart of this paper shared a 1988 Pulitzer for their stories about insider trading";
-		String initialQuery = initialQuery3;
-		doQuery(initialQuery1, index);
-		doQuery(initialQuery2, index);
-		doQuery(initialQuery3, index);
-		// System.out.println(q);
+		int[] ranks = new int[10];
+		Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
+		File questions = new File("questions.txt");
+		File index = new File(Constants.NLP_INDEX);
+		BufferedReader br = new BufferedReader(new FileReader(questions));
+		int total = 0;
+		for (String subject = br.readLine(); subject !=null; subject = br.readLine()){
+			if (subject.equals("POTPOURRI")) {
+				subject = "";
+			}
+			String question = br.readLine();
+			String answer = br.readLine();
+			String blank = br.readLine();
+			String query = preprocessor.preprocessLine(subject + " " + question);
+			System.out.println("QUESTION: " + query ); 
+			System.out.println("ANSWER: " + answer);
+			int rank = doQuery(query, index, answer);
+			if ( rank >= 0 ){
+				ranks[rank]++;
+			}
+			System.out.println("");
+			total++;
+		}
+		br.close();
+		for (int i = 0; i < ranks.length; i++){
+			System.out.println("Rank " + i + ": " + ranks[i]);
+		}
+		System.out.println("Total: " + total);
 	}
 
-	public static void doQuery(String initialQuery, File index) throws IOException, ParseException {
-		String ppQuery = App.preprocessLine(initialQuery);
-		Query q = new QueryParser(Constants.FIELD_CATEGORY, Constants.analyzer).parse(ppQuery);
+	public static int doQuery(String query, File index, String answer) throws IOException, ParseException {
+		Query q = new QueryParser(Constants.FIELD_CONTENTS, Constants.whitespaceAnalyzer).parse(query);
 		IndexReader reader = DirectoryReader.open(Constants.getDirectory(index.toPath()));
 		IndexSearcher searcher = new IndexSearcher(reader);
 		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);
-		printResults(docs.scoreDocs, searcher);
+		ScoreDoc[] hits = docs.scoreDocs;
+		System.out.println("Results:");
+		for ( int i = 0; i < hits.length; i++){
+			String result = searcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY);
+			//strip '[[' and ']]'
+			result = result.substring(2, result.length()-2);
+			if (result.equals(answer)){
+				System.out.println(i + ": " + result);
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	public static List<String> analyze(Analyzer analyzer, List<String> words) throws IOException, ParseException {
