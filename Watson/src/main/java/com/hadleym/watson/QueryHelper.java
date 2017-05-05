@@ -36,7 +36,7 @@ import org.apache.lucene.analysis.tokenattributes.*;
 public class QueryHelper {
 
 	public static void evaluate(File questionsFile, File indexDir, Analyzer a, Preprocessor pp, boolean verbose)
-			throws IOException, ParseException {
+			throws IOException {
 		Preprocessor preprocessor = pp;
 		Analyzer analyzer = a;
 		int[] ranks = new int[10];
@@ -55,16 +55,25 @@ public class QueryHelper {
 			br.readLine();
 
 			String query = subject + " " + question;
-			
-			// if the NLP_FLAG is false, then there is no 'preprocessing' to do on this query
-			if (preprocessor != null ){
+
+			// if the NLP_FLAG is false, then there is no 'preprocessing' to do
+			// on this query
+			if (preprocessor != null) {
 				query = preprocessor.preprocessLine(query);
+			} else {
+				query = filter(query);
 			}
 			if (verbose) {
 				System.out.println("QUESTION: " + query);
 				System.out.println("ANSWER: " + answer);
 			}
-			int rank = doQuery(query, index, answer, analyzer, verbose);
+			int rank;
+			try {
+				rank = doQuery(query, index, answer, analyzer, verbose);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				rank = -1;
+			}
 			if (rank >= 0) {
 				ranks[rank]++;
 			}
@@ -79,9 +88,13 @@ public class QueryHelper {
 		}
 		System.out.println("Total: " + total);
 	}
-	
 
-	public static int doQuery(String query, File index, String answer, Analyzer analyzer, boolean verbose) throws IOException, ParseException {
+	private static String filter ( String line){
+		return line.replaceAll("[()!#&\"\'-]","");
+	}
+
+	public static int doQuery(String query, File index, String answer, Analyzer analyzer, boolean verbose)
+			throws IOException, ParseException {
 		Query q = new QueryParser(Constants.FIELD_CONTENTS, analyzer).parse(query);
 		IndexReader reader = DirectoryReader.open(Constants.getDirectory(index.toPath()));
 		IndexSearcher searcher = new IndexSearcher(reader);

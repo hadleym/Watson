@@ -51,8 +51,12 @@ public class App {
 			} else if ( args[0].equals("-istd")){
 				if (args.length >= 2){
 					String filesToIndex = args[1];
-					String index = args[2];
-					index(new File(filesToIndex), new File(index), new StandardAnalyzer());
+					File index = new File(args[2]);
+					if (index.listFiles().length > 0 ){
+						System.out.println(index.getName() + " is not empty.  Please empty index directory and retry.");
+						System.exit(1);
+					}
+					index(new File(filesToIndex), index, new StandardAnalyzer());
 				} else {
 					System.out.println("Not enough arguments to analyzer");
 					System.out.println("USAGE: App -istd SOURCE_DIR INDEX_DIR");
@@ -94,7 +98,7 @@ public class App {
 	}
 
 	public static void index(File inputDir, File outputDir, Analyzer analyzer) {
-		System.out.println("Starting standard analyzer on directory: " + inputDir.getName() + " to ouput to "
+		System.out.println("indexint directory: " + inputDir.getName() + " to ouput to "
 				+ outputDir.getName());
 		DocumentIndexer indexer = new DocumentIndexer(inputDir, outputDir, analyzer);
 		indexer.indexAllFiles();
