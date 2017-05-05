@@ -30,7 +30,7 @@ public class IndexDocuments {
 		int total = srcDir.listFiles().length;
 		int count = 1;
 		for (File srcFile : srcDir.listFiles()){
-			System.out.print(count + " of " + total +", ");
+			System.out.print(count++ + " of " + total +", ");
 			indexFile(srcFile, destDir, indexWriter);
 		}
 		indexWriter.close();

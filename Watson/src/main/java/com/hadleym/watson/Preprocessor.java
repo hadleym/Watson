@@ -30,7 +30,10 @@ public class Preprocessor {
 	public void preprocessDirectory(File srcDir, File destDir) throws IOException{
 		String destPath = destDir.getPath();
 		String separator = File.separator;
+		int total = srcDir.listFiles().length;
+		int count = 1;
 		for ( File srcFile : srcDir.listFiles()){
+			System.out.print(count++ + " of " + total + ":");
 			String filename = destPath + separator + srcFile.getName() + ".pp";
 			File destFile = new File(filename);
 			preprocessFile(srcFile, destFile );
@@ -51,10 +54,9 @@ public class Preprocessor {
 			}
 			bw.write(preprocessLine(line));
 		}
-		System.out.println("");
 		br.close();
 		bw.close();
-		System.out.println("Finished preprocessing file: " + src.getName());
+		System.out.println("Finished.");
 		
 	}
 	public String preprocessLine(String line) {
@@ -68,6 +70,7 @@ public class Preprocessor {
 							sb.append(sent.lemma(i).toString() + " ");
 						}
 					}
+					sb.append("\n");
 				}
 			}
 		} else {
