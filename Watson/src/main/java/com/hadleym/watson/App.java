@@ -47,89 +47,76 @@ import edu.stanford.nlp.simple.Sentence;
 public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
-		if (args.length > 0) {
-			// will preprocess the entire directory of Constants.RAW_FILE_DIR
-			// and place new preprocessed files into Constants.PREPROCESS_DIR
-			// this is for the files referred to as 'nlp' preprocessed files.
-			if (args[0].equals("-p")) {
-				preProcessAllFiles(new File(Constants.RAW_FILE_DIR), new File(Constants.PREPROCESS_DIR));
-				// will index the nlp preprocessed files with the lucene
-				// whitespace analyzer.
-			} else if (args[0].equals("-inlp")) {
-				if (args.length >= 2) {
-					String filesToIndex = args[1];
-					String index = args[2];
-					index(new File(filesToIndex), new File(index), new WhitespaceAnalyzer());
-				} else {
-					System.out.println("Not enough arguments to analyzer");
-					System.out.println("USAGE: App -inlp SOURCE_DIR INDEX_DIR");
-					System.exit(1);
-				}
-				// will index the files with the lucene standard analyzer
-			} else if (args[0].equals("-istd")) {
-				if (args.length >= 2) {
-					String filesToIndex = args[1];
-					File index = new File(args[2]);
-					if (index.listFiles().length > 0) {
-						System.out.println(index.getName() + " is not empty.  Please empty index directory and retry.");
-						System.exit(1);
-					}
-					index(new File(filesToIndex), index, new StandardAnalyzer());
-				} else {
-					System.out.println("Not enough arguments to analyzer");
-					System.out.println("USAGE: App -istd SOURCE_DIR INDEX_DIR");
-					System.exit(1);
-				}
-				// will evaluate the nlp pre-processed files vs. the collection
-				// of questions.
-			} else if (args[0].equals("-enlp")) {
-				System.out.println("Evaluating the NLP index...");
-				if (args.length > 2) {
-					Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
-					String questions = args[1];
-					String index = args[2];
-					QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index),
-							new WhitespaceAnalyzer(), preprocessor, true);
-					// nlpQuery.analyze();
-					// nlpQuery.printRanks();
-					nlpQuery.executeQuestions();
-					nlpQuery.printRanks();
-
-				} else {
-					System.out.println("Not enough arguments to analyzer");
-					System.out.println("USAGE: App -enlp QUESTIONS_FILE INDEX_DIR");
-					System.exit(1);
-				}
-				// will evaluate the lucene standard analyzer index documents vs
-				// teh collection of questions.
-			} else if (args[0].equals("-estd")) {
-				if (args.length > 2) {
-					String questions = args[1];
-					String index = args[2];
-					QueryHelper stdQuery = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(),
-							null, true);
-					stdQuery.executeQuestions();
-					stdQuery.printRanks();
-					stdQuery.printCorrectQuestions();
-				} else {
-					System.out.println("Not enough arguments to analyzer");
-					System.out.println("USAGE: App -estd QUESTIONS_FILE INDEX_DIR");
-					System.exit(1);
-				}
-			} else {
-				System.out.println("Incorrect arguments ");
-				System.out.println("Usage: App -p \t preprocess all files in " + Constants.RAW_FILE_DIR + " to "
-						+ Constants.PREPROCESS_DIR);
-				System.out.println(
-						"Usage: App -inlp SRC_DIR INDEX_DIR \t index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
-				System.out.println(
-						"Usage: App -istd SRC_DIR INDEX_DIR \t index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
-				System.out.println(
-						"Usage: App -enlp QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer.");
-				System.out.println(
-						"Usage: App -estd QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer.");
+		// this is for the files referred to as 'nlp' preprocessed files.
+		if (args.length == 3 && args[0].equals("-p")) {
+			try {
+				File srcDir = new File(args[1]);
+				File destDir = new File(args[0]);
+				preprocessDir(srcDir, destDir);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("please make sure the directories exist and contain files to preprocess");
+				System.exit(1);
 			}
+			// will index the nlp preprocessed files with the lucene
+			// whitespace analyzer.
+		} else if (args.length == 3 && args[0].equals("-inlp")) {
+			String filesToIndex = args[1];
+			String index = args[2];
+			index(new File(filesToIndex), new File(index), new WhitespaceAnalyzer());
+			// will index the files with the lucene standard analyzer
+		} else if (args.length == 2 && args[0].equals("-istd")) {
+			String filesToIndex = args[1];
+			File index = new File(args[2]);
+			if (index.listFiles().length > 0) {
+				System.out.println(index.getName() + " is not empty.  Please empty index directory and retry.");
+				System.exit(1);
+			}
+			index(new File(filesToIndex), index, new StandardAnalyzer());
+			// will evaluate the nlp pre-processed files vs. the collection
+			// of questions.
+		} else if (args.length == 3 && args[0].equals("-enlp")) {
+			System.out.println("Evaluating against the questions file '" + args[1] + "' with the preprocessed index '" + args[2] + "' with whitespace analyzer...");
+			Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
+			String questions = args[1];
+			String index = args[2];
+			QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(),
+					preprocessor, true);
+			// nlpQuery.analyze();
+			// nlpQuery.printRanks();
+			nlpQuery.executeQuestions();
+			nlpQuery.printRanks();
+			// will evaluate the lucene standard analyzer index documents vs
+			// the collection of questions.
+		} else if (args.length == 3 && args[0].equals("-estd")) {
+			System.out.println("Evaluating the questions file [" + args[1] + "] with the index dir " + args[2]
+					+ " with standard analyzer...");
+			String questions = args[1];
+			String index = args[2];
+			QueryHelper stdQuery = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(), null,
+					true);
+			stdQuery.executeQuestions();
+			stdQuery.printRanks();
+			// stdQuery.printCorrectQuestions();
+
+		} else {
+			printUsageMessage();
+			System.exit(1);
 		}
+
+	}
+
+	public static void printUsageMessage() {
+		System.out.println("Usage: App -p \t preprocess all files in " + Constants.RAW_FILE_DIR + " to "
+				+ Constants.PREPROCESS_DIR);
+		System.out.println(
+				"Usage: App -inlp SRC_DIR INDEX_DIR \t index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
+		System.out.println(
+				"Usage: App -istd SRC_DIR INDEX_DIR \t index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
+		System.out.println(
+				"Usage: App -enlp QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer.");
+		System.out.println(
+				"Usage: App -estd QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer.");
 	}
 
 	public static void index(File inputDir, File outputDir, Analyzer analyzer) {
@@ -138,7 +125,7 @@ public class App {
 		indexer.indexAllFiles();
 	}
 
-	public static void preProcessAllFiles(File inputDir, File outputDir) {
+	public static void preprocessDir(File inputDir, File outputDir) {
 		System.out.println("Starting preprocessing...");
 		Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
 		try {

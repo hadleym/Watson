@@ -50,7 +50,8 @@ public class QueryHelper {
 	BufferedReader br;
 	int total;
 	public QuestionHandler handler;
-	public QueryHelper (File questionsFile, File indexDir, Analyzer a, Preprocessor pp, boolean v){
+
+	public QueryHelper(File questionsFile, File indexDir, Analyzer a, Preprocessor pp, boolean v) {
 		this.preprocessor = pp;
 		this.verbose = v;
 		this.analyzer = a;
@@ -60,70 +61,77 @@ public class QueryHelper {
 		handler = new QuestionHandler(questions);
 
 	}
-	
-	public void printCorrectQuestions(){
-		for (Question question : handler.questions){
-			if (question.rank == 0 ){
+
+	public void printCorrectQuestions() {
+		for (Question question : handler.questions) {
+			if (question.rank == 0) {
 				System.out.println(question);
 			}
 		}
 	}
-	public void printRanks(){
+
+	public void printRanks() {
+		int sum = 0;
+		System.out.println("Rank is the position the system retrieved the correct answer for the question");
+		System.out.println("Total questions: " + total);
 		for (int i = 0; i < ranks.length; i++) {
 			int adjustedRank = i + 1;
 			System.out.println("Rank " + adjustedRank + ": " + ranks[i]);
+			sum += ranks[i];
 		}
-		System.out.println("Total: " + total);	
+		System.out
+				.println("Number of questions failed to be answered in the top " + Constants.HITSPERPAGE + ": " + (total - sum));
+
 	}
 
-	public void executeQuestions(){
-		for ( Question question : handler.questions){
+	public void executeQuestions() {
+		for (Question question : handler.questions) {
 			String query = question.getQuery();
-			if ( preprocessor != null ){
+			if (preprocessor != null) {
 				query = preprocessor.preprocessLine(query);
 			} else {
-				// need to remove certain characters to perform a straight query,
+				// need to remove certain characters to perform a straight
+				// query,
 				// otherwise it is interpreted incorrectly or as a wildcard
 				// for the standard analyzer.
 				query = filter(query);
-			}	
-			try { 
+			}
+			try {
 				question.setResults(getResults(query));
 				question.setRank(question.calculateRank());
 				int rank = question.getRank();
-				if (rank >= 0){
+				if (rank >= 0) {
 					ranks[question.getRank()]++;
 				}
 				total++;
-			} catch  (ParseException e){
+			} catch (ParseException e) {
 				e.printStackTrace();
-			} catch (IOException e){
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 
 	}
-	
 
-	private Result[] getResults (String query) throws IOException, ParseException {
+	private Result[] getResults(String query) throws IOException, ParseException {
 		Result[] results = new Result[Constants.HITSPERPAGE];
 		Query q = new QueryParser(Constants.FIELD_CONTENTS, analyzer).parse(query);
 		IndexReader reader = DirectoryReader.open(Constants.getDirectory(index.toPath()));
 		IndexSearcher searcher = new IndexSearcher(reader);
-//		searcher.setSimilarity(new BM25Similarity());
-		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);	
+		// searcher.setSimilarity(new BM25Similarity());
+		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);
 		ScoreDoc[] hits = docs.scoreDocs;
-		for ( int i = 0; i < docs.scoreDocs.length ; i++) {
+		for (int i = 0; i < docs.scoreDocs.length; i++) {
 			String name = searcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY);
 			name = name.substring(2, name.length() - 2);
 			results[i] = new Result(name, hits[i].score);
 		}
-		
+
 		return results;
 	}
-	
+
 	public void analyze() throws IOException {
-		
+
 		BufferedReader br = new BufferedReader(new FileReader(questions));
 		for (String subject = br.readLine(); subject != null; subject = br.readLine()) {
 			if (subject.equals("POTPOURRI")) {
@@ -135,7 +143,7 @@ public class QueryHelper {
 			// read blank line
 			br.readLine();
 
-//			String query = question;
+			// String query = question;
 			String query = subject + " " + question;
 
 			// if the NLP_FLAG is false, then there is no 'preprocessing' to do
@@ -143,7 +151,8 @@ public class QueryHelper {
 			if (preprocessor != null) {
 				query = preprocessor.preprocessLine(query);
 			} else {
-				// need to remove certain characters to perform a straight query,
+				// need to remove certain characters to perform a straight
+				// query,
 				// otherwise it is interpreted incorrectly or as a wildcard
 				// for the standard analyzer.
 				query = filter(query);
@@ -168,11 +177,11 @@ public class QueryHelper {
 			total++;
 		}
 		br.close();
-		
+
 	}
 
-	private static String filter ( String line){
-		return line.replaceAll("[()!#&\"\'-]","");
+	private static String filter(String line) {
+		return line.replaceAll("[()!#&\"\'-]", "");
 	}
 
 	public int doQuery(String query, File index, String answer, Analyzer analyzer, boolean verbose)
@@ -180,7 +189,7 @@ public class QueryHelper {
 		Query q = new QueryParser(Constants.FIELD_CONTENTS, analyzer).parse(query);
 		IndexReader reader = DirectoryReader.open(Constants.getDirectory(index.toPath()));
 		IndexSearcher searcher = new IndexSearcher(reader);
-//		searcher.setSimilarity(new BM25Similarity());
+		// searcher.setSimilarity(new BM25Similarity());
 		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);
 		ScoreDoc[] hits = docs.scoreDocs;
 		if (verbose) {
@@ -191,7 +200,7 @@ public class QueryHelper {
 
 			// strip '[[' and ']]'
 			result = result.substring(2, result.length() - 2);
-			
+
 			if (result.equals(answer)) {
 				int adjustedRank = i + 1;
 				System.out.println(result + " found at rank " + adjustedRank);
@@ -202,6 +211,7 @@ public class QueryHelper {
 		System.out.println("Not found");
 		return -1;
 	}
+
 	public void printResults(ScoreDoc[] hits, IndexSearcher indexSearcher) throws IOException {
 		if (Constants.DEBUG) {
 			System.out.println("PrintResults:");
@@ -214,75 +224,59 @@ public class QueryHelper {
 	}
 
 	/*
-	public static List<String> analyze(Analyzer analyzer, List<String> words) throws IOException, ParseException {
-		List<String> result = new ArrayList<String>();
-		String wordsToAnalyze = words.toString();
-		TokenStream tokenStream = analyzer.tokenStream(Constants.FIELD_CONTENTS, new StringReader(wordsToAnalyze));
-		OffsetAttribute offsetAttribute = tokenStream.addAttribute(OffsetAttribute.class);
-		CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
-		tokenStream.reset();
-		while (tokenStream.incrementToken()) {
-			int startOffset = offsetAttribute.startOffset();
-			int endOffset = offsetAttribute.endOffset();
-			String term = charTermAttribute.toString();
-			System.out.println(term);
-			result.add(term);
-		}
-		tokenStream.end();
-		tokenStream.close();
-		return result;
-	}
-	*/
+	 * public static List<String> analyze(Analyzer analyzer, List<String> words)
+	 * throws IOException, ParseException { List<String> result = new
+	 * ArrayList<String>(); String wordsToAnalyze = words.toString();
+	 * TokenStream tokenStream = analyzer.tokenStream(Constants.FIELD_CONTENTS,
+	 * new StringReader(wordsToAnalyze)); OffsetAttribute offsetAttribute =
+	 * tokenStream.addAttribute(OffsetAttribute.class); CharTermAttribute
+	 * charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+	 * tokenStream.reset(); while (tokenStream.incrementToken()) { int
+	 * startOffset = offsetAttribute.startOffset(); int endOffset =
+	 * offsetAttribute.endOffset(); String term = charTermAttribute.toString();
+	 * System.out.println(term); result.add(term); } tokenStream.end();
+	 * tokenStream.close(); return result; }
+	 */
 
 	/*
-	public static String parseQuery(List<String> arrayList) {
-		String category = Constants.FIELD_CONTENTS + ":";
-		String parsed = new String() + category;
-		parsed += arrayList.get(0);
-		for (int i = 1; i < arrayList.size(); i++) {
-			parsed += " AND " + category + arrayList.get(i);
-		}
-		if (Constants.DEBUG) {
-			System.out.println("Parsed query : " + parsed);
-		}
-		return parsed;
-	}
-
-*/
-	
-	/*
-	public static ArrayList<String> createSynonyms(List<String> words) throws IOException {
-		ArrayList<String> synonyms = new ArrayList<String>();
-		SynonymMap map = new SynonymMap(new FileInputStream("samples/fulltext/wn_s.pl"));
-		for (int i = 0; i < words.size(); i++) {
-			String[] syn = map.getSynonyms(words.get(i));
-			if (syn.length < 20) {
-				for (int c = 0; c < syn.length; c++) {
-					synonyms.add(syn[c]);
-				}
-
-				System.out.println(words.get(i) + " : " + java.util.Arrays.asList(syn).toString());
-			}
-			synonyms.add(words.get(i));
-
-		}
-		return synonyms;
-
-	}
-	*/
+	 * public static String parseQuery(List<String> arrayList) { String category
+	 * = Constants.FIELD_CONTENTS + ":"; String parsed = new String() +
+	 * category; parsed += arrayList.get(0); for (int i = 1; i <
+	 * arrayList.size(); i++) { parsed += " AND " + category + arrayList.get(i);
+	 * } if (Constants.DEBUG) { System.out.println("Parsed query : " + parsed);
+	 * } return parsed; }
+	 * 
+	 */
 
 	/*
-	public static void searchIndex(Path directoryPath, Query query) throws IOException, ParseException {
-		Directory directory = FSDirectory.open(directoryPath);
-		IndexReader indexReader = DirectoryReader.open(directory);
-		IndexSearcher indexSearcher = new IndexSearcher(indexReader);
-		TopDocs docs = indexSearcher.search(query, Constants.HITSPERPAGE);
-		ScoreDoc[] hits = docs.scoreDocs;
-		printResults(hits, indexSearcher);
-		System.out.println(indexSearcher.doc(0).get(Constants.FIELD_CATEGORY));
+	 * public static ArrayList<String> createSynonyms(List<String> words) throws
+	 * IOException { ArrayList<String> synonyms = new ArrayList<String>();
+	 * SynonymMap map = new SynonymMap(new
+	 * FileInputStream("samples/fulltext/wn_s.pl")); for (int i = 0; i <
+	 * words.size(); i++) { String[] syn = map.getSynonyms(words.get(i)); if
+	 * (syn.length < 20) { for (int c = 0; c < syn.length; c++) {
+	 * synonyms.add(syn[c]); }
+	 * 
+	 * System.out.println(words.get(i) + " : " +
+	 * java.util.Arrays.asList(syn).toString()); } synonyms.add(words.get(i));
+	 * 
+	 * } return synonyms;
+	 * 
+	 * }
+	 */
 
-	}
+	/*
+	 * public static void searchIndex(Path directoryPath, Query query) throws
+	 * IOException, ParseException { Directory directory =
+	 * FSDirectory.open(directoryPath); IndexReader indexReader =
+	 * DirectoryReader.open(directory); IndexSearcher indexSearcher = new
+	 * IndexSearcher(indexReader); TopDocs docs = indexSearcher.search(query,
+	 * Constants.HITSPERPAGE); ScoreDoc[] hits = docs.scoreDocs;
+	 * printResults(hits, indexSearcher);
+	 * System.out.println(indexSearcher.doc(0).get(Constants.FIELD_CATEGORY));
+	 * 
+	 * }
+	 * 
+	 */
 
-*/
-	
 }
