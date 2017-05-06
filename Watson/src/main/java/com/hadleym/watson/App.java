@@ -2,11 +2,15 @@ package com.hadleym.watson;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.Console;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Path;
+import java.util.Scanner;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -76,7 +80,8 @@ public class App {
 			// will evaluate the nlp pre-processed files vs. the collection
 			// of questions.
 		} else if (args.length == 3 && args[0].equals("-ewht")) {
-			System.out.println("Evaluating against the questions file '" + args[1] + "' with the preprocessed index '" + args[2] + "' with whitespace analyzer...");
+			System.out.println("Evaluating against the questions file '" + args[1] + "' with the preprocessed index '"
+					+ args[2] + "' with whitespace analyzer...");
 			Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
 			String questions = args[1];
 			String index = args[2];
@@ -86,6 +91,8 @@ public class App {
 			// nlpQuery.printRanks();
 			nlpQuery.executeQuestions();
 			nlpQuery.printRanks();
+			System.out.println();
+			nlpQuery.printAllQuestions();
 			// will evaluate the lucene standard analyzer index documents vs
 			// the collection of questions.
 		} else if (args.length == 3 && args[0].equals("-estd")) {
@@ -97,8 +104,40 @@ public class App {
 					true);
 			stdQuery.executeQuestions();
 			stdQuery.printRanks();
-			// stdQuery.printCorrectQuestions();
+			System.out.println();
+			stdQuery.printAllQuestions();
 
+		} else if (args.length == 3 && args[0].equals("-explore")) {
+			Scanner s = new Scanner(System.in);
+			System.out.println("Exploring mode");
+			int selection = -1;
+			while (selection != 1 && selection != 2) {
+				System.out.println("Which index do you wish to explore?");
+				System.out.println("1) Preprocessed NLP and whitespace index.");
+				System.out.println("2) Lucene Standard Analyzer index.");
+
+				selection = s.nextInt();
+			}
+
+			System.out.println("Enter directory containing appropriate index:");
+			String questions = args[1];
+			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+			String index = in.readLine();
+			System.out.println("Using directory '" + index + "' as index...");
+			if (selection == 1) {
+				System.out.println("evaluating vs NLP");
+				System.out.println("Please wait while analysis is being generated...");
+				Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
+				QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(),
+						preprocessor, true);
+				exploreQuery(nlpQuery, s);
+			} else if (selection == 2) {
+				System.out.println("Evaluating vs Lucene Standard Analyzer");
+				System.out.println("Please wait while analysis is being generated...");
+				QueryHelper stdQuery = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(),
+						null, true);
+				exploreQuery(stdQuery, s);
+			}
 		} else {
 			printUsageMessage();
 			System.exit(1);
@@ -106,16 +145,39 @@ public class App {
 
 	}
 
+	public static void exploreQuery(QueryHelper helper, Scanner s) {
+		helper.executeQuestions();
+		int total = helper.total;
+		System.out.println("Processing finished, " + helper.handler.questions.size() + " questions analyzed.");
+
+		System.out.println("Please enter an integer between 1 - " + (total));
+		System.out.println("enter negative number to exit");
+		System.out.println("Which question would you like to explore: ");
+		int num = 1;
+		while (num >= 0) {
+			num = s.nextInt();
+			if (num < 0) {
+				break;
+			}
+			num--;
+			if (num < total) {
+				Question question = helper.handler.questions.get(num);
+				question.printQuestion();
+			}
+			System.out.println("\nWhich question would you like to explore: ");
+			System.out.println("enter negative number to exit");
+		}
+		System.out.println("Finished exploring...");
+	}
+
 	public static void printUsageMessage() {
-		System.out.println("Usage: java -jar Watson.jar -p SRC_DIR PREPROCESS_DIR \t\t preprocess all files in SRC_DIR to PREPROCESS_DIR.");
-		System.out.println(
-				"Usage: java -jar Watson.jar -iwht SRC_DIR INDEX_DIR \t\t index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
-		System.out.println(
-				"Usage: java -jar Watson.jar -istd SRC_DIR INDEX_DIR \t\t index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
-		System.out.println(
-				"Usage: java -jar Watson.jar -ewht QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer.");
-		System.out.println(
-				"Usage: java -jar Watson.jar -estd QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer.");
+		System.out.println( "\nUsage: java -jar Watson.jar -p SRC_DIR PREPROCESS_DIR \n\t -- preprocess all files in SRC_DIR to PREPROCESS_DIR.");
+		System.out.println( "\nUsage: java -jar Watson.jar -iwht SRC_DIR INDEX_DIR \n\t -- index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
+		System.out.println( "\nUsage: java -jar Watson.jar -istd SRC_DIR INDEX_DIR \n\t -- index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
+		System.out.println("\nUsage: java -jar Watson.jar -ewht QUESTIONS_FILE INDEX_DIR");
+		System.out.println("\t -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer and will output analysis to STDOUT");
+		System.out.println( "\nUsage: java -jar Watson.jar -estd QUESTIONS_FILE INDEX_DIR \n\t -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer and will ouput analysis to STDOUT");
+		System.out.println( "\nUsage: java -jar Watson.jar -explore QUESTIONS_FILE \n\t -- Explore the QUESTIONS_FILE.");
 	}
 
 	public static void index(File inputDir, File outputDir, Analyzer analyzer) {

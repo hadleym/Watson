@@ -223,6 +223,12 @@ public class QueryHelper {
 		}
 	}
 
+	
+	public void printAllQuestions(){
+		for (Question question: handler.questions){
+			question.printQuestion();
+		}
+	}
 	/*
 	 * public static List<String> analyze(Analyzer analyzer, List<String> words)
 	 * throws IOException, ParseException { List<String> result = new

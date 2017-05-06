@@ -79,4 +79,24 @@ public class Question {
 		this.results = results;
 	}
 
+	public void printResults(){
+		for (int i = 0; i < this.results.length; i++){
+			int num = i+1;
+			System.out.println(num + ") "+results[i].score + ":\t " + results[i].name );
+		}
+	}
+	
+	public void printQuestion(){
+		System.out.println("QUESTION: " + question);
+		System.out.println("CORRECT ANSWER: " + answer);
+		if (rank >= 0 ){
+			int foundrank = rank+1;
+			System.out.println("WATSON FOUND AT RANK: " + foundrank);
+		} else {
+			System.out.println("WATSON DID NOT FIND IN TOP " + Constants.HITSPERPAGE);
+		}
+		printResults();	
+		System.out.println("");
+	}
+
 }
