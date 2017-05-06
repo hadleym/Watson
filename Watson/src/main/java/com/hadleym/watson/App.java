@@ -69,7 +69,7 @@ public class App {
 			String index = args[2];
 			index(new File(filesToIndex), new File(index), new WhitespaceAnalyzer());
 			// will index the files with the lucene standard analyzer
-		} else if (args.length == 2 && args[0].equals("-istd")) {
+		} else if (args.length == 3 && args[0].equals("-istd")) {
 			String filesToIndex = args[1];
 			File index = new File(args[2]);
 			if (index.listFiles().length > 0) {
