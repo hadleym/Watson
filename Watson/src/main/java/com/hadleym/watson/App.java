@@ -60,7 +60,7 @@ public class App {
 			}
 			// will index the nlp preprocessed files with the lucene
 			// whitespace analyzer.
-		} else if (args.length == 3 && args[0].equals("-inlp")) {
+		} else if (args.length == 3 && args[0].equals("-iwht")) {
 			String filesToIndex = args[1];
 			String index = args[2];
 			index(new File(filesToIndex), new File(index), new WhitespaceAnalyzer());
@@ -75,7 +75,7 @@ public class App {
 			index(new File(filesToIndex), index, new StandardAnalyzer());
 			// will evaluate the nlp pre-processed files vs. the collection
 			// of questions.
-		} else if (args.length == 3 && args[0].equals("-enlp")) {
+		} else if (args.length == 3 && args[0].equals("-ewht")) {
 			System.out.println("Evaluating against the questions file '" + args[1] + "' with the preprocessed index '" + args[2] + "' with whitespace analyzer...");
 			Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
 			String questions = args[1];
@@ -107,16 +107,15 @@ public class App {
 	}
 
 	public static void printUsageMessage() {
-		System.out.println("Usage: App -p \t preprocess all files in " + Constants.RAW_FILE_DIR + " to "
-				+ Constants.PREPROCESS_DIR);
+		System.out.println("Usage: java -jar Watson.jar -p SRC_DIR PREPROCESS_DIR \t\t preprocess all files in SRC_DIR to PREPROCESS_DIR.");
 		System.out.println(
-				"Usage: App -inlp SRC_DIR INDEX_DIR \t index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
+				"Usage: java -jar Watson.jar -iwht SRC_DIR INDEX_DIR \t\t index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
 		System.out.println(
-				"Usage: App -istd SRC_DIR INDEX_DIR \t index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
+				"Usage: java -jar Watson.jar -istd SRC_DIR INDEX_DIR \t\t index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
 		System.out.println(
-				"Usage: App -enlp QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer.");
+				"Usage: java -jar Watson.jar -ewht QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer.");
 		System.out.println(
-				"Usage: App -estd QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer.");
+				"Usage: java -jar Watson.jar -estd QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer.");
 	}
 
 	public static void index(File inputDir, File outputDir, Analyzer analyzer) {
