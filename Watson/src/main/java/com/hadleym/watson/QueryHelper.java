@@ -56,6 +56,14 @@ public class QueryHelper {
 		handler = new QuestionHandler(questions);
 
 	}
+	
+	public void printCorrectQuestions(){
+		for (Question question : handler.questions){
+			if (question.rank == 0 ){
+				System.out.println(question);
+			}
+		}
+	}
 	public void printRanks(){
 		for (int i = 0; i < ranks.length; i++) {
 			int adjustedRank = i + 1;

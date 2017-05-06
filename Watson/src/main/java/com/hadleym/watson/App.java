@@ -61,13 +61,17 @@ public class App {
 				}
 			// will evaluate the nlp pre-processed files vs. the collection of questions.
 			} else if (args[0].equals("-enlp")) {
+				System.out.println("Evaluating the NLP index...");
 				if (args.length > 2) {
 					Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
 					String questions = args[1];
 					String index = args[2];
 					QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(), preprocessor, true);
-					nlpQuery.analyze();
+					//nlpQuery.analyze();
+					//nlpQuery.printRanks();
+					nlpQuery.executeQuestions();
 					nlpQuery.printRanks();
+					
 				} else {
 					System.out.println("Not enough arguments to analyzer");
 					System.out.println("USAGE: App -enlp QUESTIONS_FILE INDEX_DIR");
@@ -80,13 +84,8 @@ public class App {
 					String index = args[2];
 					QueryHelper stdQuery = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(), null, true);
 					stdQuery.executeQuestions();
-/*					for ( Question question: stdQuery.handler.questions ){
-						System.out.println(question);
-					}
-					*/
 					stdQuery.printRanks();
-//					stdQuery.analyze();
-//					stdQuery.printRanks();
+					stdQuery.printCorrectQuestions();
 				} else {
 					System.out.println("Not enough arguments to analyzer");
 					System.out.println("USAGE: App -estd QUESTIONS_FILE INDEX_DIR");
