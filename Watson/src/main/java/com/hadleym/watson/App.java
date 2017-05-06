@@ -7,8 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -23,7 +21,6 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
-import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 
@@ -68,7 +65,9 @@ public class App {
 					Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
 					String questions = args[1];
 					String index = args[2];
-					QueryHelper.evaluate(new File(questions), new File(index), new WhitespaceAnalyzer(), preprocessor, true);
+					QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(), preprocessor, true);
+					nlpQuery.analyze();
+					nlpQuery.printRanks();
 				} else {
 					System.out.println("Not enough arguments to analyzer");
 					System.out.println("USAGE: App -enlp QUESTIONS_FILE INDEX_DIR");
@@ -79,7 +78,15 @@ public class App {
 				if (args.length > 2){
 					String questions = args[1];
 					String index = args[2];
-					QueryHelper.evaluate(new File(questions), new File(index), new StandardAnalyzer(), null, true);
+					QueryHelper stdQuery = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(), null, true);
+					stdQuery.executeQuestions();
+/*					for ( Question question: stdQuery.handler.questions ){
+						System.out.println(question);
+					}
+					*/
+					stdQuery.printRanks();
+//					stdQuery.analyze();
+//					stdQuery.printRanks();
 				} else {
 					System.out.println("Not enough arguments to analyzer");
 					System.out.println("USAGE: App -estd QUESTIONS_FILE INDEX_DIR");
@@ -98,7 +105,7 @@ public class App {
 	}
 
 	public static void index(File inputDir, File outputDir, Analyzer analyzer) {
-		System.out.println("indexint directory: " + inputDir.getName() + " to ouput to "
+		System.out.println("indexing directory: " + inputDir.getName() + " to ouput to "
 				+ outputDir.getName());
 		DocumentIndexer indexer = new DocumentIndexer(inputDir, outputDir, analyzer);
 		indexer.indexAllFiles();

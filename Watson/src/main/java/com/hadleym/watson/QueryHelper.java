@@ -28,6 +28,8 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.similarities.BM25Similarity;
+import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.wordnet.SynonymMap;
@@ -35,15 +37,82 @@ import org.apache.lucene.analysis.tokenattributes.*;
 
 public class QueryHelper {
 
-	public static void evaluate(File questionsFile, File indexDir, Analyzer a, Preprocessor pp, boolean verbose)
-			throws IOException {
-		Preprocessor preprocessor = pp;
-		Analyzer analyzer = a;
-		int[] ranks = new int[10];
-		File questions = questionsFile;
-		File index = indexDir;
+	boolean verbose;
+	Preprocessor preprocessor;
+	Analyzer analyzer;
+	File index;
+	File questions;
+	int[] ranks = new int[10];
+	BufferedReader br;
+	int total;
+	public QuestionHandler handler;
+	public QueryHelper (File questionsFile, File indexDir, Analyzer a, Preprocessor pp, boolean v){
+		this.preprocessor = pp;
+		this.verbose = v;
+		this.analyzer = a;
+		this.index = indexDir;
+		this.questions = questionsFile;
+		total = 0;
+		handler = new QuestionHandler(questions);
+
+	}
+	public void printRanks(){
+		for (int i = 0; i < ranks.length; i++) {
+			int adjustedRank = i + 1;
+			System.out.println("Rank " + adjustedRank + ": " + ranks[i]);
+		}
+		System.out.println("Total: " + total);	
+	}
+
+	public void executeQuestions(){
+		for ( Question question : handler.questions){
+			String query = question.getQuery();
+			if ( preprocessor != null ){
+				query = preprocessor.preprocessLine(query);
+			} else {
+				// need to remove certain characters to perform a straight query,
+				// otherwise it is interpreted incorrectly or as a wildcard
+				// for the standard analyzer.
+				query = filter(query);
+			}	
+			try { 
+				question.setResults(getResults(query));
+				question.setRank(question.calculateRank());
+				int rank = question.getRank();
+				if (rank >= 0){
+					ranks[question.getRank()]++;
+				}
+				total++;
+			} catch  (ParseException e){
+				e.printStackTrace();
+			} catch (IOException e){
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+
+	private Result[] getResults (String query) throws IOException, ParseException {
+		Result[] results = new Result[Constants.HITSPERPAGE];
+		Query q = new QueryParser(Constants.FIELD_CONTENTS, analyzer).parse(query);
+		IndexReader reader = DirectoryReader.open(Constants.getDirectory(index.toPath()));
+		IndexSearcher searcher = new IndexSearcher(reader);
+//		searcher.setSimilarity(new BM25Similarity());
+		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);	
+		ScoreDoc[] hits = docs.scoreDocs;
+		for ( int i = 0; i < docs.scoreDocs.length ; i++) {
+			String name = searcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY);
+			name = name.substring(2, name.length() - 2);
+			results[i] = new Result(name, hits[i].score);
+		}
+		
+		return results;
+	}
+	
+	public void analyze() throws IOException {
+		
 		BufferedReader br = new BufferedReader(new FileReader(questions));
-		int total = 0;
 		for (String subject = br.readLine(); subject != null; subject = br.readLine()) {
 			if (subject.equals("POTPOURRI")) {
 				subject = "";
@@ -54,6 +123,7 @@ public class QueryHelper {
 			// read blank line
 			br.readLine();
 
+//			String query = question;
 			String query = subject + " " + question;
 
 			// if the NLP_FLAG is false, then there is no 'preprocessing' to do
@@ -61,6 +131,9 @@ public class QueryHelper {
 			if (preprocessor != null) {
 				query = preprocessor.preprocessLine(query);
 			} else {
+				// need to remove certain characters to perform a straight query,
+				// otherwise it is interpreted incorrectly or as a wildcard
+				// for the standard analyzer.
 				query = filter(query);
 			}
 			if (verbose) {
@@ -83,40 +156,52 @@ public class QueryHelper {
 			total++;
 		}
 		br.close();
-		for (int i = 0; i < ranks.length; i++) {
-			System.out.println("Rank " + i + ": " + ranks[i]);
-		}
-		System.out.println("Total: " + total);
+		
 	}
 
 	private static String filter ( String line){
 		return line.replaceAll("[()!#&\"\'-]","");
 	}
 
-	public static int doQuery(String query, File index, String answer, Analyzer analyzer, boolean verbose)
+	public int doQuery(String query, File index, String answer, Analyzer analyzer, boolean verbose)
 			throws IOException, ParseException {
 		Query q = new QueryParser(Constants.FIELD_CONTENTS, analyzer).parse(query);
 		IndexReader reader = DirectoryReader.open(Constants.getDirectory(index.toPath()));
 		IndexSearcher searcher = new IndexSearcher(reader);
+//		searcher.setSimilarity(new BM25Similarity());
 		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);
 		ScoreDoc[] hits = docs.scoreDocs;
 		if (verbose) {
-			System.out.println("Results:");
+			System.out.print("Results: ");
 		}
 		for (int i = 0; i < hits.length; i++) {
 			String result = searcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY);
 
 			// strip '[[' and ']]'
 			result = result.substring(2, result.length() - 2);
-
+			
 			if (result.equals(answer)) {
-				System.out.println(i + ": " + result);
+				int adjustedRank = i + 1;
+				System.out.println(result + " found at rank " + adjustedRank);
+				System.out.println(hits[i].score);
 				return i;
 			}
 		}
+		System.out.println("Not found");
 		return -1;
 	}
+	public void printResults(ScoreDoc[] hits, IndexSearcher indexSearcher) throws IOException {
+		if (Constants.DEBUG) {
+			System.out.println("PrintResults:");
+		}
+		for (int i = 0; i < hits.length; i++) {
 
+			System.out.println(hits[i].score + ", " + hits[i].doc + ", "
+					+ indexSearcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY));
+		}
+	}
+
+	/*
 	public static List<String> analyze(Analyzer analyzer, List<String> words) throws IOException, ParseException {
 		List<String> result = new ArrayList<String>();
 		String wordsToAnalyze = words.toString();
@@ -135,7 +220,9 @@ public class QueryHelper {
 		tokenStream.close();
 		return result;
 	}
+	*/
 
+	/*
 	public static String parseQuery(List<String> arrayList) {
 		String category = Constants.FIELD_CONTENTS + ":";
 		String parsed = new String() + category;
@@ -149,6 +236,9 @@ public class QueryHelper {
 		return parsed;
 	}
 
+*/
+	
+	/*
 	public static ArrayList<String> createSynonyms(List<String> words) throws IOException {
 		ArrayList<String> synonyms = new ArrayList<String>();
 		SynonymMap map = new SynonymMap(new FileInputStream("samples/fulltext/wn_s.pl"));
@@ -167,7 +257,9 @@ public class QueryHelper {
 		return synonyms;
 
 	}
+	*/
 
+	/*
 	public static void searchIndex(Path directoryPath, Query query) throws IOException, ParseException {
 		Directory directory = FSDirectory.open(directoryPath);
 		IndexReader indexReader = DirectoryReader.open(directory);
@@ -179,15 +271,6 @@ public class QueryHelper {
 
 	}
 
-	public static void printResults(ScoreDoc[] hits, IndexSearcher indexSearcher) throws IOException {
-		if (Constants.DEBUG) {
-			System.out.println("PrintResults:");
-		}
-		for (int i = 0; i < hits.length; i++) {
-
-			System.out.println(hits[i].score + ", " + hits[i].doc + ", "
-					+ indexSearcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY));
-		}
-	}
-
+*/
+	
 }
