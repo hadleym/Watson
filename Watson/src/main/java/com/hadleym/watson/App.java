@@ -24,16 +24,37 @@ import org.apache.lucene.store.FSDirectory;
 import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 
+/*
+ * WATSON PROJECT
+ * Mark Hadley
+ * CS 483 
+ * 5/1/2017
+ * 
+ * This is a full end-to-end system for emulating the 'Watson' Jeopardy 
+ * system.  
+ * 
+ * It utilizes Lucene as well as the NLPCore.
+ * 
+ * 
+ * 
+ * 
+ */
+// Usage: "$ java App -p" 						      -- preprocess all files in " + Constants.RAW_FILE_DIR + " to " + Constants.PREPROCESS_DIR);
+//        "$ java App -inlp SRC_DIR INDEX_DIR"	      -- index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
+//        "$ java App -istd SRC_DIR INDEX_DIR         -- index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
+//        "$ java App -enlp QUESTIONS_FILE INDEX_DIR  -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer.");
+//        "$ java App -estd QUESTIONS_FILE INDEX_DIR  -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer.");
 public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		if (args.length > 0) {
-			// will preprocess the entire directory of Constants.RAW_FILE_DIR 
+			// will preprocess the entire directory of Constants.RAW_FILE_DIR
 			// and place new preprocessed files into Constants.PREPROCESS_DIR
 			// this is for the files referred to as 'nlp' preprocessed files.
 			if (args[0].equals("-p")) {
 				preProcessAllFiles(new File(Constants.RAW_FILE_DIR), new File(Constants.PREPROCESS_DIR));
-			// will index the nlp preprocessed files with the lucene whitespace analyzer.
+				// will index the nlp preprocessed files with the lucene
+				// whitespace analyzer.
 			} else if (args[0].equals("-inlp")) {
 				if (args.length >= 2) {
 					String filesToIndex = args[1];
@@ -44,12 +65,12 @@ public class App {
 					System.out.println("USAGE: App -inlp SOURCE_DIR INDEX_DIR");
 					System.exit(1);
 				}
-			// will index the files with the lucene standard analyzer
-			} else if ( args[0].equals("-istd")){
-				if (args.length >= 2){
+				// will index the files with the lucene standard analyzer
+			} else if (args[0].equals("-istd")) {
+				if (args.length >= 2) {
 					String filesToIndex = args[1];
 					File index = new File(args[2]);
-					if (index.listFiles().length > 0 ){
+					if (index.listFiles().length > 0) {
 						System.out.println(index.getName() + " is not empty.  Please empty index directory and retry.");
 						System.exit(1);
 					}
@@ -59,30 +80,34 @@ public class App {
 					System.out.println("USAGE: App -istd SOURCE_DIR INDEX_DIR");
 					System.exit(1);
 				}
-			// will evaluate the nlp pre-processed files vs. the collection of questions.
+				// will evaluate the nlp pre-processed files vs. the collection
+				// of questions.
 			} else if (args[0].equals("-enlp")) {
 				System.out.println("Evaluating the NLP index...");
 				if (args.length > 2) {
 					Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
 					String questions = args[1];
 					String index = args[2];
-					QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(), preprocessor, true);
-					//nlpQuery.analyze();
-					//nlpQuery.printRanks();
+					QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index),
+							new WhitespaceAnalyzer(), preprocessor, true);
+					// nlpQuery.analyze();
+					// nlpQuery.printRanks();
 					nlpQuery.executeQuestions();
 					nlpQuery.printRanks();
-					
+
 				} else {
 					System.out.println("Not enough arguments to analyzer");
 					System.out.println("USAGE: App -enlp QUESTIONS_FILE INDEX_DIR");
 					System.exit(1);
 				}
-			// will evaluate the lucene standard analyzer index documents vs teh collection of questions.
-			} else if (args[0].equals("-estd")){
-				if (args.length > 2){
+				// will evaluate the lucene standard analyzer index documents vs
+				// teh collection of questions.
+			} else if (args[0].equals("-estd")) {
+				if (args.length > 2) {
 					String questions = args[1];
 					String index = args[2];
-					QueryHelper stdQuery = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(), null, true);
+					QueryHelper stdQuery = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(),
+							null, true);
 					stdQuery.executeQuestions();
 					stdQuery.printRanks();
 					stdQuery.printCorrectQuestions();
@@ -92,20 +117,23 @@ public class App {
 					System.exit(1);
 				}
 			} else {
-				System.out.println("Incorrect arguments " );
-				System.out.println("Usage: App -p \t preprocess all files in " + Constants.RAW_FILE_DIR + " to " + Constants.PREPROCESS_DIR);
-				System.out.println("Usage: App -inlp SRC_DIR INDEX_DIR \t index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
-				System.out.println("Usage: App -istd SRC_DIR INDEX_DIR \t index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
-				System.out.println("Usage: App -enlp QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer.");
-				System.out.println("Usage: App -estd QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer.");
+				System.out.println("Incorrect arguments ");
+				System.out.println("Usage: App -p \t preprocess all files in " + Constants.RAW_FILE_DIR + " to "
+						+ Constants.PREPROCESS_DIR);
+				System.out.println(
+						"Usage: App -inlp SRC_DIR INDEX_DIR \t index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
+				System.out.println(
+						"Usage: App -istd SRC_DIR INDEX_DIR \t index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
+				System.out.println(
+						"Usage: App -enlp QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer.");
+				System.out.println(
+						"Usage: App -estd QUESTIONS_FILE INDEX_DIR \t Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer.");
 			}
-
 		}
 	}
 
 	public static void index(File inputDir, File outputDir, Analyzer analyzer) {
-		System.out.println("indexing directory: " + inputDir.getName() + " to ouput to "
-				+ outputDir.getName());
+		System.out.println("indexing directory: " + inputDir.getName() + " to ouput to " + outputDir.getName());
 		DocumentIndexer indexer = new DocumentIndexer(inputDir, outputDir, analyzer);
 		indexer.indexAllFiles();
 	}

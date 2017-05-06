@@ -35,6 +35,10 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.wordnet.SynonymMap;
 import org.apache.lucene.analysis.tokenattributes.*;
 
+/* This class 
+ * 
+ * 
+ */
 public class QueryHelper {
 
 	boolean verbose;
