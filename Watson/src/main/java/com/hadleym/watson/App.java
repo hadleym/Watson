@@ -54,9 +54,7 @@ public class App {
 		// this is for the files referred to as 'nlp' preprocessed files.
 		if (args.length == 3 && args[0].equals("-p")) {
 			try {
-				File srcDir = new File(args[1]);
-				File destDir = new File(args[0]);
-				preprocessDir(srcDir, destDir);
+				preprocessDir(new File(args[1]), new File(args[2]));
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("please make sure the directories exist and contain files to preprocess");
@@ -65,10 +63,7 @@ public class App {
 			// will index the nlp preprocessed files with the lucene
 			// whitespace analyzer.
 		} else if (args.length == 3 && args[0].equals("-iwht")) {
-			String filesToIndex = args[1];
-			String index = args[2];
-			index(new File(filesToIndex), new File(index), new WhitespaceAnalyzer());
-			// will index the files with the lucene standard analyzer
+			index(new File(args[1]), new File(args[2]), new WhitespaceAnalyzer());
 		} else if (args.length == 3 && args[0].equals("-istd")) {
 			String filesToIndex = args[1];
 			File index = new File(args[2]);
@@ -77,9 +72,10 @@ public class App {
 				System.exit(1);
 			}
 			index(new File(filesToIndex), index, new StandardAnalyzer());
-			// will evaluate the nlp pre-processed files vs. the collection
-			// of questions.
-		} else if (args.length == 3 && args[0].equals("-ewht")) {
+		} else if (args.length == 3 && args[0].equals("-ewht"))
+		// will evaluate the nlp pre-processed files vs. the collection
+		// of questions.
+		{
 			System.out.println("Evaluating against the questions file '" + args[1] + "' with the preprocessed index '"
 					+ args[2] + "' with whitespace analyzer...");
 			Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
@@ -87,15 +83,15 @@ public class App {
 			String index = args[2];
 			QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(),
 					preprocessor, true);
-			// nlpQuery.analyze();
-			// nlpQuery.printRanks();
 			nlpQuery.executeQuestions();
 			nlpQuery.printRanks();
 			System.out.println();
 			nlpQuery.printAllQuestions();
-			// will evaluate the lucene standard analyzer index documents vs
-			// the collection of questions.
-		} else if (args.length == 3 && args[0].equals("-estd")) {
+
+		} else if (args.length == 3 && args[0].equals("-estd"))
+		// will evaluate the lucene standard analyzer index documents vs
+		// the collection of questions.
+		{
 			System.out.println("Evaluating the questions file [" + args[1] + "] with the index dir " + args[2]
 					+ " with standard analyzer...");
 			String questions = args[1];
@@ -171,21 +167,35 @@ public class App {
 	}
 
 	public static void printUsageMessage() {
-		System.out.println( "\nUsage: java -jar Watson.jar -p SRC_DIR PREPROCESS_DIR \n\t -- preprocess all files in SRC_DIR to PREPROCESS_DIR.");
-		System.out.println( "\nUsage: java -jar Watson.jar -iwht SRC_DIR INDEX_DIR \n\t -- index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
-		System.out.println( "\nUsage: java -jar Watson.jar -istd SRC_DIR INDEX_DIR \n\t -- index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
+		System.out.println(
+				"\nUsage: java -jar Watson.jar -p SRC_DIR PREPROCESS_DIR \n\t -- preprocess all files in SRC_DIR to PREPROCESS_DIR.");
+		System.out.println(
+				"\nUsage: java -jar Watson.jar -iwht SRC_DIR INDEX_DIR \n\t -- index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
+		System.out.println(
+				"\nUsage: java -jar Watson.jar -istd SRC_DIR INDEX_DIR \n\t -- index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
 		System.out.println("\nUsage: java -jar Watson.jar -ewht QUESTIONS_FILE INDEX_DIR");
-		System.out.println("\t -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer and will output analysis to STDOUT");
-		System.out.println( "\nUsage: java -jar Watson.jar -estd QUESTIONS_FILE INDEX_DIR \n\t -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer and will ouput analysis to STDOUT");
-		System.out.println( "\nUsage: java -jar Watson.jar -explore QUESTIONS_FILE \n\t -- Explore the QUESTIONS_FILE.");
+		System.out.println(
+				"\t -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer and will output analysis to STDOUT");
+		System.out.println(
+				"\nUsage: java -jar Watson.jar -estd QUESTIONS_FILE INDEX_DIR \n\t -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer and will ouput analysis to STDOUT");
+		System.out.println("\nUsage: java -jar Watson.jar -explore QUESTIONS_FILE \n\t -- Explore the QUESTIONS_FILE.");
 	}
 
+	/*
+	 * Accepts a directory of files and indexes them with the given analyzer,
+	 * outputing to the given output directory.
+	 */
 	public static void index(File inputDir, File outputDir, Analyzer analyzer) {
 		System.out.println("indexing directory: " + inputDir.getName() + " to ouput to " + outputDir.getName());
 		DocumentIndexer indexer = new DocumentIndexer(inputDir, outputDir, analyzer);
 		indexer.indexAllFiles();
 	}
 
+	/*
+	 * Performs pre-processing with the NLPCore api. Lemmatizes, parses and
+	 * removes specific parts of speech. This process can take over 3 hours on a
+	 * laptop for the entire wiki provided.
+	 */
 	public static void preprocessDir(File inputDir, File outputDir) {
 		System.out.println("Starting preprocessing...");
 		Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
@@ -196,74 +206,30 @@ public class App {
 			System.err.println("Error with input or output directory");
 		}
 		System.out.println("Preprocessing finished.");
-
 	}
 
-	public static void preprocessingFile(File inputFile, File outputFile) throws IOException {
-		String line;
-		BufferedWriter bw = null;
-		FileWriter fw = null;
-		fw = new FileWriter(outputFile);
-		bw = new BufferedWriter(fw);
-		BufferedReader br = new BufferedReader(new FileReader(inputFile));
-		for (line = br.readLine(); line != null; line = br.readLine()) {
-			bw.write(preprocessLine(line));
-			/*
-			 * if (!beginsWith(line, "[[")) { if (!beginsWith(line, "==") &&
-			 * !beginsWith(line, "#RED")) { Document doc = new Document(line);
-			 * for (Sentence sent : doc.sentences()) { StringBuilder sb = new
-			 * StringBuilder(); for (int i = 0; i < sent.posTags().size(); i++)
-			 * { if (keepPartOfSpeech(sent.posTag(i))) {
-			 * sb.append(sent.lemma(i).toString() + " "); } }
-			 * bw.write(sb.toString() + "\n"); } } } else { bw.write(line +
-			 * "\n"); }
-			 */
-		}
-
-		br.close();
-		bw.close();
-		System.out.println("File " + outputFile.toPath() + " created");
-	}
-
-	public static String preprocessLine(String line) {
-		StringBuilder sb = new StringBuilder();
-		if (!beginsWith(line, "[[")) {
-			if (!beginsWith(line, "==") && !beginsWith(line, "#RED")) {
-				Document doc = new Document(line);
-				for (Sentence sent : doc.sentences()) {
-					for (int i = 0; i < sent.posTags().size(); i++) {
-						if (keepPartOfSpeech(sent.posTag(i))) {
-							sb.append(sent.lemma(i).toString() + " ");
-						}
-					}
-				}
-			}
-		} else {
-			sb.append(line + "\n");
-		}
-		return sb.toString();
-	}
-
-	public static boolean keepPartOfSpeech(String pos) {
-		if (pos.length() == 1) {
-			if (pos.equals("V")) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		String firstTwo = pos.substring(0, 2);
-		if ((pos.charAt(0) == 'V') || firstTwo.equals("RB") || firstTwo.equals("JJ") || firstTwo.equals("NN")) {
-			return true;
-		}
-		return false;
-	}
-
+	/*
+	 * public static String preprocessLine(String line) { StringBuilder sb = new
+	 * StringBuilder(); if (!beginsWith(line, "[[")) { if (!beginsWith(line,
+	 * "==") && !beginsWith(line, "#RED")) { Document doc = new Document(line);
+	 * for (Sentence sent : doc.sentences()) { for (int i = 0; i <
+	 * sent.posTags().size(); i++) { if (keepPartOfSpeech(sent.posTag(i))) {
+	 * sb.append(sent.lemma(i).toString() + " "); } } } } } else {
+	 * sb.append(line + "\n"); } return sb.toString(); }
+	 * 
+	 */
+	/*
+	 * public static boolean keepPartOfSpeech(String pos) { if (pos.length() ==
+	 * 1) { if (pos.equals("V")) { return true; } else { return false; } }
+	 * String firstTwo = pos.substring(0, 2); if ((pos.charAt(0) == 'V') ||
+	 * firstTwo.equals("RB") || firstTwo.equals("JJ") || firstTwo.equals("NN"))
+	 * { return true; } return false; }
+	 */
 	// strip the leading 2 characters from a line.
-	public static String parseCategory(String s) {
-		String returnString = s.substring(2, s.length() - 2);
-		return returnString;
-	}
+	/*
+	 * public static String parseCategory(String s) { String returnString =
+	 * s.substring(2, s.length() - 2); return returnString; }
+	 */
 
 	// This returns if the line of text is a section
 	// for example:
@@ -271,47 +237,45 @@ public class App {
 	// or
 	// #REDIRECT
 	// is a section, and is most likely not relevant.
-	public static boolean beginsWith(String line, String prefix) {
-		if (line.length() >= prefix.length()) {
-			return line.substring(0, prefix.length()).equals(prefix);
-		}
-		return false;
-	}
+	/*
+	 * public static boolean beginsWith(String line, String prefix) { if
+	 * (line.length() >= prefix.length()) { return line.substring(0,
+	 * prefix.length()).equals(prefix); } return false; }
+	 */
 
 	// Determines if a string is a category, denoted by
 	// a leading '=='. Should be added to the Category field
 	// of the index.
-	public static boolean isCategory(String line) {
-		return (line.length() > 2 && line.charAt(0) == '[' && line.charAt(1) == '[');
-	}
+	/*
+	 * public static boolean isCategory(String line) { return (line.length() > 2
+	 * && line.charAt(0) == '[' && line.charAt(1) == '['); }
+	 */
+	/*
+	 * public static void searchIndex(Path directoryPath, String searchString)
+	 * throws IOException, ParseException { Directory directory =
+	 * FSDirectory.open(directoryPath); IndexReader indexReader =
+	 * DirectoryReader.open(directory); IndexSearcher indexSearcher = new
+	 * IndexSearcher(indexReader); StandardAnalyzer analyzer = new
+	 * StandardAnalyzer(); QueryParser queryParser = new
+	 * QueryParser(Constants.FIELD_CONTENTS, analyzer); Query query =
+	 * queryParser.parse(searchString); if (Constants.DEBUG) {
+	 * System.out.println("SearchString: " + searchString);
+	 * System.out.println("Query: " + query); }
+	 * 
+	 * TopDocs docs = indexSearcher.search(query, Constants.HITSPERPAGE);
+	 * ScoreDoc[] hits = docs.scoreDocs; printResults(hits, indexSearcher);
+	 * System.out.println(indexSearcher.doc(0).get(Constants.FIELD_CATEGORY));
+	 * 
+	 * }
+	 */
 
-	public static void searchIndex(Path directoryPath, String searchString) throws IOException, ParseException {
-		Directory directory = FSDirectory.open(directoryPath);
-		IndexReader indexReader = DirectoryReader.open(directory);
-		IndexSearcher indexSearcher = new IndexSearcher(indexReader);
-		StandardAnalyzer analyzer = new StandardAnalyzer();
-		QueryParser queryParser = new QueryParser(Constants.FIELD_CONTENTS, analyzer);
-		Query query = queryParser.parse(searchString);
-		if (Constants.DEBUG) {
-			System.out.println("SearchString: " + searchString);
-			System.out.println("Query: " + query);
-		}
-
-		TopDocs docs = indexSearcher.search(query, Constants.HITSPERPAGE);
-		ScoreDoc[] hits = docs.scoreDocs;
-		printResults(hits, indexSearcher);
-		System.out.println(indexSearcher.doc(0).get(Constants.FIELD_CATEGORY));
-
-	}
-
-	public static void printResults(ScoreDoc[] hits, IndexSearcher indexSearcher) throws IOException {
-		if (Constants.DEBUG) {
-			System.out.println("PrintResults:");
-		}
-		for (int i = 0; i < hits.length; i++) {
-
-			System.out.println(hits[i].score + ", " + hits[i].doc + ", "
-					+ indexSearcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY));
-		}
-	}
+	/*
+	 * public static void printResults(ScoreDoc[] hits, IndexSearcher
+	 * indexSearcher) throws IOException { if (Constants.DEBUG) {
+	 * System.out.println("PrintResults:"); } for (int i = 0; i < hits.length;
+	 * i++) {
+	 * 
+	 * System.out.println(hits[i].score + ", " + hits[i].doc + ", " +
+	 * indexSearcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY)); } }
+	 */
 }
