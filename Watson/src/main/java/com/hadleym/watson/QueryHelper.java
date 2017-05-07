@@ -2,24 +2,8 @@ package com.hadleym.watson;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.Tokenizer;
-import org.apache.lucene.analysis.core.SimpleAnalyzer;
-import org.apache.lucene.analysis.core.StopAnalyzer;
-import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.analysis.synonym.WordnetSynonymParser;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -28,17 +12,12 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
-import org.apache.lucene.search.similarities.Similarity;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.wordnet.SynonymMap;
-import org.apache.lucene.analysis.tokenattributes.*;
 
-/* This class 
- * 
- * 
+/* This class takes a directory that has been indexed by lucene, 
+ * a file containing the Jeopardy questions, and queries the
+ * index using a given analyzer and generates scores for each
+ * question.  It stores each question in its own Question class.
  */
 public class QueryHelper {
 
@@ -63,6 +42,8 @@ public class QueryHelper {
 
 	}
 
+	// prints all of the questions that received a rank of '1' meaning it was
+	// the top result for that question.
 	public void printCorrectQuestions() {
 		for (Question question : handler.questions) {
 			if (question.rank == 0) {
@@ -71,6 +52,8 @@ public class QueryHelper {
 		}
 	}
 
+	// print all the ranks that each question received from the analsis.
+	// the number of ranks depends on the Constants.HITSPERPAGE vairable.
 	public void printRanks() {
 		int sum = 0;
 		System.out.println("Rank is the position the system retrieved the correct answer for the question");
@@ -85,10 +68,17 @@ public class QueryHelper {
 
 	}
 
+	
+	// performs the analysis on the questions given by questions file. 
+	// Will iterate through each question, create a Question class,
+	// and perform a query with the question vs the index.
 	public void executeQuestions() {
 		int num = 1;
+		// iterate over each question
 		for (Question question : handler.questions) {
 			String query = question.getQuery();
+			// if a preprocessor was used in the indexing, 
+			// the query must receive the same processing.
 			if (preprocessor != null) {
 				query = preprocessor.preprocessLine(query);
 			} else {
@@ -99,6 +89,7 @@ public class QueryHelper {
 				query = filter(query);
 			}
 			try {
+				// set the results returned from the query.
 				question.setResults(getResults(query, question));
 				question.setRank(question.calculateRank());
 				int rank = question.getRank();
@@ -116,6 +107,11 @@ public class QueryHelper {
 
 	}
 
+	// This is where the indexer is combined with analyzer and the 
+	// query is evaluated against the index.  An array of results (name and score)
+	// are returned, also the Question passed along receives a copy of
+	// what the parsed question was, for future analysis.
+	// this is where the similarity can be modified.
 	private Result[] getResults(String query, Question question) throws IOException, ParseException {
 		Result[] results = new Result[Constants.HITSPERPAGE];
 		Query q = new QueryParser(Constants.FIELD_CONTENTS, analyzer).parse(query);
@@ -125,19 +121,25 @@ public class QueryHelper {
 		searcher.setSimilarity(new ClassicSimilarity());
 		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);
 		ScoreDoc[] hits = docs.scoreDocs;
+		// find the document category that matches the answer.
 		for (int i = 0; i < docs.scoreDocs.length; i++) {
 			String name = searcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY);
+			// remove the leading and trailing '[['
 			name = name.substring(2, name.length() - 2);
 			results[i] = new Result(name, hits[i].score);
 		}
+		// assign the parsed question
 		question.setParsedQuestion(q.toString(Constants.FIELD_CONTENTS));
 		return results;
 	}
 
+	// filter out certain characters, these characters cause the lucene query parser
+	// to throw ParseExceptions
 	private static String filter(String line) {
 		return line.replaceAll("[()!#&\"\'-]", "");
 	}
 
+	// display the results of a search.
 	public void printResults(ScoreDoc[] hits, IndexSearcher indexSearcher) throws IOException {
 		if (Constants.DEBUG) {
 			System.out.println("PrintResults:");
@@ -149,6 +151,7 @@ public class QueryHelper {
 		}
 	}
 
+	// print all of the questions contained for this QueryHelper.
 	public void printAllQuestions() {
 		for (Question question : handler.questions) {
 			question.printQuestion();
