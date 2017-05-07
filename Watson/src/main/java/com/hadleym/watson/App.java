@@ -39,15 +39,18 @@ import edu.stanford.nlp.simple.Sentence;
  * 
  * It utilizes Lucene as well as the NLPCore.
  * 
+ * CoreNLP is used to remove parts of speech not wanted, and also performs lemmatization.
+ * Lucene is used to index using either the StandardAnalyzer, or WhitespaceAnalyzer.
+ * 
+ * Documents that are preprocessed with CoreNLP are then used with just the WhitespaceAnalyzer.
+ * 
+ * Documents that are not preproccessed with CoreNLP are analyzed with the lucene StandardAnalyzer.
+ * 
+ * Questions are created by parsing the 'questions.txt' file contained given with these files.
  * 
  * 
  * 
  */
-// Usage: "$ java App -p" 						      -- preprocess all files in " + Constants.RAW_FILE_DIR + " to " + Constants.PREPROCESS_DIR);
-//        "$ java App -inlp SRC_DIR INDEX_DIR"	      -- index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
-//        "$ java App -istd SRC_DIR INDEX_DIR         -- index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
-//        "$ java App -enlp QUESTIONS_FILE INDEX_DIR  -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer.");
-//        "$ java App -estd QUESTIONS_FILE INDEX_DIR  -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer.");
 public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
