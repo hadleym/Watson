@@ -11,6 +11,13 @@ import java.util.HashSet;
 import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 
+/*
+ * This class utilizes the NLPCore api to 'pre-process' a document.
+ * It will strip all of the parts of speech not listed in the Constants class
+ * as 'parts of speech' and will remove all stop words associated with the 
+ * stop words array.  It then writes these preprocessed files to an
+ * output directory to then be parsed by lucene. 
+ */
 public class Preprocessor {
 	public HashSet<String> stopWords;
 	public HashSet<String> parts;
@@ -20,6 +27,8 @@ public class Preprocessor {
 		this.parts = generateHashSet(parts);
 		this.stopWords = generateHashSet(sw);
 	}
+	// generate a hashSet for the parts of speech we wish
+	// to keep, and the stop words we do not wish to keep.
 	public HashSet<String> generateHashSet(String[] p){
 		HashSet<String> set = new HashSet<String>();
 		for ( String s: p){
@@ -27,6 +36,7 @@ public class Preprocessor {
 		}
 		return set;
 	}
+	// preprocess an entire dirctory.
 	public void preprocessDirectory(File srcDir, File destDir) throws IOException{
 		String destPath = destDir.getPath();
 		String separator = File.separator;
@@ -40,6 +50,7 @@ public class Preprocessor {
 		}
 		
 	}
+	// preprocess a file
 	public void preprocessFile(File src, File dest) throws IOException {
 		System.out.print("preprocessing file: " + src.getName());
 		String line;
@@ -59,13 +70,19 @@ public class Preprocessor {
 		System.out.println("Finished.");
 		
 	}
+	/*
+	 * Process a single line
+	 */
 	public String preprocessLine(String line) {
 		StringBuilder sb = new StringBuilder();
 		if (!isCategory(line)) {
+			// if the line begins with '==' or '#RED' then it can be ignored.
 			if (!beginsWith(line, "==") && !beginsWith(line, "#RED")) {
 				Document doc = new Document(line);
 				for (Sentence sent : doc.sentences()) {
 					for (int i = 0; i < sent.posTags().size(); i++) {
+						// Parts of speech not contained in parts hashSet and are 
+						// in the stopWords hashSet, are discarded.
 						if ( parts.contains(sent.posTag(i)) && !stopWords.contains(sent.lemma(i))){ 
 							sb.append(sent.lemma(i).toString() + " ");
 						}
@@ -74,6 +91,8 @@ public class Preprocessor {
 				}
 			}
 		} else {
+			// simply add the line as is (not processed) because it is 
+			// a category.
 			sb.append(line + "\n");
 		}
 		return sb.toString();
