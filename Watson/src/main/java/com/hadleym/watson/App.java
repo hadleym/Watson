@@ -22,6 +22,8 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.similarities.BM25Similarity;
+import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
@@ -85,11 +87,11 @@ public class App {
 			String questions = args[1];
 			String index = args[2];
 			QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(),
-					preprocessor, true);
+					preprocessor, true, new BM25Similarity());
 			nlpQuery.executeQuestions();
-			nlpQuery.printRanks();
+			nlpQuery.printSummary();
 			System.out.println();
-			nlpQuery.printAllQuestions();
+//			nlpQuery.printAllQuestions();
 
 		} else if (args.length == 3 && args[0].equals("-estd"))
 		// will evaluate the lucene standard analyzer index documents vs
@@ -99,12 +101,15 @@ public class App {
 					+ " with standard analyzer...");
 			String questions = args[1];
 			String index = args[2];
-			QueryHelper stdQuery = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(), null,
-					true);
-			stdQuery.executeQuestions();
-			stdQuery.printRanks();
+			QueryHelper stdQueryClassic = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(), null,
+					true, new ClassicSimilarity());
+			QueryHelper stdQueryBM25 = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(), null,
+					true, new BM25Similarity());
+			stdQueryClassic.executeQuestions();
+			stdQueryClassic.printSummary();
+			stdQueryBM25.executeQuestions();
+			stdQueryBM25.printSummary();
 			System.out.println();
-			stdQuery.printAllQuestions();
 
 		} else if (args.length == 3 && args[0].equals("-explore")) {
 			Scanner s = new Scanner(System.in);
@@ -128,13 +133,13 @@ public class App {
 				System.out.println("Please wait while analysis is being generated...");
 				Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
 				QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(),
-						preprocessor, true);
+						preprocessor, true, new BM25Similarity());
 				exploreQuery(nlpQuery, s);
 			} else if (selection == 2) {
 				System.out.println("Evaluating vs Lucene Standard Analyzer");
 				System.out.println("Please wait while analysis is being generated...");
 				QueryHelper stdQuery = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(),
-						null, true);
+						null, true, new BM25Similarity());
 				exploreQuery(stdQuery, s);
 			}
 		} else {

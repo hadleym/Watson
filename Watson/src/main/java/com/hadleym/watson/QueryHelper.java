@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -13,6 +14,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
+import org.apache.lucene.search.similarities.Similarity;
 
 /* This class takes a directory that has been indexed by lucene, 
  * a file containing the Jeopardy questions, and queries the
@@ -30,16 +32,23 @@ public class QueryHelper {
 	BufferedReader br;
 	int total;
 	public QuestionHandler handler;
+	private float MRRScore;
+	private int RA1Score;
+	Similarity sim;
 
-	public QueryHelper(File questionsFile, File indexDir, Analyzer a, Preprocessor pp, boolean v) {
+	public QueryHelper(File questionsFile, File indexDir, Analyzer a, Preprocessor pp, boolean v, Similarity sim) {
 		this.preprocessor = pp;
 		this.verbose = v;
+		this.sim = sim;
 		this.analyzer = a;
 		this.index = indexDir;
 		this.questions = questionsFile;
 		total = 0;
 		handler = new QuestionHandler(questions);
-
+		RA1Score = -1;
+		MRRScore = -1;
+		// initialize to -1 to flag if its been calculated yet.
+		ranks[0] = -1;
 	}
 
 	// prints all of the questions that received a rank of '1' meaning it was
@@ -52,6 +61,21 @@ public class QueryHelper {
 		}
 	}
 
+	// Prints a summary of the results from the Questions.
+	public void printSummary(){
+		String analyzerString = null;
+		if ( analyzer instanceof StandardAnalyzer){
+			analyzerString = "Lucene Standard Analyzer";
+		} else {
+			analyzerString = "CoreNLP lemmas and Lucene Whitespace Analyzer";
+		}
+		System.out.println("Summary for " + analyzerString + ", " + sim);
+		System.out.println("Total Questions: " + total);
+		System.out.println("Correct top 1 questions: " + getRA1Score());
+		System.out.println("MRRScore: " + getMRRScore());
+//		printRanks();
+	}
+			
 	// print all the ranks that each question received from the analsis.
 	// the number of ranks depends on the Constants.HITSPERPAGE vairable.
 	public void printRanks() {
@@ -68,8 +92,7 @@ public class QueryHelper {
 
 	}
 
-	
-	// performs the analysis on the questions given by questions file. 
+	// performs the analysis on the questions given by questions file.
 	// Will iterate through each question, create a Question class,
 	// and perform a query with the question vs the index.
 	public void executeQuestions() {
@@ -77,7 +100,7 @@ public class QueryHelper {
 		// iterate over each question
 		for (Question question : handler.questions) {
 			String query = question.getQuery();
-			// if a preprocessor was used in the indexing, 
+			// if a preprocessor was used in the indexing,
 			// the query must receive the same processing.
 			if (preprocessor != null) {
 				query = preprocessor.preprocessLine(query);
@@ -107,8 +130,9 @@ public class QueryHelper {
 
 	}
 
-	// This is where the indexer is combined with analyzer and the 
-	// query is evaluated against the index.  An array of results (name and score)
+	// This is where the indexer is combined with analyzer and the
+	// query is evaluated against the index. An array of results (name and
+	// score)
 	// are returned, also the Question passed along receives a copy of
 	// what the parsed question was, for future analysis.
 	// this is where the similarity can be modified.
@@ -118,7 +142,8 @@ public class QueryHelper {
 		IndexReader reader = DirectoryReader.open(Constants.getDirectory(index.toPath()));
 		IndexSearcher searcher = new IndexSearcher(reader);
 		// searcher.setSimilarity(new BM25Similarity());
-		searcher.setSimilarity(new ClassicSimilarity());
+//		searcher.setSimilarity(new ClassicSimilarity());
+		searcher.setSimilarity(sim);
 		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);
 		ScoreDoc[] hits = docs.scoreDocs;
 		// find the document category that matches the answer.
@@ -132,8 +157,45 @@ public class QueryHelper {
 		question.setParsedQuestion(q.toString(Constants.FIELD_CONTENTS));
 		return results;
 	}
+	public int getRA1Score(){
+		if ( RA1Score == -1 ){
+			calculateRA1Score();
+		}
+		return RA1Score;
+	}
 
-	// filter out certain characters, these characters cause the lucene query parser
+	public void calculateRA1Score(){
+		if (ranks[0] > 0 ){
+			RA1Score = ranks[0];
+		}
+	}
+	public void calculateMRRScore() {
+		float score = 0;
+		for (Question question : handler.questions) {
+			// rank start at 0 being the top hit.
+			int rank = question.getRank() + 1;
+			if (rank > 0) {
+				float recip = 1/(float)rank;
+				score = score + recip;
+			}
+			// If a rank is not within the top 10 (indicated by
+			// question.getRank() == -1)
+			// then its MRRScore is 0, and not added to the MRRScore.
+		}
+		MRRScore = score;
+	}
+
+	// returns MMRScore. Calculates if the result is -1, which means 
+	// it hasnt been calculated yet.
+	public double getMRRScore() {
+		if (MRRScore < 0) {
+			calculateMRRScore();
+		}
+		return MRRScore;
+	}
+
+	// filter out certain characters, these characters cause the lucene query
+	// parser
 	// to throw ParseExceptions
 	private static String filter(String line) {
 		return line.replaceAll("[()!#&\"\'-]", "");
