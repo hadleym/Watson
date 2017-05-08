@@ -71,7 +71,8 @@ public class Preprocessor {
 		
 	}
 	/*
-	 * Process a single line
+	 * Process a single line.  Parts of speech are identified, compared
+	 * to the HashSet parts, and stop words are removed.
 	 */
 	public String preprocessLine(String line) {
 		StringBuilder sb = new StringBuilder();

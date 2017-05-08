@@ -118,6 +118,7 @@ public class App {
 			stdQueryBM25.executeQuestions();
 			stdQueryBM25.printSummary();
 			System.out.println();
+//			stdQueryBM25.printAllQuestions();
 
 		} else if (args.length == 3 && args[0].equals("-explore")) {
 			Scanner s = new Scanner(System.in);

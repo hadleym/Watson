@@ -24,7 +24,7 @@ public class Constants {
 	public static final String FIELD_CONTENTS = "contents";
 	public static final String FIELD_CATEGORY = "category";
 	public static final boolean recreate = true;
-	public static final int HITSPERPAGE = 10;
+	public static final int HITSPERPAGE = 50;
 	public static final String[] PARTS_OF_SPEECH = {"JJ", "JJR", "JJS", "NN", "NNS", "NNP", 
 			"NNPS", "RB", "RBR", "RBS", "VB", "VBD", "VBG" ,"VBN", "VBP", "VBZ"};
 	public static final String[] STOP_WORDS = {"a", "an", "and", "are", "as", "at", "be", "but", "by",

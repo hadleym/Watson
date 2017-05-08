@@ -28,7 +28,7 @@ public class QueryHelper {
 	Analyzer analyzer;
 	File index;
 	File questions;
-	int[] ranks = new int[10];
+	int[] ranks = new int[Constants.HITSPERPAGE	];
 	BufferedReader br;
 	int total;
 	public QuestionHandler handler;
