@@ -58,18 +58,19 @@ public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// this is for the files referred to as 'nlp' preprocessed files.
-		if (args.length == 1 && args[0].equals("-p")) {
-			try {
-				Preprocessor.preprocessDir(Constants.RAW_FILE_DIR, Constants.NLP_PREPROCESS_DIR);
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("please make sure the directories exist and contain files to preprocess");
-				System.exit(1);
-			}
-			// will index the nlp preprocessed files with the lucene
-			// whitespace analyzer.
+		if (args.length == 0){
+			Helper.printUsageMessage();
+			System.exit(1);
+		}
+		if (args.length == 1 && args[0].equals("-pre")) {
+			Preprocessor.preprocessDir(Constants.RAW_FILE_DIR, Constants.NLP_PREPROCESS_DIR);
+			System.out.println("Preprocessing completed.");
 		} else if (args.length == 1 && args[0].equals("-index")) {
 			indexBothBranches();
+			System.out.println("Indexing for both branches completed");
+		} else if (args.length == 1 && args[0].equals("-evaluate")) {
+			evaluateFull(Helper.buildAllFour());
+			System.out.println("Evaluation for both branches completed. See output files");
 		} else if (args.length == 3 && args[0].equals("-iwht")) {
 			index(new File(args[1]), new File(args[2]), new WhitespaceAnalyzer());
 		} else if (args.length == 3 && args[0].equals("-istd")) {
@@ -119,7 +120,6 @@ public class App {
 			stdQueryBM25.executeQuestions();
 			stdQueryBM25.printSummary();
 			System.out.println();
-			// stdQueryBM25.printAllQuestions();
 
 		} else if (args.length == 3 && args[0].equals("-explore")) {
 			// Handy 'explorer' that can be used to see what individual
@@ -155,8 +155,6 @@ public class App {
 						null, true, new BM25Similarity());
 				exploreQuery(stdQuery, s);
 			}
-		} else if (args.length == 1 && args[0].equals("-full")) {
-			evaluateFull(Helper.buildAllFour());
 		} else if (args.length == 4 && args[0].equals("-full")) {
 			evaluateFull(Helper.buildAllFour(args[1], args[2], args[3]));
 		} else if (args.length == 1 && args[0].equals("-a")) {
@@ -172,7 +170,7 @@ public class App {
 	}
 
 	// will index the preprocessed Core NLP files (that need to have already
-	// been generated using the '-p' flag)
+	// been generated using the '-pre' flag)
 	// into the default directory of 'nlpIndex' and will also index the default
 	// directory 'rawFiles' into
 	// the directory 'standardIndex' for use with the StandardAnalyzer.
@@ -187,7 +185,7 @@ public class App {
 			System.err.println("Directory [" + nlpSource
 					+ "] is either empty, doesnt exist, or is not a directory. Please correct and try again.");
 			System.err.println(
-					"This directory should contain all NLP preprocessed files created with the -p flag. See -usage for usage messages.");
+					"This directory should contain all NLP preprocessed files created with the -pre flag. See -usage for usage messages.");
 			System.err.println("Exiting.");
 			System.exit(1);
 		}
