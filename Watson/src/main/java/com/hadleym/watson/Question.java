@@ -99,6 +99,29 @@ public class Question {
 		}
 	}
 
+	public String getResults() {
+		StringBuilder sb = new StringBuilder();
+		if (getNumber() >= 0) {
+			sb.append("NUMBER " + getNumber() + '\n');
+		}
+		sb.append("CATEGORY: " + category + '\n');
+		sb.append("QUESTION: \"" + question + "\"" + '\n');
+		sb.append("CORRECT ANSWER: " + answer);
+		sb.append("PARSED QUESTION: " + getParsedQuestion() + '\n');
+		if (rank >= 0) {
+			int foundrank = rank + 1;
+			sb.append("WATSON FOUND AT RANK: " + foundrank + '\n');
+		} else {
+			sb.append("WATSON DID NOT FIND IN TOP " + Constants.HITSPERPAGE + '\n');
+		}
+		for (int i = 0; i < this.results.length; i++) {
+			int num = i + 1;
+			sb.append(num + ") " + results[i].score + ":\t " + results[i].name + '\n');
+		}
+		return sb.toString();
+
+	}
+
 	public void printQuestion() {
 		if (getNumber() >= 0) {
 			System.out.println("NUMBER " + getNumber());

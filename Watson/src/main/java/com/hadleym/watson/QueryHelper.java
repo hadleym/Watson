@@ -28,7 +28,7 @@ public class QueryHelper {
 	Analyzer analyzer;
 	File index;
 	File questions;
-	int[] ranks = new int[Constants.HITSPERPAGE	];
+	int[] ranks = new int[Constants.HITSPERPAGE];
 	BufferedReader br;
 	int total;
 	public QuestionHandler handler;
@@ -61,21 +61,6 @@ public class QueryHelper {
 		}
 	}
 
-	// Prints a summary of the results from the Questions.
-	public void printSummary(){
-		String analyzerString = null;
-		if ( analyzer instanceof StandardAnalyzer){
-			analyzerString = "Lucene Standard Analyzer";
-		} else {
-			analyzerString = "CoreNLP lemmas and Lucene Whitespace Analyzer";
-		}
-		System.out.println("Summary for " + analyzerString + ", " + sim);
-		System.out.println("Total Questions: " + total);
-		System.out.println("Correct top 1 questions: " + getRA1Score());
-		System.out.println("MRRScore: " + getMRRScore());
-//		printRanks();
-	}
-			
 	// print all the ranks that each question received from the analsis.
 	// the number of ranks depends on the Constants.HITSPERPAGE vairable.
 	public void printRanks() {
@@ -141,8 +126,6 @@ public class QueryHelper {
 		Query q = new QueryParser(Constants.FIELD_CONTENTS, analyzer).parse(query);
 		IndexReader reader = DirectoryReader.open(Constants.getDirectory(index.toPath()));
 		IndexSearcher searcher = new IndexSearcher(reader);
-		// searcher.setSimilarity(new BM25Similarity());
-//		searcher.setSimilarity(new ClassicSimilarity());
 		searcher.setSimilarity(sim);
 		TopDocs docs = searcher.search(q, Constants.HITSPERPAGE);
 		ScoreDoc[] hits = docs.scoreDocs;
@@ -157,25 +140,27 @@ public class QueryHelper {
 		question.setParsedQuestion(q.toString(Constants.FIELD_CONTENTS));
 		return results;
 	}
-	public int getRA1Score(){
-		if ( RA1Score == -1 ){
+
+	public int getRA1Score() {
+		if (RA1Score == -1) {
 			calculateRA1Score();
 		}
 		return RA1Score;
 	}
 
-	public void calculateRA1Score(){
-		if (ranks[0] > 0 ){
+	public void calculateRA1Score() {
+		if (ranks[0] > 0) {
 			RA1Score = ranks[0];
 		}
 	}
+
 	public void calculateMRRScore() {
 		float score = 0;
 		for (Question question : handler.questions) {
 			// rank start at 0 being the top hit.
 			int rank = question.getRank() + 1;
 			if (rank > 0) {
-				float recip = 1/(float)rank;
+				float recip = 1 / (float) rank;
 				score = score + recip;
 			}
 			// If a rank is not within the top 10 (indicated by
@@ -185,7 +170,7 @@ public class QueryHelper {
 		MRRScore = score;
 	}
 
-	// returns MMRScore. Calculates if the result is -1, which means 
+	// returns MMRScore. Calculates if the result is -1, which means
 	// it hasnt been calculated yet.
 	public double getMRRScore() {
 		if (MRRScore < 0) {
@@ -218,6 +203,38 @@ public class QueryHelper {
 		for (Question question : handler.questions) {
 			question.printQuestion();
 		}
+	}
+
+	// Prints a summary of the results from the Questions.
+	public void printSummary() {
+		
+		System.out.println("Summary for " + this );
+		System.out.println("Total Questions: " + total);
+		System.out.println("Correct top 1 questions: " + getRA1Score());
+		System.out.println("MRRScore: " + getMRRScore());
+		// printRanks();
+	}
+
+	@Override
+	public String toString(){
+		if (analyzer instanceof StandardAnalyzer) {
+			return "Lucene Standard Analyzer " + sim;
+		} else {
+			return "CoreNLP lemmas and Lucene Whitespace Analyzer " + sim;
+		}	
+	}
+	public String getSummary() {
+		StringBuilder sb = new StringBuilder();
+		String analyzerString = null;
+		if (analyzer instanceof StandardAnalyzer) {
+			analyzerString = "Lucene Standard Analyzer with " + sim ;
+		} else {
+			analyzerString = "CoreNLP lemmas and Lucene Whitespace Analyzer";
+		}
+		sb.append("Summary for " + analyzerString + '\n');
+		sb.append("Total Questions: " + total + "\nCorrect top 1 questions: " + getRA1Score() + "\nMRRScore: "
+				+ getMRRScore() + '\n');
+		return sb.toString();
 	}
 
 }

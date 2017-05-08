@@ -99,8 +99,8 @@ public class App {
 			nlpQueryBM25.executeQuestions();
 			nlpQueryBM25.printSummary();
 
-			// nlpQuery.printAllQuestions();
-
+		} else if (args.length == 4 && args[0].equals("-full")){
+			evaluateFull(buildAllFour(args[1], args[2], args[3]));
 		} else if (args.length == 3 && args[0].equals("-estd"))
 		// will evaluate the lucene standard analyzer index documents vs
 		// the collection of questions.
@@ -122,7 +122,8 @@ public class App {
 			// stdQueryBM25.printAllQuestions();
 
 		} else if (args.length == 3 && args[0].equals("-explore")) {
-			// Handy 'explorer' that can be used to see what individual questions
+			// Handy 'explorer' that can be used to see what individual
+			// questions
 			// for both the CoreNLP and StandardAnalyzer with BM25.
 			Scanner s = new Scanner(System.in);
 			System.out.println("Exploring mode");
@@ -155,7 +156,7 @@ public class App {
 				exploreQuery(stdQuery, s);
 			}
 		} else if (args.length == 4 && args[0].equals("-a")) {
-			evaluateAllPrecisionAtOne(args[1], args[2], args[3]);
+			evaluateAllPrecisionAtOne(buildAllFour(args[1], args[2], args[3]));
 
 		} else {
 			printUsageMessage();
@@ -163,25 +164,45 @@ public class App {
 		}
 
 	}
+
+	// evaluates both branches ( StandardAnalyzer and Core NLP ) with 
+	// both scoring functions (tf-idf and BM25) and writes each to 
+	// one of four text files.
+	public static void evaluateFull(ArrayList<QueryHelper> queries){
+		String[] names = {"StandardAnalyzerTFIDF.txt", "StandardAnalyzerBM25.txt", "nlpCoreTFIDF.txt", "nlpCoreBM25.txt"};
+		int pos = 0;
+		for (QueryHelper query : queries){
+			System.out.println("Evaluating " + query + "...");
+			query.executeQuestions();
+			try {
+				System.out.println("Producing " + names[pos] + "...");
+				BufferedWriter bw = new BufferedWriter(new FileWriter(names[pos++]));
+				bw.write(query.getSummary());
+				bw.write('\n');
+				for ( Question question : query.handler.questions){
+					bw.write(question.getResults());
+					bw.write('\n');
+				}
+				bw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Finished");
+		}
+		
+
+		
+	}
 	/*
-	 * Evaluate all four model (CoreNLP w/tf-id, CoreNLP w/BM25, StandardAnalyzer w/tf-id, Standard
-	 * Analyzer w/BM25
-	 * with the Precision at one ranking algorithm.
-	 * print to standard output.
+	 * Evaluate all four model (CoreNLP w/tf-id, CoreNLP w/BM25,
+	 * StandardAnalyzer w/tf-id, Standard Analyzer w/BM25 with the Precision at
+	 * one ranking algorithm. print to standard output.
 	 * 
-	 * REQUIRES that the CoreNLP directory has been preprocessed (a 3 hour process) and indexed
-	 * 			and that the standardIndex has been indexed with the Lucene Standard Analyzer.
+	 * REQUIRES that the CoreNLP directory has been preprocessed (a 3 hour
+	 * process) and indexed and that the standardIndex has been indexed with the
+	 * Lucene Standard Analyzer.
 	 */
-	public static void evaluateAllPrecisionAtOne(String questions, String nlpIndex, String stdIndex) {
-		ArrayList<QueryHelper> queries = new ArrayList<>();
-		queries.add(new QueryHelper(new File(questions), new File(stdIndex), new StandardAnalyzer(), null, true,
-				new ClassicSimilarity()));
-		queries.add(new QueryHelper(new File(questions), new File(stdIndex), new StandardAnalyzer(), null, true,
-				new BM25Similarity()));
-		queries.add(new QueryHelper(new File(questions), new File(nlpIndex), new WhitespaceAnalyzer(),
-				PreprocessorGenerator.standardPreprocessor(), true, new ClassicSimilarity()));
-		queries.add(new QueryHelper(new File(questions), new File(nlpIndex), new WhitespaceAnalyzer(),
-				PreprocessorGenerator.standardPreprocessor(), true, new BM25Similarity()));
+	public static void evaluateAllPrecisionAtOne(ArrayList<QueryHelper> queries){
 		System.out.println("Whole system Precision @ 1 Rank");
 		System.out.println("Evaluating...");
 		for (QueryHelper query : queries) {
@@ -206,6 +227,18 @@ public class App {
 			}
 			System.out.println();
 		}
+	}
+	public static ArrayList<QueryHelper> buildAllFour(String questions, String nlpIndex, String stdIndex){
+		ArrayList<QueryHelper> queries = new ArrayList<QueryHelper>();
+		queries.add(new QueryHelper(new File(questions), new File(stdIndex), new StandardAnalyzer(), null, true,
+				new ClassicSimilarity()));
+		queries.add(new QueryHelper(new File(questions), new File(stdIndex), new StandardAnalyzer(), null, true,
+				new BM25Similarity()));
+		queries.add(new QueryHelper(new File(questions), new File(nlpIndex), new WhitespaceAnalyzer(),
+				PreprocessorGenerator.standardPreprocessor(), true, new ClassicSimilarity()));
+		queries.add(new QueryHelper(new File(questions), new File(nlpIndex), new WhitespaceAnalyzer(),
+				PreprocessorGenerator.standardPreprocessor(), true, new BM25Similarity()));	
+		return queries;
 	}
 
 	public static void exploreQuery(QueryHelper helper, Scanner s) {
