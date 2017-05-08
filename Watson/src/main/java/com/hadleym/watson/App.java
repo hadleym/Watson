@@ -239,15 +239,18 @@ public class App {
 	public static ArrayList<QueryHelper> buildAllFour(){
 		return buildAllFour(Constants.QUESTIONS_FILE, Constants.NLP_INDEX, Constants.STD_INDEX);
 	}
-	public static ArrayList<QueryHelper> buildAllFour(String questions, String nlpIndex, String stdIndex){
+	public static ArrayList<QueryHelper> buildAllFour(String q, String nIndex, String sIndex){
+		File questions = new File(q);
+		File nlpIndex = Helper.checkDirectoryAndCreate(nIndex);
+		File stdIndex = Helper.checkDirectoryAndCreate(sIndex);
 		ArrayList<QueryHelper> queries = new ArrayList<QueryHelper>();
-		queries.add(new QueryHelper(new File(questions), new File(stdIndex), new StandardAnalyzer(), null, true,
+		queries.add(new QueryHelper(questions, stdIndex,new StandardAnalyzer(), null, true,
 				new ClassicSimilarity()));
-		queries.add(new QueryHelper(new File(questions), new File(stdIndex), new StandardAnalyzer(), null, true,
+		queries.add(new QueryHelper(questions, stdIndex, new StandardAnalyzer(), null, true,
 				new BM25Similarity()));
-		queries.add(new QueryHelper(new File(questions), new File(nlpIndex), new WhitespaceAnalyzer(),
+		queries.add(new QueryHelper(questions, nlpIndex, new WhitespaceAnalyzer(),
 				PreprocessorGenerator.standardPreprocessor(), true, new ClassicSimilarity()));
-		queries.add(new QueryHelper(new File(questions), new File(nlpIndex), new WhitespaceAnalyzer(),
+		queries.add(new QueryHelper(questions, nlpIndex, new WhitespaceAnalyzer(),
 				PreprocessorGenerator.standardPreprocessor(), true, new BM25Similarity()));	
 		return queries;
 	}
@@ -320,5 +323,6 @@ public class App {
 		}
 		System.out.println("Preprocessing finished.");
 	}
+	
 
 }
