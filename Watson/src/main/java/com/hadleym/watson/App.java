@@ -99,8 +99,7 @@ public class App {
 			nlpQueryBM25.executeQuestions();
 			nlpQueryBM25.printSummary();
 
-		} else if (args.length == 4 && args[0].equals("-full")){
-			evaluateFull(buildAllFour(args[1], args[2], args[3]));
+		
 		} else if (args.length == 3 && args[0].equals("-estd"))
 		// will evaluate the lucene standard analyzer index documents vs
 		// the collection of questions.
@@ -155,6 +154,12 @@ public class App {
 						null, true, new BM25Similarity());
 				exploreQuery(stdQuery, s);
 			}
+		} else if (args.length == 1 && args[0].equals("-full")){
+			evaluateFull(buildAllFour());
+		} else if (args.length == 4 && args[0].equals("-full")){
+			evaluateFull(buildAllFour(args[1], args[2], args[3]));
+		} else if (args.length == 1 && args[0].equals("-a")){
+			evaluateAllPrecisionAtOne(buildAllFour());
 		} else if (args.length == 4 && args[0].equals("-a")) {
 			evaluateAllPrecisionAtOne(buildAllFour(args[1], args[2], args[3]));
 
@@ -165,18 +170,19 @@ public class App {
 
 	}
 
+
 	// evaluates both branches ( StandardAnalyzer and Core NLP ) with 
 	// both scoring functions (tf-idf and BM25) and writes each to 
 	// one of four text files.
 	public static void evaluateFull(ArrayList<QueryHelper> queries){
-		String[] names = {"StandardAnalyzerTFIDF.txt", "StandardAnalyzerBM25.txt", "nlpCoreTFIDF.txt", "nlpCoreBM25.txt"};
+		String[] names = Constants.FILENAMES;
 		int pos = 0;
 		for (QueryHelper query : queries){
 			System.out.println("Evaluating " + query + "...");
 			query.executeQuestions();
 			try {
 				System.out.println("Producing " + names[pos] + "...");
-				BufferedWriter bw = new BufferedWriter(new FileWriter(names[pos++]));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(names[pos]));
 				bw.write(query.getSummary());
 				bw.write('\n');
 				for ( Question question : query.handler.questions){
@@ -187,8 +193,10 @@ public class App {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Finished");
+			System.out.println("Finished creating " + names[pos]);
+			pos++;
 		}
+		System.out.println("Evaluation finished, all files complete.");
 		
 
 		
@@ -227,6 +235,9 @@ public class App {
 			}
 			System.out.println();
 		}
+	}
+	public static ArrayList<QueryHelper> buildAllFour(){
+		return buildAllFour(Constants.QUESTIONS_FILE, Constants.NLP_INDEX, Constants.STD_INDEX);
 	}
 	public static ArrayList<QueryHelper> buildAllFour(String questions, String nlpIndex, String stdIndex){
 		ArrayList<QueryHelper> queries = new ArrayList<QueryHelper>();
