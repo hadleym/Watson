@@ -1,0 +1,8 @@
+Question # 19:   1,  1,  1,  1
+Question # 35:   1,  1,  1,  1
+Question # 36:   1,  1,  1,  1
+Question # 63:   1,  1,  1,  1
+Question # 64:   1,  1,  1,  1
+Question # 65:   1,  1,  1,  1
+Question # 82:   1,  1,  1,  1
+Question # 98:   1,  1,  1,  1
