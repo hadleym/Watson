@@ -58,9 +58,9 @@ public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// this is for the files referred to as 'nlp' preprocessed files.
-		if (args.length == 3 && args[0].equals("-p")) {
+		if (args.length == 1 && args[0].equals("-p")) {
 			try {
-				preprocessDir(new File(args[1]), new File(args[2]));
+				Preprocessor.preprocessDir(Constants.RAW_FILE_DIR, Constants.NLP_PREPROCESS_DIR);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("please make sure the directories exist and contain files to preprocess");
@@ -68,6 +68,8 @@ public class App {
 			}
 			// will index the nlp preprocessed files with the lucene
 			// whitespace analyzer.
+		} else if (args.length == 1 && args[0].equals("-index")) {
+			indexBothBranches();
 		} else if (args.length == 3 && args[0].equals("-iwht")) {
 			index(new File(args[1]), new File(args[2]), new WhitespaceAnalyzer());
 		} else if (args.length == 3 && args[0].equals("-istd")) {
@@ -99,7 +101,6 @@ public class App {
 			nlpQueryBM25.executeQuestions();
 			nlpQueryBM25.printSummary();
 
-		
 		} else if (args.length == 3 && args[0].equals("-estd"))
 		// will evaluate the lucene standard analyzer index documents vs
 		// the collection of questions.
@@ -154,30 +155,73 @@ public class App {
 						null, true, new BM25Similarity());
 				exploreQuery(stdQuery, s);
 			}
-		} else if (args.length == 1 && args[0].equals("-full")){
-			evaluateFull(buildAllFour());
-		} else if (args.length == 4 && args[0].equals("-full")){
-			evaluateFull(buildAllFour(args[1], args[2], args[3]));
-		} else if (args.length == 1 && args[0].equals("-a")){
-			evaluateAllPrecisionAtOne(buildAllFour());
+		} else if (args.length == 1 && args[0].equals("-full")) {
+			evaluateFull(Helper.buildAllFour());
+		} else if (args.length == 4 && args[0].equals("-full")) {
+			evaluateFull(Helper.buildAllFour(args[1], args[2], args[3]));
+		} else if (args.length == 1 && args[0].equals("-a")) {
+			evaluateAllPrecisionAtOne(Helper.buildAllFour());
 		} else if (args.length == 4 && args[0].equals("-a")) {
-			evaluateAllPrecisionAtOne(buildAllFour(args[1], args[2], args[3]));
+			evaluateAllPrecisionAtOne(Helper.buildAllFour(args[1], args[2], args[3]));
 
 		} else {
-			printUsageMessage();
+			Helper.printUsageMessage();
 			System.exit(1);
 		}
 
 	}
 
+	// will index the preprocessed Core NLP files (that need to have already
+	// been generated using the '-p' flag)
+	// into the default directory of 'nlpIndex' and will also index the default
+	// directory 'rawFiles' into
+	// the directory 'standardIndex' for use with the StandardAnalyzer.
+	public static void indexBothBranches() {
+		System.err.println("Indexing both branches with default directories.");
+		System.err.println("This process takes approximately 8 minutes on a non-SSD hard drive.");
+		File nlpSource = new File(Constants.NLP_PREPROCESS_DIR);
+		File nlpIndex = Helper.checkDirectoryAndCreate(Constants.NLP_INDEX);
+		File stdIndex = Helper.checkDirectoryAndCreate(Constants.STD_INDEX);
+		File stdSource = new File(Constants.RAW_FILE_DIR);
+		if (!nlpSource.exists() || !nlpSource.isDirectory() || nlpSource.listFiles().length == 0) {
+			System.err.println("Directory [" + nlpSource
+					+ "] is either empty, doesnt exist, or is not a directory. Please correct and try again.");
+			System.err.println(
+					"This directory should contain all NLP preprocessed files created with the -p flag. See -usage for usage messages.");
+			System.err.println("Exiting.");
+			System.exit(1);
+		}
+		if (!stdSource.exists() || !stdSource.isDirectory() || stdSource.listFiles().length == 0) {
+			System.err.println("Directory [" + stdSource
+					+ "] is either empty, doesnt exist, or is not a directory. Please correct and try again.");
+			System.err.println("This directory should contain all raw wikipedia files.");
+			System.err.println("Exiting.");
+			System.exit(1);
+		}
 
-	// evaluates both branches ( StandardAnalyzer and Core NLP ) with 
-	// both scoring functions (tf-idf and BM25) and writes each to 
+		if (nlpIndex.listFiles().length != 0) {
+			System.err.println("Directory [" + nlpIndex + "] is NOT empty. Please delete before attempting to index.");
+			System.err.println("Exiting...");
+			System.exit(1);
+		}
+
+		if (stdIndex.listFiles().length != 0) {
+			System.err.println("Directory [" + stdIndex + "] is NOT empty. Please delete before attempting to index.");
+			System.err.println("Exiting...");
+			System.exit(1);
+		}
+
+		index(nlpSource, nlpIndex, new WhitespaceAnalyzer());
+		index(stdSource, stdIndex, new StandardAnalyzer());
+	}
+
+	// evaluates both branches ( StandardAnalyzer and Core NLP ) with
+	// both scoring functions (tf-idf and BM25) and writes each to
 	// one of four text files.
-	public static void evaluateFull(ArrayList<QueryHelper> queries){
+	public static void evaluateFull(ArrayList<QueryHelper> queries) {
 		String[] names = Constants.FILENAMES;
 		int pos = 0;
-		for (QueryHelper query : queries){
+		for (QueryHelper query : queries) {
 			System.out.println("Evaluating " + query + "...");
 			query.executeQuestions();
 			try {
@@ -185,7 +229,7 @@ public class App {
 				BufferedWriter bw = new BufferedWriter(new FileWriter(names[pos]));
 				bw.write(query.getSummary());
 				bw.write('\n');
-				for ( Question question : query.handler.questions){
+				for (Question question : query.handler.questions) {
 					bw.write(question.getResults());
 					bw.write('\n');
 				}
@@ -197,10 +241,8 @@ public class App {
 			pos++;
 		}
 		System.out.println("Evaluation finished, all files complete.");
-		
-
-		
 	}
+
 	/*
 	 * Evaluate all four model (CoreNLP w/tf-id, CoreNLP w/BM25,
 	 * StandardAnalyzer w/tf-id, Standard Analyzer w/BM25 with the Precision at
@@ -210,7 +252,7 @@ public class App {
 	 * process) and indexed and that the standardIndex has been indexed with the
 	 * Lucene Standard Analyzer.
 	 */
-	public static void evaluateAllPrecisionAtOne(ArrayList<QueryHelper> queries){
+	public static void evaluateAllPrecisionAtOne(ArrayList<QueryHelper> queries) {
 		System.out.println("Whole system Precision @ 1 Rank");
 		System.out.println("Evaluating...");
 		for (QueryHelper query : queries) {
@@ -236,24 +278,8 @@ public class App {
 			System.out.println();
 		}
 	}
-	public static ArrayList<QueryHelper> buildAllFour(){
-		return buildAllFour(Constants.QUESTIONS_FILE, Constants.NLP_INDEX, Constants.STD_INDEX);
-	}
-	public static ArrayList<QueryHelper> buildAllFour(String q, String nIndex, String sIndex){
-		File questions = new File(q);
-		File nlpIndex = Helper.checkDirectoryAndCreate(nIndex);
-		File stdIndex = Helper.checkDirectoryAndCreate(sIndex);
-		ArrayList<QueryHelper> queries = new ArrayList<QueryHelper>();
-		queries.add(new QueryHelper(questions, stdIndex,new StandardAnalyzer(), null, true,
-				new ClassicSimilarity()));
-		queries.add(new QueryHelper(questions, stdIndex, new StandardAnalyzer(), null, true,
-				new BM25Similarity()));
-		queries.add(new QueryHelper(questions, nlpIndex, new WhitespaceAnalyzer(),
-				PreprocessorGenerator.standardPreprocessor(), true, new ClassicSimilarity()));
-		queries.add(new QueryHelper(questions, nlpIndex, new WhitespaceAnalyzer(),
-				PreprocessorGenerator.standardPreprocessor(), true, new BM25Similarity()));	
-		return queries;
-	}
+
+	
 
 	public static void exploreQuery(QueryHelper helper, Scanner s) {
 		helper.executeQuestions();
@@ -280,23 +306,6 @@ public class App {
 		System.out.println("Finished exploring...");
 	}
 
-	public static void printUsageMessage() {
-		System.out.println(
-				"\nUsage: java -jar Watson.jar -a QUESTIONS_FILE PREPROCESS_DIR INDEX_DIR \n\t -- evaluate all 4 models with Precision @ 1");
-		System.out.println(
-				"\nUsage: java -jar Watson.jar -p SRC_DIR PREPROCESS_DIR \n\t -- preprocess all files in SRC_DIR to PREPROCESS_DIR.");
-		System.out.println(
-				"\nUsage: java -jar Watson.jar -iwht SRC_DIR INDEX_DIR \n\t -- index all files in SRC_DIR to INDEX_DIR with the Lucene Whitespace analyzer.");
-		System.out.println(
-				"\nUsage: java -jar Watson.jar -istd SRC_DIR INDEX_DIR \n\t -- index all files in SRC_DIR to INDEX_DIR with the Lucene Standard Analyzer.");
-		System.out.println("\nUsage: java -jar Watson.jar -ewht QUESTIONS_FILE INDEX_DIR");
-		System.out.println(
-				"\t -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with the Preprocessor and Whitespace Analyzer and will output analysis to STDOUT");
-		System.out.println(
-				"\nUsage: java -jar Watson.jar -estd QUESTIONS_FILE INDEX_DIR \n\t -- Evaluate the QUESTIONS_FILE vs the INDEX_DIR with Lucene Standard Analyzer and will ouput analysis to STDOUT");
-		System.out.println("\nUsage: java -jar Watson.jar -explore QUESTIONS_FILE \n\t -- Explore the QUESTIONS_FILE.");
-	}
-
 	/*
 	 * Accepts a directory of files and indexes them with the given analyzer,
 	 * outputing to the given output directory.
@@ -306,23 +315,5 @@ public class App {
 		DocumentIndexer indexer = new DocumentIndexer(inputDir, outputDir, analyzer);
 		indexer.indexAllFiles();
 	}
-
-	/*
-	 * Performs pre-processing with the NLPCore api. Lemmatizes, parses and
-	 * removes specific parts of speech. This process can take over 3 hours on a
-	 * laptop for the entire wiki provided.
-	 */
-	public static void preprocessDir(File inputDir, File outputDir) {
-		System.out.println("Starting preprocessing...");
-		Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
-		try {
-			preprocessor.preprocessDirectory(inputDir, outputDir);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("Error with input or output directory");
-		}
-		System.out.println("Preprocessing finished.");
-	}
-	
 
 }

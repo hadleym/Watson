@@ -122,5 +122,29 @@ public class Preprocessor {
 		}
 		return line.substring(0, prefix.length()).equals(prefix);
 	}
+	/*
+	 * Performs pre-processing with the NLPCore api. Lemmatizes, parses and
+	 * removes specific parts of speech. This process can take over 3 hours on a
+	 * laptop for the entire wiki provided.
+	 */
+	public static void preprocessDir(String iDir, String oDir) {
+		File inputDir = new File(iDir);
+		File outputDir = Helper.checkDirectoryAndCreate(oDir);
+		if ( !inputDir.exists() || !inputDir.isDirectory() || inputDir.listFiles().length == 0){
+			System.err.println("Directory [" + inputDir + "] is either empty, doesnt exist, or is not a directory. Please correct and try again.");
+			System.err.println("This directory should contain all raw wikipedia files."); 
+			System.err.println("Exiting.");
+			System.exit(1);
+		}
+		System.err.println("Starting preprocessing...");
+		Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
+		try {
+			preprocessor.preprocessDirectory(inputDir, outputDir);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("Error with input or output directory");
+		}
+		System.err.println("Preprocessing finished.");
+	}
 
 }
