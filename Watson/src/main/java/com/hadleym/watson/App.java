@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -88,8 +89,8 @@ public class App {
 			Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
 			String questions = args[1];
 			String index = args[2];
-			QueryHelper nlpQueryClassic = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(),
-					preprocessor, true, new ClassicSimilarity());
+			QueryHelper nlpQueryClassic = new QueryHelper(new File(questions), new File(index),
+					new WhitespaceAnalyzer(), preprocessor, true, new ClassicSimilarity());
 			nlpQueryClassic.executeQuestions();
 			nlpQueryClassic.printSummary();
 			System.out.println();
@@ -98,7 +99,7 @@ public class App {
 			nlpQueryBM25.executeQuestions();
 			nlpQueryBM25.printSummary();
 
-//			nlpQuery.printAllQuestions();
+			// nlpQuery.printAllQuestions();
 
 		} else if (args.length == 3 && args[0].equals("-estd"))
 		// will evaluate the lucene standard analyzer index documents vs
@@ -108,19 +109,21 @@ public class App {
 					+ " with standard analyzer...");
 			String questions = args[1];
 			String index = args[2];
-			QueryHelper stdQueryClassic = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(), null,
-					true, new ClassicSimilarity());
-			QueryHelper stdQueryBM25 = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(), null,
-					true, new BM25Similarity());
+			QueryHelper stdQueryClassic = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(),
+					null, true, new ClassicSimilarity());
+			QueryHelper stdQueryBM25 = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(),
+					null, true, new BM25Similarity());
 			stdQueryClassic.executeQuestions();
 			stdQueryClassic.printSummary();
 			System.out.println();
 			stdQueryBM25.executeQuestions();
 			stdQueryBM25.printSummary();
 			System.out.println();
-//			stdQueryBM25.printAllQuestions();
+			// stdQueryBM25.printAllQuestions();
 
 		} else if (args.length == 3 && args[0].equals("-explore")) {
+			// Handy 'explorer' that can be used to see what individual questions
+			// for both the CoreNLP and StandardAnalyzer with BM25.
 			Scanner s = new Scanner(System.in);
 			System.out.println("Exploring mode");
 			int selection = -1;
@@ -151,11 +154,58 @@ public class App {
 						null, true, new BM25Similarity());
 				exploreQuery(stdQuery, s);
 			}
+		} else if (args.length == 4 && args[0].equals("-a")) {
+			evaluateAllPrecisionAtOne(args[1], args[2], args[3]);
+
 		} else {
 			printUsageMessage();
 			System.exit(1);
 		}
 
+	}
+	/*
+	 * Evaluate all four model (CoreNLP w/tf-id, CoreNLP w/BM25, StandardAnalyzer w/tf-id, Standard
+	 * Analyzer w/BM25
+	 * with the Precision at one ranking algorithm.
+	 * print to standard output.
+	 * 
+	 * REQUIRES that the CoreNLP directory has been preprocessed (a 3 hour process) and indexed
+	 * 			and that the standardIndex has been indexed with the Lucene Standard Analyzer.
+	 */
+	public static void evaluateAllPrecisionAtOne(String questions, String nlpIndex, String stdIndex) {
+		ArrayList<QueryHelper> queries = new ArrayList<>();
+		queries.add(new QueryHelper(new File(questions), new File(stdIndex), new StandardAnalyzer(), null, true,
+				new ClassicSimilarity()));
+		queries.add(new QueryHelper(new File(questions), new File(stdIndex), new StandardAnalyzer(), null, true,
+				new BM25Similarity()));
+		queries.add(new QueryHelper(new File(questions), new File(nlpIndex), new WhitespaceAnalyzer(),
+				PreprocessorGenerator.standardPreprocessor(), true, new ClassicSimilarity()));
+		queries.add(new QueryHelper(new File(questions), new File(nlpIndex), new WhitespaceAnalyzer(),
+				PreprocessorGenerator.standardPreprocessor(), true, new BM25Similarity()));
+		System.out.println("Whole system Precision @ 1 Rank");
+		System.out.println("Evaluating...");
+		for (QueryHelper query : queries) {
+			query.executeQuestions();
+		}
+		QuestionHandler[] handler = new QuestionHandler[4];
+		for (int i = 0; i < handler.length; i++) {
+			handler[i] = queries.get(i).handler;
+		}
+		int total = queries.get(0).total;
+		System.out.println("Rank 0 == not found, Rank 1 == correct answer");
+		System.out.println("StdAnalyzer/Classic, StdAnalyzer/BM25, NLPCore/Classic, NLPCore/BM25");
+		for (int i = 0; i < total; i++) {
+			System.out.print(String.format("Question #%3d: ", (i + 1)));
+			for (int h = 0; h < handler.length; h++) {
+
+				if (h < handler.length - 1) {
+					System.out.print(String.format("%3d,", handler[h].questions.get(i).getRank() + 1));
+				} else {
+					System.out.print(String.format("%3d", handler[h].questions.get(i).getRank() + 1));
+				}
+			}
+			System.out.println();
+		}
 	}
 
 	public static void exploreQuery(QueryHelper helper, Scanner s) {
@@ -184,6 +234,8 @@ public class App {
 	}
 
 	public static void printUsageMessage() {
+		System.out.println(
+				"\nUsage: java -jar Watson.jar -a QUESTIONS_FILE PREPROCESS_DIR INDEX_DIR \n\t -- evaluate all 4 models with Precision @ 1");
 		System.out.println(
 				"\nUsage: java -jar Watson.jar -p SRC_DIR PREPROCESS_DIR \n\t -- preprocess all files in SRC_DIR to PREPROCESS_DIR.");
 		System.out.println(
@@ -225,74 +277,4 @@ public class App {
 		System.out.println("Preprocessing finished.");
 	}
 
-	/*
-	 * public static String preprocessLine(String line) { StringBuilder sb = new
-	 * StringBuilder(); if (!beginsWith(line, "[[")) { if (!beginsWith(line,
-	 * "==") && !beginsWith(line, "#RED")) { Document doc = new Document(line);
-	 * for (Sentence sent : doc.sentences()) { for (int i = 0; i <
-	 * sent.posTags().size(); i++) { if (keepPartOfSpeech(sent.posTag(i))) {
-	 * sb.append(sent.lemma(i).toString() + " "); } } } } } else {
-	 * sb.append(line + "\n"); } return sb.toString(); }
-	 * 
-	 */
-	/*
-	 * public static boolean keepPartOfSpeech(String pos) { if (pos.length() ==
-	 * 1) { if (pos.equals("V")) { return true; } else { return false; } }
-	 * String firstTwo = pos.substring(0, 2); if ((pos.charAt(0) == 'V') ||
-	 * firstTwo.equals("RB") || firstTwo.equals("JJ") || firstTwo.equals("NN"))
-	 * { return true; } return false; }
-	 */
-	// strip the leading 2 characters from a line.
-	/*
-	 * public static String parseCategory(String s) { String returnString =
-	 * s.substring(2, s.length() - 2); return returnString; }
-	 */
-
-	// This returns if the line of text is a section
-	// for example:
-	// ==Information==
-	// or
-	// #REDIRECT
-	// is a section, and is most likely not relevant.
-	/*
-	 * public static boolean beginsWith(String line, String prefix) { if
-	 * (line.length() >= prefix.length()) { return line.substring(0,
-	 * prefix.length()).equals(prefix); } return false; }
-	 */
-
-	// Determines if a string is a category, denoted by
-	// a leading '=='. Should be added to the Category field
-	// of the index.
-	/*
-	 * public static boolean isCategory(String line) { return (line.length() > 2
-	 * && line.charAt(0) == '[' && line.charAt(1) == '['); }
-	 */
-	/*
-	 * public static void searchIndex(Path directoryPath, String searchString)
-	 * throws IOException, ParseException { Directory directory =
-	 * FSDirectory.open(directoryPath); IndexReader indexReader =
-	 * DirectoryReader.open(directory); IndexSearcher indexSearcher = new
-	 * IndexSearcher(indexReader); StandardAnalyzer analyzer = new
-	 * StandardAnalyzer(); QueryParser queryParser = new
-	 * QueryParser(Constants.FIELD_CONTENTS, analyzer); Query query =
-	 * queryParser.parse(searchString); if (Constants.DEBUG) {
-	 * System.out.println("SearchString: " + searchString);
-	 * System.out.println("Query: " + query); }
-	 * 
-	 * TopDocs docs = indexSearcher.search(query, Constants.HITSPERPAGE);
-	 * ScoreDoc[] hits = docs.scoreDocs; printResults(hits, indexSearcher);
-	 * System.out.println(indexSearcher.doc(0).get(Constants.FIELD_CATEGORY));
-	 * 
-	 * }
-	 */
-
-	/*
-	 * public static void printResults(ScoreDoc[] hits, IndexSearcher
-	 * indexSearcher) throws IOException { if (Constants.DEBUG) {
-	 * System.out.println("PrintResults:"); } for (int i = 0; i < hits.length;
-	 * i++) {
-	 * 
-	 * System.out.println(hits[i].score + ", " + hits[i].doc + ", " +
-	 * indexSearcher.doc(hits[i].doc).get(Constants.FIELD_CATEGORY)); } }
-	 */
 }
