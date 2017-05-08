@@ -1,0 +1,19 @@
+Summary for CoreNLP lemmas and Lucene Whitespace Analyzer, ClassicSimilarity
+Total Questions: 100
+Correct top 1 questions: 19
+MRRScore: 26.26349449157715
+
+Summary for CoreNLP lemmas and Lucene Whitespace Analyzer, BM25(k1=1.2,b=0.75)
+Total Questions: 100
+Correct top 1 questions: 14
+MRRScore: 18.4777774810791
+
+Summary for Lucene Standard Analyzer, ClassicSimilarity
+Total Questions: 100
+Correct top 1 questions: 18
+MRRScore: 28.111906051635742
+
+Summary for Lucene Standard Analyzer, BM25(k1=1.2,b=0.75)
+Total Questions: 100
+Correct top 1 questions: 14
+MRRScore: 20.25079345703125

@@ -81,16 +81,23 @@ public class App {
 		// will evaluate the nlp pre-processed files vs. the collection
 		// of questions.
 		{
-			System.out.println("Evaluating against the questions file '" + args[1] + "' with the preprocessed index '"
+			System.out.println("Evaluating against the questions file '" + args[1] + "' and the preprocessed index '"
 					+ args[2] + "' with whitespace analyzer...");
+
+			// because this is the NLP files, we must do the preprocessing.
 			Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
 			String questions = args[1];
 			String index = args[2];
-			QueryHelper nlpQuery = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(),
-					preprocessor, true, new BM25Similarity());
-			nlpQuery.executeQuestions();
-			nlpQuery.printSummary();
+			QueryHelper nlpQueryClassic = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(),
+					preprocessor, true, new ClassicSimilarity());
+			nlpQueryClassic.executeQuestions();
+			nlpQueryClassic.printSummary();
 			System.out.println();
+			QueryHelper nlpQueryBM25 = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(),
+					preprocessor, true, new BM25Similarity());
+			nlpQueryBM25.executeQuestions();
+			nlpQueryBM25.printSummary();
+
 //			nlpQuery.printAllQuestions();
 
 		} else if (args.length == 3 && args[0].equals("-estd"))
@@ -107,6 +114,7 @@ public class App {
 					true, new BM25Similarity());
 			stdQueryClassic.executeQuestions();
 			stdQueryClassic.printSummary();
+			System.out.println();
 			stdQueryBM25.executeQuestions();
 			stdQueryBM25.printSummary();
 			System.out.println();
