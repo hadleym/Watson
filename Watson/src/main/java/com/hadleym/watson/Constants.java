@@ -15,14 +15,14 @@ public class Constants {
 	public static final Analyzer standardAnalyzer = new StandardAnalyzer();
 	public static final boolean DEBUG = false;
 
-	public static final String RAW_FILE_DIR = "rawFiles";
-	public static final String PREPROCESS_DIR = "preprocessedFiles";
-	public static final String STANDARD_ANALYZE_DIR = "standardIndex";
-	public static final String NLP_INDEX = "nlpIndex";
-	public static final String LUCENE_INDEX = "luceneIndex";
+//	public static final String RAW_FILE_DIR = "rawFiles";
+//	public static final String PREPROCESS_DIR = "preprocessedFiles";
+//	public static final String STANDARD_ANALYZE_DIR = "standardIndex";
+//	public static final String NLP_INDEX = "nlpIndex";
+//	public static final String LUCENE_INDEX = "luceneIndex";
+//	public static final String INDEX_DIR = "index";
 	public static final String FIELD_CONTENTS = "contents";
 	public static final String FIELD_CATEGORY = "category";
-	public static final String INDEX_DIR = "index";
 	public static final boolean recreate = true;
 	public static final int HITSPERPAGE = 10;
 	public static final String[] PARTS_OF_SPEECH = {"JJ", "JJR", "JJS", "NN", "NNS", "NNP", 
