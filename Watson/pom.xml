@@ -74,7 +74,7 @@
 					<mainClass>com.hadleym.watson.App</mainClass>
 					<arguments>
 						<!--To Run, change this single argument to one of the three "-pre, -index, or -evaluate".  See attached README.txt -->
-						<argument>-evaluate</argument>
+						<argument>-usage</argument>
 					</arguments>
 				</configuration>
 			</plugin>

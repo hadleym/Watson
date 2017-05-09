@@ -26,6 +26,7 @@ import com.hadleym.watson.query.Question;
  * ****************************************
  * $ java -jar Watson.jar -usage 
  * OR
+ * $ mvn compile
  * $ mvn exec:java
  * 
  * to see usage information.

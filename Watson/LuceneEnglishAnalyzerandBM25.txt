@@ -1,0 +1,1705 @@
+Summary for Lucene EnglishAnalyzer and BM25
+Total Questions: 100
+Correct top 1 questions: 18
+MRRScore: 24.485715866088867
+
+NUMBER 1
+CATEGORY: NEWSPAPERS
+QUESTION: "The dominant paper in our nation's capital, it's among the top 10 U.S. papers in circulation"
+CORRECT ANSWER: The Washington Post
+PARSED QUESTION: domin paper our nation capit it among top 10 u. paper circul newspap
+WATSON DID NOT FIND IN TOP 10
+1) 37.679703:	 Media of the United States
+2) 36.46241:	 Irish Independent
+3) 33.485508:	 Star Tribune
+4) 32.952854:	 Svenska Dagbladet
+5) 32.89148:	 Sun-Sentinel
+6) 32.507717:	 List of newspapers in Hong Kong
+7) 32.343864:	 Daily Worker
+8) 32.08526:	 Al-Quds Al-Arabi
+9) 32.045376:	 The New York Sun
+10) 31.89017:	 London Evening Standard
+
+NUMBER 2
+CATEGORY: OLD YEAR'S RESOLUTIONS
+QUESTION: "The practice of pre-authorizing presidential use of force dates to a 1955 resolution re: this island near mainland China"
+CORRECT ANSWER: Taiwan
+PARSED QUESTION: practic preauthor presidenti us forc date 1955 resolut island near mainland china old year resolut
+WATSON FOUND AT RANK: 2
+1) 37.425163:	 United Nations General Assembly Resolution 505
+2) 33.369175:	 Taiwan
+3) 32.95652:	 Taiwan Relations Act
+4) 32.25946:	 Kinmen
+5) 30.131138:	 United Nations Security Council Resolution 348
+6) 29.972569:	 United Nations Security Council Resolution 940
+7) 29.857569:	 Åfjord
+8) 28.957558:	 Image:RC (Taiwan).png|thumb|right|Countries maintaining relations with the ROC[tpl]legend|#008000|diplomatic relations and embassy in Taipei[/tp
+9) 28.591997:	 Political status of Taiwan
+10) 28.329414:	 United Nations Security Council Resolution 349
+
+NUMBER 3
+CATEGORY: NEWSPAPERS
+QUESTION: "Daniel Hertzberg & James B. Stewart of this paper shared a 1988 Pulitzer for their stories about insider trading"
+CORRECT ANSWER: The Wall Street Journal
+PARSED QUESTION: daniel hertzberg jame b stewart paper share 1988 pulitz stori about insid trade newspap
+WATSON FOUND AT RANK: 1
+1) 33.893513:	 The Wall Street Journal
+2) 31.910376:	 The Hutchinson News
+3) 29.156408:	 The Atlanta Journal-Constitution
+4) 29.06139:	 The Baltimore Sun
+5) 28.927391:	 Hedrick Smith
+6) 27.850039:	 Los Angeles Times
+7) 26.367989:	 Yellow journalism
+8) 24.462646:	 Orange County Business Journal
+9) 24.270655:	 Sun-Sentinel
+10) 23.724194:	 Star Tribune
+
+NUMBER 4
+CATEGORY: BROADWAY LYRICS
+QUESTION: "Song that says, "you make me smile with my heart; your looks are laughable, unphotographable""
+CORRECT ANSWER: My Funny Valentine
+PARSED QUESTION: song sai you make me smile my heart your look laughabl unphotograph broadwai lyric
+WATSON DID NOT FIND IN TOP 10
+1) 42.521503:	 Bess, You Is My Woman Now
+2) 37.36699:	 An Invitation to Lubberland
+3) 36.688385:	 Haifa (musician)
+4) 36.11552:	 I Hope You Dance (song)
+5) 35.701855:	 Jason Robert Brown
+6) 35.27272:	 National anthem of Yemen
+7) 34.1302:	 A Brisk Young Sailor Courted Me
+8) 34.1222:	 Papa, Can You Hear Me?
+9) 34.03447:	 Gus Edwards
+10) 33.684467:	 Northern Downpour
+
+NUMBER 5
+CATEGORY: 
+QUESTION: "In 2011 bell ringers for this charity started accepting digital donations to its red kettle"
+CORRECT ANSWER: The Salvation Army|Salvation Army
+PARSED QUESTION: 2011 bell ringer chariti start accept digit donat it red kettl
+WATSON DID NOT FIND IN TOP 10
+1) 29.456776:	 The Salvation Army
+2) 27.78732:	 Change ringing
+3) 25.02596:	 Aloysius Society
+4) 24.777164:	 Pró-Vida
+5) 23.418297:	 Campanology
+6) 23.254206:	 Goodwill Industries
+7) 22.917276:	 Donation
+8) 22.060991:	 GiveWell
+9) 21.586035:	 Mikael Tariverdiev
+10) 21.143677:	 Kariandusi School Trust
+
+NUMBER 6
+CATEGORY: STATE OF THE ART MUSEUM (Alex: We'll give you the museum. You give us the state.)
+QUESTION: "The Naples Museum of Art"
+CORRECT ANSWER: Florida
+PARSED QUESTION: napl museum art state art museum Alex:well give you museum you give us state
+WATSON DID NOT FIND IN TOP 10
+1) 41.43113:	 Customs House Museum and Cultural Center
+2) 40.516438:	 Art museum
+3) 40.506435:	 Wichita Art Museum
+4) 40.16473:	 Ural Tansykbayev
+5) 39.741707:	 Michael Bierut
+6) 39.41794:	 Roman De Salvo
+7) 39.195858:	 Lady Lever Art Gallery
+8) 39.06988:	 Terra Museum
+9) 38.945637:	 Agnes Martin
+10) 38.822968:	 Museum of Science and Industry (Chicago)
+
+NUMBER 7
+CATEGORY: "TIN" MEN
+QUESTION: "This Italian painter depicted the "Adoration of the Golden Calf""
+CORRECT ANSWER: Tintoretto
+PARSED QUESTION: italian painter depict ador golden calf tin men
+WATSON DID NOT FIND IN TOP 10
+1) 27.796448:	 Nicola Cianfanelli
+2) 22.797798:	 Dirk Stoop
+3) 22.715595:	 Lorenzo Monaco
+4) 22.252808:	 Master of the Khanenko Adoration
+5) 21.698406:	 Raffaello Gambogi
+6) 21.69042:	 Francesco di Vannuccio
+7) 21.632511:	 Antonio da Correggio
+8) 21.536556:	 Vecchietta
+9) 21.049475:	 Sisto Badalocchio
+10) 20.903101:	 Herman Naiwincx
+
+NUMBER 8
+CATEGORY: UCLA CELEBRITY ALUMNI
+QUESTION: "This woman who won consecutive heptathlons at the Olympics went to UCLA on a basketball scholarship"
+CORRECT ANSWER: Jackie Joyner-Kersee
+PARSED QUESTION: woman who won consecut heptathlon olymp went ucla basketbal scholarship ucla celebr alumni
+WATSON FOUND AT RANK: 1
+1) 52.011345:	 Jackie Joyner-Kersee
+2) 41.16969:	 George Stanich
+3) 40.466675:	 University of California, Los Angeles
+4) 37.86296:	 Cy Young (athlete)
+5) 33.202328:	 Men's Gym
+6) 32.463097:	 Robert Young (athlete)
+7) 32.31383:	 George Jefferson (athlete)
+8) 32.249695:	 Greg Foster (hurdler)
+9) 31.918869:	 Ruy de Freitas
+10) 31.663578:	 Mighty Bruins
+
+NUMBER 9
+CATEGORY: SERVICE ORGANIZATIONS
+QUESTION: "Originally this club's emblem was a wagon wheel; now it's a gearwheel with 24 cogs & 6 spokes"
+CORRECT ANSWER: Rotary International
+PARSED QUESTION: origin club emblem wagon wheel now it gearwheel 24 cog 6 spoke servic organ
+WATSON DID NOT FIND IN TOP 10
+1) 34.249046:	 De Poelen, Dronrijp
+2) 33.84323:	 De Mearmin, Dokkum
+3) 29.83341:	 Spoke
+4) 29.34013:	 Chevrolet Celebrity
+5) 28.252068:	 Hammer and sickle
+6) 27.460003:	 Emblem of Angola
+7) 26.271732:	 Wheel
+8) 26.091318:	 Penny-farthing
+9) 26.01364:	 Holden Gemini
+10) 25.996378:	 Webster's Mill, Framsden
+
+NUMBER 10
+CATEGORY: AFRICAN CITIES
+QUESTION: "Several bridges, including El Tahrir, cross the Nile in this capital"
+CORRECT ANSWER: Cairo
+PARSED QUESTION: sever bridg includ el tahrir cross nile capit african citi
+WATSON FOUND AT RANK: 3
+1) 32.895363:	 Khartoum
+2) 31.870934:	 Kosti, Sudan
+3) 31.604246:	 Cairo
+4) 27.96893:	 Nile
+5) 26.011662:	 Omdurman
+6) 24.96414:	 Pan-American Highway (North America)
+7) 24.899332:	 Toriel
+8) 24.41507:	 Soba (city)
+9) 23.894928:	 Anshun Bridge
+10) 23.229694:	 San Francisco Peninsula
+
+NUMBER 11
+CATEGORY: HISTORICAL QUOTES
+QUESTION: "After the fall of France in 1940, this general told his country, "France has lost a battle. But France has not lost the war""
+CORRECT ANSWER: Charles de Gaulle|de Gaulle
+PARSED QUESTION: after fall franc 1940 gener told hi countri franc ha lost battl franc ha lost war histor quot
+WATSON DID NOT FIND IN TOP 10
+1) 45.573925:	 Hubert Lyautey
+2) 43.04402:	 Philippe Pétain
+3) 41.49425:	 War of the Sixth Coalition
+4) 41.299377:	 Argenis
+5) 41.081726:	 Charles V of France
+6) 40.57141:	 Foreign alliances of France
+7) 40.33318:	 Free French Forces
+8) 40.18633:	 Fall Rot
+9) 40.18461:	 File:Češi vyhnaní z pohraničí hledají nový domov.jpg|thumb|300px|right|Czechs expelled from the border looking for new home, October 19
+10) 39.861195:	 Lorraine (duchy)
+
+NUMBER 12
+CATEGORY: STATE OF THE ART MUSEUM (Alex: We'll give you the museum. You give us the state.)
+QUESTION: "The Taft Museum of Art"
+CORRECT ANSWER: Ohio
+PARSED QUESTION: taft museum art state art museum Alex:well give you museum you give us state
+WATSON DID NOT FIND IN TOP 10
+1) 41.43183:	 Museum of Science and Industry (Chicago)
+2) 41.43113:	 Customs House Museum and Cultural Center
+3) 40.516438:	 Art museum
+4) 40.506435:	 Wichita Art Museum
+5) 40.16473:	 Ural Tansykbayev
+6) 39.741707:	 Michael Bierut
+7) 39.41794:	 Roman De Salvo
+8) 39.195858:	 Lady Lever Art Gallery
+9) 39.06988:	 Terra Museum
+10) 38.945637:	 Agnes Martin
+
+NUMBER 13
+CATEGORY: CEMETERIES
+QUESTION: "The mast from the USS Maine is part of the memorial to the ship & crew at this national cemetery"
+CORRECT ANSWER: Arlington National Cemetery|Arlington Cemetery
+PARSED QUESTION: mast from uss main part memori ship crew nation cemeteri cemeteri
+WATSON DID NOT FIND IN TOP 10
+1) 41.38081:	 USS Arizona Memorial
+2) 34.351505:	 Thomas W. Lawson (ship)
+3) 34.274853:	 Frank Newcomb
+4) 33.62611:	 Margate Surfboat
+5) 33.006264:	 Edwin M. Shepard
+6) 32.419174:	 Panayis Athanase Vagliano
+7) 31.10222:	 USCGC Mohawk (WPG-78)
+8) 30.503355:	 Brookwood Cemetery
+9) 30.497719:	 Madras War Cemetery
+10) 30.329184:	 USS Irene Forsyte (IX-93)
+
+NUMBER 14
+CATEGORY: GOLDEN GLOBE WINNERS
+QUESTION: "In 2009: Joker on film"
+CORRECT ANSWER: Heath Ledger
+PARSED QUESTION: 2009:joker film golden globe winner
+WATSON DID NOT FIND IN TOP 10
+1) 25.332954:	 Jimmy Harry
+2) 25.264622:	 Paul Le Mat
+3) 23.918663:	 Marilyn Hassett
+4) 23.737823:	 1988 in film
+5) 23.520174:	 One Chance (film)
+6) 23.334618:	 Los Angeles Film Critics Association
+7) 23.071278:	 Sally Kirkland
+8) 22.947926:	 Warren Beatty
+9) 22.558365:	 Miranda Richardson
+10) 22.299208:	 Rita Blanco
+
+NUMBER 15
+CATEGORY: HISTORICAL HODGEPODGE
+QUESTION: "It was the peninsula fought over in the peninsular war of 1808 to 1814"
+CORRECT ANSWER: Iberia|Iberian Peninsula
+PARSED QUESTION: peninsula fought over peninsular war 1808 1814 histor hodgepodg
+WATSON DID NOT FIND IN TOP 10
+1) 38.229767:	 Vicente Genaro de Quesada
+2) 28.620216:	 Godfrey Macdonald, 3rd Baron Macdonald of Slate
+3) 28.015762:	 Alexander Gordon (British cavalry officer)
+4) 25.936163:	 War of the Sixth Coalition
+5) 25.790983:	 Ferdinand VII of Spain
+6) 24.319645:	 Edward John Eliot
+7) 24.293293:	 Battle of Roliça
+8) 23.45195:	 History of Spain
+9) 21.919947:	 Peninsulars
+10) 21.774736:	 Duke of Wellington (title)
+
+NUMBER 16
+CATEGORY: CONSERVATION
+QUESTION: "In 1980 China founded a center for these cute creatures in its bamboo-rich Wolong Nature Preserve"
+CORRECT ANSWER: Panda|Giant panda
+PARSED QUESTION: 1980 china found center cute creatur it bamboorich wolong natur preserv conserv
+WATSON DID NOT FIND IN TOP 10
+1) 24.913841:	 Wolong Nature Reserve
+2) 24.874935:	 Wolong Temple
+3) 24.26912:	 Wolong Panda Reserve
+4) 23.728094:	 Toei Fushigi Comedy Series
+5) 22.964237:	 Environmental movement
+6) 22.70511:	 International Union for Conservation of Nature
+7) 22.589033:	 Xiang Xiang (giant panda)
+8) 21.991713:	 La Tigra National Park
+9) 21.665277:	 Monteverde Cloud Forest Reserve
+10) 21.513107:	 Blackish stingray
+
+NUMBER 17
+CATEGORY: '80s NO.1 HITMAKERS
+QUESTION: "1988: "Father Figure""
+CORRECT ANSWER: George Michael
+PARSED QUESTION: 1988:father figur 80 1 hitmak
+WATSON DID NOT FIND IN TOP 10
+1) 12.3574915:	 Them Again
+2) 11.688677:	 Fontana Records
+3) 11.5330305:	 GRS 80
+4) 10.974636:	 Gobots
+5) 10.792274:	 Roseland University Prep
+6) 10.6641865:	 Itemized deduction
+7) 10.350206:	 1st century BC
+8) 10.219512:	 File:110th US Congress Senate.svg|thumb|375px|Senators' party membership by state at the opening of the 110th Congress in January 20
+9) 10.007768:	 Iron Man 2 (toy line)
+10) 9.987127:	 1979–80 New York Rangers season
+
+NUMBER 18
+CATEGORY: AFRICAN-AMERICAN WOMEN
+QUESTION: "In an essay defending this 2011 film, Myrlie Evers-Williams said, "My mother was" this film "& so was her mother""
+CORRECT ANSWER: The Help
+PARSED QUESTION: essai defend 2011 film myrli everswilliam said my mother film so her mother africanamerican women
+WATSON DID NOT FIND IN TOP 10
+1) 36.236473:	 My Girl 2
+2) 35.25214:	 Illeana Douglas
+3) 34.792942:	 Penny Marshall
+4) 33.802372:	 Naomi Watts
+5) 33.59879:	 Amy Tan
+6) 33.561783:	 Mommie Dearest
+7) 33.23787:	 Heartbreakers (2001 film)
+8) 33.21345:	 Judy Gold
+9) 32.59417:	 My Mother's Castle (film)
+10) 32.528847:	 Bedford Hills Correctional Facility for Women
+
+NUMBER 19
+CATEGORY: SERVICE ORGANIZATIONS
+QUESTION: "Father Michael McGivney founded this fraternal society for Catholic laymen in 1882"
+CORRECT ANSWER: Knights of Columbus
+PARSED QUESTION: father michael mcgivnei found fratern societi cathol laymen 1882 servic organ
+WATSON FOUND AT RANK: 1
+1) 42.15059:	 Knights of Columbus
+2) 30.646458:	 Lambda Theta Phi
+3) 28.046738:	 K.A.V. Lovania Leuven
+4) 27.96299:	 Thomas Wyatt Turner
+5) 27.222721:	 Studentenverbindung
+6) 26.556526:	 Cartellverband
+7) 26.006977:	 Roman Catholic Diocese of Peterborough
+8) 25.477425:	 Order of Chosen Friends
+9) 25.442743:	 Pi Alpha Phi
+10) 25.389788:	 Josephite Fathers
+
+NUMBER 20
+CATEGORY: CONSERVATION
+QUESTION: "Early projects of the WWF, this organization, included work with the bald eagle & the red wolf"
+CORRECT ANSWER: World Wide Fund|World Wide Fund for Nature
+PARSED QUESTION: earli project wwf organ includ work bald eagl red wolf conserv
+WATSON DID NOT FIND IN TOP 10
+1) 26.698174:	 United States Fish and Wildlife Service
+2) 26.60101:	 Kratié (town)
+3) 24.98171:	 Tundi Spring Agardy
+4) 24.58806:	 Guadalajara Zoo
+5) 23.523779:	 Red wolf
+6) 23.268106:	 Steve Lombardi
+7) 22.61946:	 Falconry
+8) 22.590872:	 Ecoregion
+9) 22.008186:	 Sahara Desert (ecoregion)
+10) 21.934368:	 Forterra
+
+NUMBER 21
+CATEGORY: CONSERVATION
+QUESTION: "Indonesia's largest lizard, it's protected from poachers, though we wish it could breathe fire to do the job itself"
+CORRECT ANSWER: Komodo dragon
+PARSED QUESTION: indonesia largest lizard it protect from poacher though we wish could breath fire do job itself conserv
+WATSON FOUND AT RANK: 1
+1) 28.154722:	 Komodo dragon
+2) 27.158165:	 Ecology movement
+3) 27.105131:	 Dragon (Middle-earth)
+4) 25.710922:	 Bloom County
+5) 25.519802:	 Cape Grass Lizard
+6) 25.303602:	 Alaungdaw Kathapa National Park
+7) 24.52792:	 Weesen (Hermannsburg)
+8) 24.382736:	 United Kingdom general election, February 1974
+9) 24.253487:	 File:2009 European Parliament Composition.svg|thumb|Seating in the 2009 European Parliame
+10) 23.929861:	 Wishmaster (film)
+
+NUMBER 22
+CATEGORY: 1920s NEWS FLASH!
+QUESTION: "Nov. 28, 1929! This man & his chief pilot Bernt Balchen fly to South Pole! Yowza! You'll be an admirable admiral, sir!"
+CORRECT ANSWER: Richard Byrd|Richard E. Byrd
+PARSED QUESTION: nov 28 1929 man hi chief pilot bernt balchen fly south pole yowza youll admir admir sir 1920 new flash
+WATSON DID NOT FIND IN TOP 10
+1) 36.11657:	 Edwyn Alexander-Sinclair
+2) 35.47747:	 Home Fleet
+3) 33.24359:	 George Hyde (admiral)
+4) 33.17947:	 Leonard Holbrook
+5) 32.631004:	 Sandy Woodward
+6) 32.214836:	 Reginald Tyrwhitt
+7) 32.13071:	 Keith Park
+8) 31.8118:	 David Murray Anderson
+9) 31.338505:	 Wilson Flagg
+10) 30.904856:	 George Washington Williams (naval officer)
+
+NUMBER 23
+CATEGORY: CEMETERIES
+QUESTION: "On May 5, 1878 Alice Chambers was the last person buried in this Dodge City, Kansas cemetery"
+CORRECT ANSWER: Boot Hill
+PARSED QUESTION: mai 5 1878 alic chamber last person buri dodg citi kansa cemeteri cemeteri
+WATSON FOUND AT RANK: 1
+1) 44.65773:	 Boot Hill
+2) 32.945583:	 William S. Gregory
+3) 32.567772:	 Ross Bay Cemetery
+4) 32.498684:	 Panteón de Dolores
+5) 29.382908:	 Edwin M. Shepard
+6) 29.345745:	 Almon Brown Strowger
+7) 29.177847:	 Cemetery
+8) 28.955866:	 Östra kyrkogården, Gothenburg
+9) 28.621632:	 Samuel Medary
+10) 28.513632:	 Cemetery of the Evergreens
+
+NUMBER 24
+CATEGORY: CAMBODIAN HISTORY & CULTURE
+QUESTION: "The Royal Palace grounds feature a statue of King Norodom, who in the late 1800s was compelled to first put his country under the control of this European power; of course, it was sculpted in that country"
+CORRECT ANSWER: France
+PARSED QUESTION: royal palac ground featur statu king norodom who late 1800 compel first put hi countri under control european power cours sculpt countri cambodian histori cultur
+WATSON DID NOT FIND IN TOP 10
+1) 57.96652:	 Politics of Cambodia
+2) 49.90261:	 Norodom Buppha Devi
+3) 49.2947:	 History of Cambodia
+4) 44.93356:	 List of heads of state of Cambodia
+5) 44.278496:	 Reamker
+6) 40.570267:	 Image:Your Majesty! at your age....jpg|thumb|upright|A political cartoon pillorying Leopold's affair with Caroline Lacroix
+7) 40.13339:	 History of Lesotho
+8) 39.504738:	 Capital of the Netherlands
+9) 39.2395:	 History of Spain
+10) 38.823578:	 Suryavarman I
+
+NUMBER 25
+CATEGORY: HISTORICAL HODGEPODGE
+QUESTION: "In the 400s B.C. this Chinese philosopher went into exile for 12 years"
+CORRECT ANSWER: Confucius
+PARSED QUESTION: 400 b.c chines philosoph went exil 12 year histor hodgepodg
+WATSON DID NOT FIND IN TOP 10
+1) 21.066778:	 Zhang Binglin
+2) 20.679638:	 List of British Columbia provincial highways
+3) 20.057049:	 Zitong County
+4) 19.864143:	 Chinese classics
+5) 18.987204:	 Chinese philosophy
+6) 18.671177:	 Bernhard Karlgren
+7) 17.967981:	 Zhu Rong (god)
+8) 17.79618:	 Numerology
+9) 17.654:	 King Ling of Zhou
+10) 17.524076:	 American Philosophical Society
+
+NUMBER 26
+CATEGORY: AFRICAN-AMERICAN WOMEN
+QUESTION: "Bessie Coleman, the first black woman licensed as a pilot, landed a street named in her honor at this Chicago airport"
+CORRECT ANSWER: O'Hare|O'Hare International Airport
+PARSED QUESTION: bessi coleman first black woman licens pilot land street name her honor chicago airport africanamerican women
+WATSON DID NOT FIND IN TOP 10
+1) 67.75767:	 Bessie Coleman
+2) 38.93194:	 Jean Burns
+3) 38.655697:	 Pilot (aeronautics)
+4) 32.54657:	 Bertha Palmer
+5) 32.522606:	 Eileen Collins
+6) 32.313244:	 Hélène Dutrieu
+7) 32.196712:	 Catherine O'Leary
+8) 32.16287:	 Patty Wagstaff
+9) 30.453154:	 Margo Howard
+10) 30.342861:	 Lassie Goodbread-Black
+
+NUMBER 27
+CATEGORY: HISTORICAL HODGEPODGE
+QUESTION: "The Ammonites held sway in this Mideast country in the 1200s B.C. & the capital is named for them"
+CORRECT ANSWER: Jordan
+PARSED QUESTION: ammonit held swai mideast countri 1200 b.c capit name them histor hodgepodg
+WATSON DID NOT FIND IN TOP 10
+1) 26.00246:	 Rabbah
+2) 22.617435:	 Raichur district
+3) 21.34525:	 Ammonoidea
+4) 19.35077:	 Historical school of economics
+5) 18.35603:	 Capital Country
+6) 17.481882:	 Nikolaiviertel
+7) 17.348242:	 Hildoceras
+8) 17.164917:	 Valley of Salt
+9) 16.772242:	 Ammonites (disambiguation)
+10) 16.385332:	 Assyrian conquest of Aram
+
+NUMBER 28
+CATEGORY: HE PLAYED A GUY NAMED JACK RYAN IN...
+QUESTION: ""The Sum of All Fears"; he also won a screenwriting Oscar for "Good Will Hunting""
+CORRECT ANSWER: Ben Affleck
+PARSED QUESTION: sum all fear he also won screenwrit oscar good hunt he plai gui name jack ryan
+WATSON DID NOT FIND IN TOP 10
+1) 34.436543:	 Tim Ryan (rugby union)
+2) 33.362858:	 Helen Hunt
+3) 31.009865:	 William Goldman
+4) 30.919193:	 Peter Shaffer
+5) 30.845942:	 John Huston
+6) 30.842527:	 Jack Nicholson
+7) 29.9244:	 I. A. L. Diamond
+8) 29.887943:	 Elmer Bernstein
+9) 29.283607:	 Chris Moore (film producer)
+10) 29.09003:	 George Seaton
+
+NUMBER 29
+CATEGORY: 
+QUESTION: "One of the N.Y. Times' headlines on this landmark 1973 Supreme Court decision was "Cardinals shocked""
+CORRECT ANSWER: Roe v. Wade
+PARSED QUESTION: on n.y time headlin landmark 1973 suprem court decis cardin shock
+WATSON DID NOT FIND IN TOP 10
+1) 27.97866:	 R. v. Owen
+2) 27.618711:	 Morris Pashman
+3) 27.484642:	 Miller v. California
+4) 27.26373:	 Canada v. Schmidt
+5) 26.822958:	 Wesberry v. Sanders
+6) 26.227406:	 New York Supreme Court
+7) 26.044033:	 Ford v. Quebec (Attorney General)
+8) 25.792982:	 Regents of the University of California v. Bakke
+9) 25.447248:	 Gideon v. Wainwright
+10) 25.122454:	 Mostyn Hanger
+
+NUMBER 30
+CATEGORY: I'M BURNIN' FOR YOU
+QUESTION: "France's Philip IV--known as "The Fair"--had Jacques De Molay, the last Grand Master of this order, burned in 1314"
+CORRECT ANSWER: Knights Templar
+PARSED QUESTION: franc philip ivknown fairhad jacqu de molai last grand master order burn 1314 im burnin you
+WATSON FOUND AT RANK: 2
+1) 52.399837:	 Philip IV of France
+2) 44.095917:	 Knights Templar
+3) 37.871925:	 Ferdinand IV of Castile
+4) 35.443264:	 Humbert de Pairaud
+5) 32.522724:	 James de Molay
+6) 29.354939:	 Duke of Nemours
+7) 27.456715:	 Victor Amadeus I, Duke of Savoy
+8) 27.02123:	 Louis X of France
+9) 26.602104:	 Tomar
+10) 26.075998:	 Froissart of Louis of Gruuthuse (BnF Fr 2643-6)
+
+NUMBER 31
+CATEGORY: STATE OF THE ART MUSEUM (Alex: We'll give you the museum. You give us the state.)
+QUESTION: "The Georgia O'Keeffe Museum"
+CORRECT ANSWER: New Mexico
+PARSED QUESTION: georgia okeeff museum state art museum Alex:well give you museum you give us state
+WATSON DID NOT FIND IN TOP 10
+1) 37.812454:	 Customs House Museum and Cultural Center
+2) 37.743362:	 National Museum of Commercial Aviation
+3) 36.75178:	 Louvre Atlanta
+4) 36.591534:	 Fort James Jackson
+5) 35.99436:	 Old Governor's Mansion (Milledgeville, Georgia)
+6) 35.025646:	 Joel Chandler Harris House
+7) 34.99121:	 Michael Bierut
+8) 34.892223:	 Dorchester Academy
+9) 34.817547:	 Museum of Science and Industry (Chicago)
+10) 34.682625:	 Wichita Art Museum
+
+NUMBER 32
+CATEGORY: AFRICAN CITIES
+QUESTION: "The name of this largest Moroccan city combines 2 Spanish words"
+CORRECT ANSWER: Casablanca
+PARSED QUESTION: name largest moroccan citi combin 2 spanish word african citi
+WATSON FOUND AT RANK: 2
+1) 28.759468:	 Perejil Island
+2) 27.54659:	 Casablanca
+3) 26.555187:	 Melilla
+4) 26.425196:	 Malabo
+5) 25.834877:	 Londrina
+6) 24.887157:	 Extremadura
+7) 24.664335:	 Arecibo, Puerto Rico
+8) 24.546902:	 Leo Africanus
+9) 24.370619:	 Western Sahara
+10) 24.235884:	 Peñón de Vélez de la Gomera
+
+NUMBER 33
+CATEGORY: NAME THE PARENT COMPANY
+QUESTION: "Jell-O"
+CORRECT ANSWER: Kraft Foods
+PARSED QUESTION: jello name parent compani
+WATSON DID NOT FIND IN TOP 10
+1) 17.117144:	 Bedtime for Democracy
+2) 16.07323:	 AK Press
+3) 15.459424:	 Jello mold
+4) 15.459424:	 Reed Boucher
+5) 15.124475:	 Mary Jane's Not a Virgin Anymore
+6) 14.609919:	 Give Me Convenience or Give Me Death
+7) 14.558984:	 East Bay Ray
+8) 14.340595:	 MTX Audio
+9) 13.585557:	 Tipper Gore
+10) 13.526899:	 California Über Alles
+
+NUMBER 34
+CATEGORY: GOLDEN GLOBE WINNERS
+QUESTION: "2011: Chicago mayor Tom Kane"
+CORRECT ANSWER: Kelsey Grammer
+PARSED QUESTION: 2011:chicago mayor tom kane golden globe winner
+WATSON DID NOT FIND IN TOP 10
+1) 22.701233:	 Delores Taylor
+2) 21.408873:	 Cybill
+3) 21.255394:	 The Secret of Santa Vittoria
+4) 21.151617:	 Jimmy Harry
+5) 20.800787:	 Miranda Richardson
+6) 20.19175:	 Tom Wilkinson
+7) 19.621906:	 Paul Le Mat
+8) 18.957663:	 From the Earth to the Moon (TV miniseries)
+9) 18.656694:	 Larry McMurtry
+10) 18.646173:	 Helen Hunt
+
+NUMBER 35
+CATEGORY: THE RESIDENTS
+QUESTION: "Title residence of Otter, Flounder, Pinto & Bluto in a 1978 comedy"
+CORRECT ANSWER: Animal House
+PARSED QUESTION: titl resid otter flounder pinto bluto 1978 comedi resid
+WATSON FOUND AT RANK: 1
+1) 43.217064:	 Animal House
+2) 26.502064:	 Bluto
+3) 22.888365:	 Flounder
+4) 20.185987:	 Ford Pinto
+5) 20.009493:	 Scott & Muriel
+6) 19.360088:	 A Night to Remember (1942 film)
+7) 19.327192:	 Claudia Galli
+8) 19.324053:	 Gigging
+9) 16.664694:	 Joe Pace
+10) 16.543163:	 São Tomé and Príncipe presidential election, 2011
+
+NUMBER 36
+CATEGORY: UCLA CELEBRITY ALUMNI
+QUESTION: "Neurobiologist Amy Farrah Fowler on "The Big Bang Theory", in real life she has a Ph.D. in neuroscience from UCLA"
+CORRECT ANSWER: Mayim Bialik
+PARSED QUESTION: neurobiologist ami farrah fowler big bang theori real life she ha ph.d neurosci from ucla ucla celebr alumni
+WATSON FOUND AT RANK: 1
+1) 80.248566:	 Mayim Bialik
+2) 58.003223:	 Amy Fowler
+3) 41.03437:	 Howard Wolowitz
+4) 40.5662:	 Steven Loza
+5) 38.893272:	 Mighty Bruins
+6) 38.736126:	 Andrea M. Ghez
+7) 38.48384:	 Virginia Louise Trimble
+8) 36.805454:	 Raj Koothrappali
+9) 36.59389:	 Kamran Khavarani
+10) 36.37993:	 Randall Crane
+
+NUMBER 37
+CATEGORY: NOTES FROM THE CAMPAIGN TRAIL
+QUESTION: "In "The Deadlocked Election of 1800", James R. Sharp outlines the fall of this dueling vice president"
+CORRECT ANSWER: Aaron Burr
+PARSED QUESTION: deadlock elect 1800 jame r sharp outlin fall duel vice presid note from campaign trail
+WATSON FOUND AT RANK: 1
+1) 32.362213:	 Aaron Burr
+2) 29.527102:	 George Clinton (vice president)
+3) 28.483784:	 Richard Mentor Johnson
+4) 28.274815:	 Republican Party presidential primaries, 1976
+5) 28.01277:	 Vice President of the United States
+6) 27.812586:	 Virginia dynasty
+7) 27.28549:	 Daniel D. Tompkins
+8) 26.650494:	 Electoral history of Ted Kennedy
+9) 26.281176:	 Massachusetts Democratic Party
+10) 26.075603:	 Fernando Ferrer
+
+NUMBER 38
+CATEGORY: "TIN" MEN
+QUESTION: "He served in the KGB before becoming president & then prime minister of Russia"
+CORRECT ANSWER: Vladimir Putin|Putin
+PARSED QUESTION: he serv kgb befor becom presid prime minist russia tin men
+WATSON DID NOT FIND IN TOP 10
+1) 31.50129:	 Vladimir Alganov
+2) 30.097881:	 Keizō Obuchi
+3) 29.24435:	 President of Turkey
+4) 28.674004:	 Government of Kazakhstan
+5) 28.667057:	 Prime Minister of France
+6) 28.498095:	 Takahashi Korekiyo
+7) 28.047413:	 Ivan Goremykin
+8) 27.972782:	 August Zaleski
+9) 27.877214:	 Gaston Thorn
+10) 27.837524:	 Louis Lansana Beavogui
+
+NUMBER 39
+CATEGORY: AFRICAN-AMERICAN WOMEN
+QUESTION: "When asked to describe herself, she says first & foremost, she is Malia & Sasha's mom"
+CORRECT ANSWER: Michelle Obama
+PARSED QUESTION: when ask describ herself she sai first foremost she malia sasha mom africanamerican women
+WATSON FOUND AT RANK: 7
+1) 36.37697:	 Gertrud Månsson
+2) 35.05062:	 Liz Malia
+3) 31.853842:	 Sasha Pieterse
+4) 31.57141:	 Deborah Sampson
+5) 29.685642:	 Princesas
+6) 29.55764:	 Christine de Pizan
+7) 29.478918:	 Michelle Obama
+8) 29.320946:	 Hannah (biblical figure)
+9) 29.30634:	 We, the Women
+10) 29.009396:	 Ahsaas Channa
+
+NUMBER 40
+CATEGORY: POETS & POETRY
+QUESTION: "She wrote, "My candle burns at both ends... but, ah, my foes, and oh, my friends--it gives a lovely light""
+CORRECT ANSWER: Edna St. Vincent Millay
+PARSED QUESTION: she wrote my candl burn both end ah my foe oh my friendsit give love light poet poetri
+WATSON DID NOT FIND IN TOP 10
+1) 51.742027:	 Mihri Hatun
+2) 43.757656:	 Sonnet 133
+3) 43.01535:	 Anna Akhmatova
+4) 42.647507:	 Conceit
+5) 40.399017:	 Ogden Nash
+6) 40.171455:	 Daphne Marlatt
+7) 39.467308:	 Henry Wadsworth Longfellow
+8) 39.37239:	 Alcestis
+9) 39.356785:	 Edwin Muir
+10) 39.061966:	 Lee Tzu Pheng
+
+NUMBER 41
+CATEGORY: CAPITAL CITY CHURCHES (Alex: We'll give you the church. You tell us the capital city in which it is located.)
+QUESTION: "In this Finnish city, the Lutheran Cathedral, also known as Tuomiokirkko"
+CORRECT ANSWER: Helsinki
+PARSED QUESTION: finnish citi lutheran cathedr also known tuomiokirkko capit citi church Alex:well give you church you tell us capit citi which locat
+WATSON DID NOT FIND IN TOP 10
+1) 59.967:	 Savonlinna
+2) 49.102352:	 Magdeburg
+3) 46.899853:	 Rostov
+4) 46.760273:	 Mikael Agricola
+5) 46.715736:	 Roseau
+6) 46.444923:	 Suure-Jaani
+7) 45.492004:	 Porvoo
+8) 45.424683:	 Golden Ring
+9) 45.18885:	 León, Nicaragua
+10) 44.742916:	 Tampere
+
+NUMBER 42
+CATEGORY: NAME THE PARENT COMPANY
+QUESTION: "Milton Bradley games"
+CORRECT ANSWER: Hasbro
+PARSED QUESTION: milton bradlei game name parent compani
+WATSON FOUND AT RANK: 5
+1) 28.322845:	 Microvision
+2) 27.341549:	 Axis & Allies
+3) 26.186493:	 Battleship (game)
+4) 24.863792:	 Vectrex
+5) 23.084925:	 Hasbro
+6) 21.778635:	 Snakes and Ladders
+7) 18.432192:	 Shawn Bradley
+8) 15.16952:	 Flame Queen Opal
+9) 15.12435:	 Namco
+10) 14.980183:	 Matt Bradley
+
+NUMBER 43
+CATEGORY: OLD YEAR'S RESOLUTIONS
+QUESTION: "The Kentucky & Virginia resolutions were passed to protest these controversial 1798 acts of Congress"
+CORRECT ANSWER: The Alien and Sedition Acts
+PARSED QUESTION: kentucki virginia resolut were pass protest controversi 1798 act congress old year resolut
+WATSON DID NOT FIND IN TOP 10
+1) 62.004997:	 Kentucky and Virginia Resolutions
+2) 41.189335:	 Second Continental Congress
+3) 34.124943:	 Stamp Act 1765
+4) 33.76167:	 Richard Henry Lee
+5) 32.66849:	 Congressional Budget and Impoundment Control Act of 1974
+6) 32.4778:	 Copyright Act of 1790
+7) 32.12785:	 Big Sandy River (Ohio River)
+8) 31.56623:	 Compromise of 1850
+9) 31.331587:	 Authorization for Use of Military Force Against Terrorists
+10) 29.957594:	 Brent Spence
+
+NUMBER 44
+CATEGORY: '80s NO.1 HITMAKERS
+QUESTION: "1983: "Beat It""
+CORRECT ANSWER: Michael Jackson
+PARSED QUESTION: 1983:beat 80 1 hitmak
+WATSON DID NOT FIND IN TOP 10
+1) 12.3574915:	 Them Again
+2) 11.688677:	 Fontana Records
+3) 10.219512:	 File:110th US Congress Senate.svg|thumb|375px|Senators' party membership by state at the opening of the 110th Congress in January 20
+4) 9.987127:	 1979–80 New York Rangers season
+5) 9.953348:	 File:106 us house membership.png|right|thumbnail|320p
+6) 9.876507:	 The Other Man's Grass Is Always Greener
+7) 9.833478:	 UEFA Euro 1980 qualifying Group 1
+8) 9.47379:	 Bulimulus guadalupensis
+9) 9.19078:	 File:102senate.svg|thumb|Party standings on the opening day of the 102nd Congre
+10) 9.002832:	 File:104senate.svg|thumb|Party standings on the opening day of the 104th Congre
+
+NUMBER 45
+CATEGORY: GOLDEN GLOBE WINNERS
+QUESTION: "In 2009: Sookie Stackhouse"
+CORRECT ANSWER: Anna Paquin
+PARSED QUESTION: 2009:sooki stackhous golden globe winner
+WATSON DID NOT FIND IN TOP 10
+1) 21.151617:	 Jimmy Harry
+2) 19.621906:	 Paul Le Mat
+3) 18.387218:	 Marilyn Hassett
+4) 17.823206:	 1988 in film
+5) 17.816414:	 One Chance (film)
+6) 17.683947:	 Warren Beatty
+7) 17.62598:	 Los Angeles Film Critics Association
+8) 17.583633:	 Sally Kirkland
+9) 17.376053:	 Olympia Dukakis
+10) 17.194218:	 Miranda Richardson
+
+NUMBER 46
+CATEGORY: HISTORICAL HODGEPODGE
+QUESTION: "This member of the Nixon & Ford cabinets was born in Furth, Germany in 1923"
+CORRECT ANSWER: Henry Kissinger
+PARSED QUESTION: member nixon ford cabinet born furth germani 1923 histor hodgepodg
+WATSON DID NOT FIND IN TOP 10
+1) 23.461893:	 William B. Saxbe
+2) 22.678164:	 Hidejirō Nagata
+3) 20.76116:	 Helmut Sturm
+4) 20.701021:	 1st government of Turkey
+5) 20.502796:	 Emil Wallber
+6) 20.442093:	 Théophile Delcassé
+7) 20.317854:	 Frank B. Kellogg
+8) 19.998337:	 Arthur Sauvé
+9) 19.501959:	 List of Presidents of the United States by other offices held
+10) 19.105299:	 Otto Schily
+
+NUMBER 47
+CATEGORY: CAPITAL CITY CHURCHES (Alex: We'll give you the church. You tell us the capital city in which it is located.)
+QUESTION: "The High Kirk of St. Giles, where John Knox was minister"
+CORRECT ANSWER: Edinburgh
+PARSED QUESTION: high kirk st gile where john knox minist capit citi church Alex:well give you church you tell us capit citi which locat
+WATSON DID NOT FIND IN TOP 10
+1) 49.890797:	 John Knox
+2) 49.406628:	 Glasgow Cathedral
+3) 45.89537:	 Church of Scotland
+4) 45.71376:	 Stobo Kirk
+5) 43.862953:	 Queen's Hall, Edinburgh
+6) 41.086227:	 Diest
+7) 40.963596:	 St. Luke's Church (Bronx, New York)
+8) 40.687943:	 Rivers of Life, Oxford
+9) 40.539253:	 Roseau
+10) 39.85106:	 Solin, Croatia
+
+NUMBER 48
+CATEGORY: UCLA CELEBRITY ALUMNI
+QUESTION: "For the brief time he attended, he was a rebel with a cause, even landing a lead role in a 1950 stage production"
+CORRECT ANSWER: James Dean
+PARSED QUESTION: brief time he attend he rebel caus even land lead role 1950 stage product ucla celebr alumni
+WATSON FOUND AT RANK: 1
+1) 35.060547:	 James Dean
+2) 34.343903:	 Kevin Weisman
+3) 33.299614:	 Jamie King (actor)
+4) 32.02587:	 Richard Simmons (actor)
+5) 31.827736:	 Willard Libby
+6) 31.59826:	 Guy Kawasaki
+7) 31.512499:	 Richard Thomas (actor)
+8) 31.322529:	 Len Cariou
+9) 30.696808:	 Gary LeRoi Gray
+10) 30.68749:	 Brad Johnson (television actor)
+
+NUMBER 49
+CATEGORY: NAME THE PARENT COMPANY
+QUESTION: "Fisher-Price toys"
+CORRECT ANSWER: Mattel
+PARSED QUESTION: fisherpric toi name parent compani
+WATSON DID NOT FIND IN TOP 10
+1) 20.425293:	 Learning Express Toys
+2) 18.52087:	 Circus World (store)
+3) 18.114895:	 Hasbro
+4) 17.905342:	 Applause Inc.
+5) 17.741058:	 Tandem Productions
+6) 17.463543:	 Frog (models)
+7) 17.352076:	 Happy Fun Ball
+8) 17.275833:	 Baby Bach
+9) 16.857054:	 Tekno (toy manufacturer)
+10) 16.820934:	 Tri-ang Railways
+
+NUMBER 50
+CATEGORY: HISTORICAL QUOTES
+QUESTION: "In a 1959 American kitchen exhibit in Moscow, he told Khrushchev, "In America, we like to make life easier for women""
+CORRECT ANSWER: Richard Nixon|Nixon
+PARSED QUESTION: 1959 american kitchen exhibit moscow he told khrushchev america we like make life easier women histor quot
+WATSON DID NOT FIND IN TOP 10
+1) 47.91522:	 American National Exhibition
+2) 31.25719:	 Yuri Zhukov (journalist)
+3) 27.505901:	 Robert Frank
+4) 27.28534:	 Cuban missile crisis
+5) 25.747496:	 Davis Phinney
+6) 25.506683:	 Esfir Shub
+7) 25.327188:	 K Blows Top
+8) 25.248331:	 Ray Singleton
+9) 25.209482:	 Jesse Barfield
+10) 25.125978:	 Vittorio De Sica
+
+NUMBER 51
+CATEGORY: POETS & POETRY
+QUESTION: "One of his "Tales of a Wayside Inn" begins, "Listen, my children, and you shall hear of the midnight ride of Paul Revere""
+CORRECT ANSWER: Henry Wadsworth Longfellow
+PARSED QUESTION: on hi tale waysid inn begin listen my children you shall hear midnight ride paul rever poet poetri
+WATSON FOUND AT RANK: 3
+1) 40.536736:	 Cornelia Hoogland
+2) 38.151016:	 Baxter Black
+3) 35.72035:	 Henry Wadsworth Longfellow
+4) 35.70044:	 William Dawes
+5) 33.214584:	 Acrostic
+6) 32.62568:	 John Masefield
+7) 32.38674:	 Third Nephi
+8) 32.067215:	 Are You Afraid of the Dark?
+9) 32.056786:	 Alliteration
+10) 31.105406:	 Language of flowers
+
+NUMBER 52
+CATEGORY: NOTES FROM THE CAMPAIGN TRAIL
+QUESTION: "This bestseller about problems on the McCain-Palin ticket became an HBO movie with Julianne Moore"
+CORRECT ANSWER: Game Change
+PARSED QUESTION: bestsel about problem mccainpalin ticket becam hbo movi juliann moor note from campaign trail
+WATSON FOUND AT RANK: 7
+1) 22.539032:	 The Green Berets (book)
+2) 22.509249:	 Safe (1995 film)
+3) 22.09194:	 Operation Simoom
+4) 21.44:	 Junket Whore
+5) 21.106146:	 My Best Friend's Wedding
+6) 20.645926:	 Project Greenlight
+7) 20.089314:	 Game Change
+8) 19.824406:	 Scarlet's Walk
+9) 19.767935:	 Bowling for Columbine
+10) 19.696182:	 The Tuskegee Airmen
+
+NUMBER 53
+CATEGORY: THAT 20-AUGHTS SHOW
+QUESTION: "A 2-part episode of "JAG" introduced this Mark Harmon drama"
+CORRECT ANSWER: NCIS
+PARSED QUESTION: 2part episod jag introduc mark harmon drama 20aught show
+WATSON DID NOT FIND IN TOP 10
+1) 21.79753:	 The Defenders (1961 TV series)
+2) 21.631683:	 Bozo the Clown
+3) 20.71897:	 Japanese television drama
+4) 20.469318:	 Mill Valley High School
+5) 20.088528:	 Arthur Storey and the Department of Historical Correction
+6) 19.777193:	 Mark Iddon
+7) 19.393745:	 Jack McMullen
+8) 19.219816:	 The New Loretta Young Show
+9) 19.145847:	 James Harmon Brown and Barbara Esensten
+10) 19.030842:	 Clocking Off
+
+NUMBER 54
+CATEGORY: AFRICAN CITIES
+QUESTION: "This port is the southernmost of South Africa's 3 capitals"
+CORRECT ANSWER: Cape Town
+PARSED QUESTION: port southernmost south africa 3 capit african citi
+WATSON DID NOT FIND IN TOP 10
+1) 28.471529:	 Urbanization in Africa
+2) 27.577663:	 Port Elizabeth Airport
+3) 27.415934:	 Malabo
+4) 25.83788:	 Agulhas National Park
+5) 25.472187:	 Image:Mozambique n2.jpg|thumb|right|The Island of Mozambique was first occupied 
+6) 25.353336:	 Port Elizabeth
+7) 24.762234:	 Nacala
+8) 24.42077:	 File:LocationSouthernAfrica.png|right|thumb|350p
+9) 24.408318:	 Porto-Novo
+10) 24.394527:	 Geography of the Republic of the Congo
+
+NUMBER 55
+CATEGORY: THE QUOTABLE KEATS
+QUESTION: "Keats was quoting this Edmund Spenser poem when he told Shelley to "'load every rift' of your subject with ore""
+CORRECT ANSWER: The Faerie Queene
+PARSED QUESTION: keat quot edmund spenser poem when he told shellei load everi rift your subject or quotabl keat
+WATSON FOUND AT RANK: 8
+1) 52.839993:	 John Keats
+2) 51.824684:	 Ode
+3) 41.07154:	 Edmund Spenser
+4) 38.713547:	 Hyperion (poem)
+5) 38.572777:	 La Belle Dame sans Merci
+6) 37.65994:	 Ozymandias
+7) 36.33134:	 Edmund Blunden
+8) 35.486088:	 The Faerie Queene
+9) 32.446194:	 I Hope You Dance (song)
+10) 32.354923:	 Dominic Keating
+
+NUMBER 56
+CATEGORY: THE QUOTABLE KEATS
+QUESTION: "In an 1819 letter Keats wrote that this lord & poet "cuts a figure, but he is not figurative""
+CORRECT ANSWER: Lord Byron
+PARSED QUESTION: 1819 letter keat wrote lord poet cut figur he figur quotabl keat
+WATSON DID NOT FIND IN TOP 10
+1) 52.83284:	 John Keats
+2) 44.826283:	 La Belle Dame sans Merci
+3) 42.26847:	 Hyperion (poem)
+4) 34.824512:	 Robert Keate
+5) 34.787582:	 Ode
+6) 30.968054:	 Blank verse
+7) 30.552998:	 Didymus Chalcenterus
+8) 30.501833:	 Edward Keating
+9) 30.438038:	 Michael Keating (actor)
+10) 29.414534:	 Adonis
+
+NUMBER 57
+CATEGORY: GREEK FOOD & DRINK
+QUESTION: "This clear Greek liqueur is quite potent, so it's usually mixed with water, which turns it white & cloudy"
+CORRECT ANSWER: Ouzo
+PARSED QUESTION: clear greek liqueur quit potent so it usual mix water which turn white cloudi greek food drink
+WATSON FOUND AT RANK: 1
+1) 57.962917:	 Ouzo
+2) 49.684715:	 Liqueur
+3) 39.15273:	 List of cocktails
+4) 39.00819:	 List of coffee beverages
+5) 37.602943:	 Rakı
+6) 37.54144:	 Feta
+7) 36.5387:	 Anise
+8) 34.942493:	 File:Pasta alla Norma (2563876877).jpg|thum
+9) 34.61342:	 White Russian (cocktail)
+10) 34.37028:	 Souvlaki
+
+NUMBER 58
+CATEGORY: OLD YEAR'S RESOLUTIONS
+QUESTION: "Feb. 1, National Freedom Day, is the date in 1865 when a resolution sent the states an amendment ending this"
+CORRECT ANSWER: Slavery|Slavery in the United States
+PARSED QUESTION: feb 1 nation freedom dai date 1865 when resolut sent state amend end old year resolut
+WATSON DID NOT FIND IN TOP 10
+1) 35.71869:	 Image:Equal Rights Amendment Map.svg|320px|right|thumb|[tpl]legend|#ff8080|Ratified[/tpl] [tpl]legend|#ffe680|Ratified, then rescinded[/tp
+2) 34.3616:	 Kentucky and Virginia Resolutions
+3) 33.834846:	 Emancipation Proclamation
+4) 33.564766:	 Pledge of Allegiance
+5) 33.20388:	 Lambeth Conferences
+6) 32.8613:	 Second Continental Congress
+7) 32.643677:	 Image:Cameroon boundary changes.PNG|thumb|right|Cameroon over ti
+8) 32.539505:	 United Nations Security Council Resolution 794
+9) 32.53904:	 International Telecommunication Union
+10) 32.20792:	 Henry S. Foote
+
+NUMBER 59
+CATEGORY: RANKS & TITLES
+QUESTION: "This person is the queen's representative in Canada; currently the office is held by David Johnston"
+CORRECT ANSWER: Governor General of Canada
+PARSED QUESTION: person queen repres canada current offic held david johnston rank titl
+WATSON FOUND AT RANK: 2
+1) 28.855835:	 Order of Military Merit (Canada)
+2) 28.366055:	 Governor General of Canada
+3) 27.02184:	 List of current Canadian first ministers
+4) 26.078411:	 John David Burnes
+5) 25.981833:	 Jules Léger
+6) 25.869314:	 Atlantic Canada's 100 Greatest Books
+7) 25.810144:	 Parliament of Canada
+8) 24.837866:	 100 Huntley Street
+9) 24.564613:	 David A. Dodge
+10) 24.083773:	 Lincoln Alexander
+
+NUMBER 60
+CATEGORY: "TIN" MEN
+QUESTION: "He earned the "fifth Beatle" nickname by producing all of the Beatles' albums"
+CORRECT ANSWER: George Martin
+PARSED QUESTION: he earn fifth beatl nicknam produc all beatl album tin men
+WATSON FOUND AT RANK: 2
+1) 43.607014:	 Fifth Beatle
+2) 37.77564:	 George Martin
+3) 36.747143:	 Love (The Beatles album)
+4) 36.551403:	 The Beatles (album)
+5) 36.163033:	 Ringo Starr
+6) 36.02838:	 Twist and Shout
+7) 35.37474:	 Help! (album)
+8) 34.899265:	 1 (The Beatles album)
+9) 34.71012:	 Please Please Me
+10) 34.69866:	 Sour Milk Sea
+
+NUMBER 61
+CATEGORY: NEWSPAPERS
+QUESTION: "Early in their careers, Mark Twain & Bret Harte wrote pieces for this California city's Chronicle"
+CORRECT ANSWER: San Francisco
+PARSED QUESTION: earli career mark twain bret hart wrote piec california citi chronicl newspap
+WATSON DID NOT FIND IN TOP 10
+1) 48.36329:	 Bret Harte
+2) 33.881226:	 Bret Harte Union High School
+3) 28.034554:	 Joaquin Miller
+4) 26.906725:	 1860 Wiyot Massacre
+5) 26.818964:	 Lost Cement Mine
+6) 25.443913:	 A Defence of General Funston
+7) 25.230598:	 Dave Meltzer
+8) 25.068836:	 Bret Hart Montreal
+9) 24.981125:	 Bret Harte High School
+10) 24.939629:	 KKBN
+
+NUMBER 62
+CATEGORY: 
+QUESTION: "Large specimens of this marsupial can leap over barriers 6 feet high"
+CORRECT ANSWER: Kangaroo
+PARSED QUESTION: larg specimen marsupi can leap over barrier 6 feet high
+WATSON DID NOT FIND IN TOP 10
+1) 25.562996:	 Broad-faced potoroo
+2) 23.552114:	 Borhyaenidae
+3) 22.025814:	 Marsupial mole
+4) 21.706047:	 Fauna of Australia
+5) 21.453804:	 Thames Barrier
+6) 20.339052:	 Acacia beckleri
+7) 20.151314:	 Stejneger's beaked whale
+8) 20.14361:	 Pitchout
+9) 19.92909:	 Yungavolucris
+10) 19.729206:	 Honey possum
+
+NUMBER 63
+CATEGORY: GREEK FOOD & DRINK
+QUESTION: "Because it's cured & stored in brine, this crumbly white cheese made from sheep's milk is often referred to as pickled cheese"
+CORRECT ANSWER: Feta
+PARSED QUESTION: becaus it cure store brine crumbl white chees made from sheep milk often refer pickl chees greek food drink
+WATSON FOUND AT RANK: 1
+1) 90.92974:	 Feta
+2) 63.98489:	 Norwegian cuisine
+3) 60.149693:	 English cuisine
+4) 59.879112:	 Pecorino
+5) 56.44295:	 Breakfast
+6) 55.731884:	 Quark (dairy product)
+7) 54.738953:	 Caerphilly cheese
+8) 54.7001:	 Rennet
+9) 54.216686:	 Serbian cuisine
+10) 53.653015:	 Mozzarella
+
+NUMBER 64
+CATEGORY: 1920s NEWS FLASH!
+QUESTION: "1927! Gene Tunney takes a long count in the squared circle but rises to defeat this "Manassa Mauler"! Howzabout that!"
+CORRECT ANSWER: Jack Dempsey
+PARSED QUESTION: 1927 gene tunnei take long count squar circl rise defeat manassa mauler howzabout 1920 new flash
+WATSON FOUND AT RANK: 1
+1) 41.786198:	 Jack Dempsey
+2) 28.47796:	 New Jersey Route 37
+3) 24.006609:	 MIM-46 Mauler
+4) 23.422243:	 Dan Minor
+5) 22.491205:	 Alexander Kolowrat
+6) 21.815163:	 Robin Tunney
+7) 21.701912:	 Vehicle registration plates of Italy
+8) 21.324947:	 Lou Stillman
+9) 21.22888:	 Tommy Gibbons
+10) 19.931732:	 Quebec general election, 1927
+
+NUMBER 65
+CATEGORY: RANKS & TITLES
+QUESTION: "Italian for "leader", it was especially applied to Benito Mussolini"
+CORRECT ANSWER: Duce
+PARSED QUESTION: italian leader especi appli benito mussolini rank titl
+WATSON FOUND AT RANK: 1
+1) 42.00868:	 Duce
+2) 34.130703:	 Romano Mussolini
+3) 33.216892:	 Clara Petacci
+4) 32.620796:	 Fascist and anti-Fascist violence in Italy (1919–26)
+5) 32.04687:	 Predappio
+6) 31.492733:	 Alessandra Mussolini
+7) 30.658985:	 Agostino Lanzillo
+8) 28.183887:	 Fascism in Europe
+9) 27.811535:	 Esercito Nazionale Repubblicano
+10) 27.047106:	 Luigi Barzini, Jr.
+
+NUMBER 66
+CATEGORY: STATE OF THE ART MUSEUM (Alex: We'll give you the museum. You give us the state.)
+QUESTION: "The Kalamazoo Institute of Arts"
+CORRECT ANSWER: Michigan
+PARSED QUESTION: kalamazoo institut art state art museum Alex:well give you museum you give us state
+WATSON DID NOT FIND IN TOP 10
+1) 37.198757:	 Michael Bierut
+2) 36.31931:	 Ian Hornak
+3) 36.263268:	 Terra Museum
+4) 36.10978:	 Art museum
+5) 34.92591:	 Portland Institute for Contemporary Art
+6) 34.86906:	 Akio Takamori
+7) 34.639145:	 Utah Museum of Fine Arts
+8) 34.59314:	 Agnes Martin
+9) 34.581364:	 Museum
+10) 34.49612:	 Customs House Museum and Cultural Center
+
+NUMBER 67
+CATEGORY: STATE OF THE ART MUSEUM (Alex: We'll give you the museum. You give us the state.)
+QUESTION: "The Sun Valley Center for the Arts"
+CORRECT ANSWER: Idaho
+PARSED QUESTION: sun vallei center art state art museum Alex:well give you museum you give us state
+WATSON DID NOT FIND IN TOP 10
+1) 39.11138:	 Customs House Museum and Cultural Center
+2) 36.533592:	 Arthouse at The Jones Center
+3) 36.388187:	 Collins Center for the Arts
+4) 36.276215:	 Molly Springfield
+5) 36.07879:	 Terre Haute, Indiana
+6) 35.655975:	 Roman De Salvo
+7) 35.616737:	 Lady Lever Art Gallery
+8) 35.582542:	 Museum of Contemporary Art, Chicago
+9) 35.47651:	 Cape Cod Museum of Art
+10) 35.380974:	 Impression, Sunrise
+
+NUMBER 68
+CATEGORY: "TIN" MEN
+QUESTION: "You can't mention this shortstop without mentioning his double-play associates Evers & Chance"
+CORRECT ANSWER: Joe Tinker
+PARSED QUESTION: you cant mention shortstop without mention hi doubleplai associ ever chanc tin men
+WATSON FOUND AT RANK: 2
+1) 26.20524:	 Hughie Jennings
+2) 23.295795:	 Joe Tinker
+3) 23.035883:	 Nicholas Tooley
+4) 21.596115:	 Hastur
+5) 21.52125:	 You cant spell slaughter without laughter
+6) 21.44254:	 Dominique You
+7) 21.004593:	 Freydís Eiríksdóttir
+8) 20.865654:	 Belial
+9) 20.630945:	 The Book of Five Rings
+10) 20.456053:	 Image:John Bauer-Tyr and Fenrir.jpg|right|240px|thumb|According to the Edda, Fenrisulfr bites off t
+
+NUMBER 69
+CATEGORY: NEWSPAPERS
+QUESTION: "In 1840 Horace Greeley began publishing "The Log Cabin", a weekly campaign paper in support of this Whig candidate"
+CORRECT ANSWER: William Henry Harrison
+PARSED QUESTION: 1840 horac greelei began publish log cabin weekli campaign paper support whig candid newspap
+WATSON FOUND AT RANK: 4
+1) 68.684784:	 Horace Greeley
+2) 31.57441:	 Anti-Masonic Party
+3) 30.65028:	 The Day (New London)
+4) 29.395794:	 William Henry Harrison
+5) 28.875774:	 The Telegraph (Nashua)
+6) 26.797598:	 Gringoire (newspaper)
+7) 26.790892:	 Schuyler Colfax
+8) 26.568434:	 Sun-Sentinel
+9) 25.993397:	 Boston Daily Advertiser
+10) 25.213722:	 Literaturnaya Gazeta
+
+NUMBER 70
+CATEGORY: I'M BURNIN' FOR YOU
+QUESTION: "Pierre Cauchon, Bishop of Beauvais, presided over the trial of this woman who went up in smoke May 30, 1431"
+CORRECT ANSWER: Joan of Arc|Jeanne d'Arc
+PARSED QUESTION: pierr cauchon bishop beauvai presid over trial woman who went up smoke mai 30 1431 im burnin you
+WATSON DID NOT FIND IN TOP 10
+1) 50.192875:	 Roman Catholic Diocese of Beauvais
+2) 32.503345:	 File:Traité de Troyes.svg|300px|thumb|1415-1429[tpl]Legend|#ea8b9d|Territories controlled by Henry VI of England[/tp
+3) 32.32601:	 Beauvais
+4) 28.387726:	 Joan of Arc
+5) 28.137205:	 Wilfried Louisy-Daniel
+6) 26.422369:	 Medieval Inquisition
+7) 25.214403:	 Eduardo Ciannelli
+8) 25.072947:	 William Elphinstone
+9) 24.464798:	 Jean Casimir-Perier
+10) 24.404232:	 Jean Houymet
+
+NUMBER 71
+CATEGORY: COMPLETE DOM-INATION(Alex: Not "domination.")
+QUESTION: "This Wisconsin city claims to have built the USA's only granite dome"
+CORRECT ANSWER: Madison
+PARSED QUESTION: wisconsin citi claim have built usa onli granit dome complet domin
+WATSON DID NOT FIND IN TOP 10
+1) 25.281258:	 Saint Isaac's Cathedral
+2) 24.826725:	 Volkshalle
+3) 23.528854:	 Corcovado
+4) 22.090868:	 Islamic architecture
+5) 22.083382:	 Frank Zeidler
+6) 22.058352:	 Usa, Ōita
+7) 21.986801:	 Industrial archaeology of Dartmoor
+8) 21.913778:	 St. Adalbert's Church (Milwaukee)
+9) 21.861387:	 Yosemite Valley
+10) 21.775648:	 Madison, Wisconsin
+
+NUMBER 72
+CATEGORY: NEWSPAPERS
+QUESTION: "This Georgia paper is known as the AJC for short"
+CORRECT ANSWER: The Atlanta Journal-Constitution
+PARSED QUESTION: georgia paper known ajc short newspap
+WATSON FOUND AT RANK: 1
+1) 33.67465:	 The Atlanta Journal-Constitution
+2) 20.219206:	 Rome News-Tribune
+3) 19.597717:	 Stylish Century
+4) 18.333998:	 AJC
+5) 16.622532:	 The Five Orange Pips
+6) 15.875832:	 Metropolis Daily
+7) 15.553918:	 BVI Beacon
+8) 15.329972:	 Wallace Carlson
+9) 15.287543:	 Interstate 285
+10) 15.284828:	 Joel Chandler Harris House
+
+NUMBER 73
+CATEGORY: AFRICAN CITIES
+QUESTION: "Wooden 2-story verandas in this Liberian capital are an architectural link to the U.S. south"
+CORRECT ANSWER: Monrovia
+PARSED QUESTION: wooden 2stori veranda liberian capit architectur link u. south african citi
+WATSON FOUND AT RANK: 2
+1) 31.895628:	 Americo-Liberian
+2) 30.453754:	 Monrovia
+3) 26.560171:	 History of Liberia
+4) 26.318958:	 Yablanski House
+5) 25.45998:	 Flag of Liberia
+6) 23.15349:	 Frank Seator
+7) 22.97523:	 Economy of Liberia
+8) 22.706484:	 Liberia
+9) 22.583212:	 Prince Johnson
+10) 22.333738:	 William R. Tolbert, Jr.
+
+NUMBER 74
+CATEGORY: COMPLETE DOM-INATION(Alex: Not "domination.")
+QUESTION: "This New Orleans venue reopened Sept. 25, 2006"
+CORRECT ANSWER: Mercedes-Benz Superdome|The Superdome
+PARSED QUESTION: new orlean venu reopen sept 25 2006 complet domin
+WATSON DID NOT FIND IN TOP 10
+1) 26.34427:	 Wesley Barrow Stadium
+2) 26.129736:	 Snug Harbor (jazz club)
+3) 25.537111:	 Mercedes-Benz Superdome
+4) 24.723976:	 Tameside Hippodrome
+5) 23.202093:	 The Brewhouse Theatre & Arts Centre
+6) 23.051643:	 Jimmy Walter
+7) 22.908854:	 Stade Mohamed V
+8) 22.892738:	 Saenger Theatre (New Orleans, Louisiana)
+9) 22.135223:	 Shrewsbury, Louisiana
+10) 21.262867:	 New Orleans Jazz Museum
+
+NUMBER 75
+CATEGORY: HE PLAYED A GUY NAMED JACK RYAN IN...
+QUESTION: ""The Hunt for Red October"; he went more comedic as Jack Donaghy on "30 Rock""
+CORRECT ANSWER: Alec Baldwin
+PARSED QUESTION: hunt red octob he went more comed jack donaghi 30 rock he plai gui name jack ryan
+WATSON DID NOT FIND IN TOP 10
+1) 41.575222:	 Plunkett Donaghy
+2) 35.905693:	 Wolfman Jack
+3) 35.581867:	 30 Rock (season 6)
+4) 34.24228:	 Jack McCarthy (baseball)
+5) 34.010155:	 Australian Idol (season 1)
+6) 33.878128:	 Jack Billingham
+7) 33.607117:	 Jack Fallon
+8) 32.799522:	 Swansea Jack
+9) 32.432686:	 Jack Nicholson
+10) 32.300568:	 Pops Foster
+
+NUMBER 76
+CATEGORY: AFRICAN-AMERICAN WOMEN
+QUESTION: "Rita Dove titled a collection of poems "On the Bus with" this woman"
+CORRECT ANSWER: Rosa Parks
+PARSED QUESTION: rita dove titl collect poem bu woman africanamerican women
+WATSON DID NOT FIND IN TOP 10
+1) 23.411974:	 Maria Rita Lorenzetti
+2) 23.223906:	 Heo Nanseolheon
+3) 23.12556:	 Joshua Beckman
+4) 21.499538:	 Rita Lobato
+5) 19.788504:	 Will Success Spoil Rock Hunter?
+6) 19.714865:	 Stella Benson
+7) 19.657364:	 Ama (diving)
+8) 19.640896:	 Julia de Burgos
+9) 19.340994:	 Nellie Y. McKay
+10) 19.22645:	 Elizabeth Barrett Browning
+
+NUMBER 77
+CATEGORY: HE PLAYED A GUY NAMED JACK RYAN IN...
+QUESTION: ""Patriot Games"; he's had other iconic roles, in space & underground"
+CORRECT ANSWER: Harrison Ford
+PARSED QUESTION: patriot game he had other icon role space underground he plai gui name jack ryan
+WATSON DID NOT FIND IN TOP 10
+1) 36.492485:	 Phil LaMarr
+2) 32.69681:	 Raiden (Metal Gear)
+3) 32.022663:	 Bill Mumy
+4) 31.172035:	 Nick Tate
+5) 30.776636:	 Armin Shimerman
+6) 30.65656:	 Ryan Stiles
+7) 30.470577:	 Nolan Ryan
+8) 30.21824:	 Andrew Robinson (actor)
+9) 29.845068:	 Cory Aldridge
+10) 29.810524:	 Rolento
+
+NUMBER 78
+CATEGORY: COMPLETE DOM-INATION(Alex: Not "domination.")
+QUESTION: "This sacred structure dates from the late 600's A.D."
+CORRECT ANSWER: Dome of the Rock
+PARSED QUESTION: sacr structur date from late 600 a.d complet domin
+WATSON DID NOT FIND IN TOP 10
+1) 23.362692:	 Altun Ha
+2) 22.021616:	 Tayasal (archaeological site)
+3) 20.782866:	 Isidore of Miletus
+4) 20.754333:	 Izamal
+5) 19.80349:	 Manbij
+6) 18.149195:	 Svetitskhoveli Cathedral
+7) 17.901638:	 Roman calendar
+8) 17.75282:	 Chaeronea
+9) 17.037355:	 Structure follows strategy
+10) 17.005545:	 Sacred Heart Catholic Church (McCartyville, Ohio)
+
+NUMBER 79
+CATEGORY: '80s NO.1 HITMAKERS
+QUESTION: "1988: "Man In The Mirror""
+CORRECT ANSWER: Michael Jackson
+PARSED QUESTION: 1988:man mirror 80 1 hitmak
+WATSON DID NOT FIND IN TOP 10
+1) 12.479606:	 Kirby & the Amazing Mirror
+2) 12.3574915:	 Them Again
+3) 12.236606:	 Polycube
+4) 11.970031:	 Image:L-peptideD-peptideAnalogues.png|thumbnail|right|300x300px|Figure 2. An L-peptide and its analogues. An L-peptide (1) sequence has three analogues: the D-enantiomer (3) with the same sequenc
+5) 11.921564:	 Star diagonal
+6) 11.688677:	 Fontana Records
+7) 11.434112:	 Snub dodecahedron
+8) 11.375549:	 Image:L-Peptide-D-PeptideMirrorImages.png|thumbnail|right|300x150px|Figure 1. D-peptides assume the mirror image conformation of their L-peptide analogue
+9) 11.059049:	 Amateur telescope making
+10) 11.024859:	 Lovesick/Mirrors
+
+NUMBER 80
+CATEGORY: CAPITAL CITY CHURCHES (Alex: We'll give you the church. You tell us the capital city in which it is located.)
+QUESTION: "Matthias Church, or Matyas Templom, where Franz Joseph was crowned in 1867"
+CORRECT ANSWER: Budapest
+PARSED QUESTION: matthia church matya templom where franz joseph crown 1867 capit citi church Alex:well give you church you tell us capit citi which locat
+WATSON DID NOT FIND IN TOP 10
+1) 45.518192:	 Saint Matthias
+2) 44.509823:	 Votive Church, Vienna
+3) 43.2451:	 Olomouc
+4) 43.001305:	 Las Piñas
+5) 42.806084:	 Church of St. Martin de Porres (Poughkeepsie, New York)
+6) 42.522533:	 Znojmo
+7) 41.9458:	 Helsingør
+8) 41.645245:	 Mayerling
+9) 40.92498:	 Magdeburg
+10) 40.712574:	 Église Notre-Dame la Grande, Poitiers
+
+NUMBER 81
+CATEGORY: UCLA CELEBRITY ALUMNI
+QUESTION: "Attending UCLA in the '60s, he was no "Meathead", he just played one later on television"
+CORRECT ANSWER: Rob Reiner
+PARSED QUESTION: attend ucla 60 he meathead he just plai on later televis ucla celebr alumni
+WATSON FOUND AT RANK: 1
+1) 41.279602:	 Rob Reiner
+2) 40.43729:	 Ron Pitts
+3) 38.5608:	 Jason Bell (American football)
+4) 38.4651:	 Gary LeRoi Gray
+5) 37.750813:	 University of California, Los Angeles
+6) 37.240273:	 Kevin Weisman
+7) 36.82189:	 Cy Young (athlete)
+8) 36.80967:	 Mighty Bruins
+9) 36.22353:	 Raymond Beegle
+10) 36.16243:	 Animal Crackers (film)
+
+NUMBER 82
+CATEGORY: THE RESIDENTS
+QUESTION: "Kinch, Carter & LeBeau were all residents of Stalag 13 on this TV show"
+CORRECT ANSWER: Hogan's Heroes
+PARSED QUESTION: kinch carter lebeau were all resid stalag 13 tv show resid
+WATSON FOUND AT RANK: 1
+1) 47.0634:	 Hogan's Heroes
+2) 27.719296:	 John Carter (ER)
+3) 23.264624:	 Carter Covington
+4) 21.889038:	 Peshtigo, Wisconsin
+5) 21.736078:	 Spin City
+6) 20.499731:	 Episode Six
+7) 20.435446:	 Stalag VIII-F
+8) 20.171364:	 Gary Burghoff
+9) 19.764915:	 List of Pennsylvania State University residence halls
+10) 19.613445:	 The Pattersons
+
+NUMBER 83
+CATEGORY: 1920s NEWS FLASH!
+QUESTION: "News flash! This less-than-yappy pappy is sixth veep to be nation's top dog after chief takes deep sleep!"
+CORRECT ANSWER: Calvin Coolidge
+PARSED QUESTION: new flash lessthanyappi pappi sixth veep nation top dog after chief take deep sleep 1920 new flash
+WATSON DID NOT FIND IN TOP 10
+1) 30.513233:	 Kid Flash
+2) 30.121487:	 Kaley Fountain
+3) 29.20975:	 Ashlyn Harris
+4) 27.923056:	 Belize national cricket team
+5) 27.591566:	 Adobe Flash
+6) 27.53179:	 Slashdot effect
+7) 27.172617:	 Harold Eugene Edgerton
+8) 27.047428:	 ActionScript
+9) 26.759022:	 Flash memory
+10) 26.10564:	 Point-and-shoot camera
+
+NUMBER 84
+CATEGORY: GOLDEN GLOBE WINNERS
+QUESTION: "In 2001: The president of the United States on television"
+CORRECT ANSWER: Martin Sheen
+PARSED QUESTION: presid unit state televis golden globe winner
+WATSON DID NOT FIND IN TOP 10
+1) 26.301828:	 Olympia Dukakis
+2) 24.626032:	 Jimmy Harry
+3) 24.327024:	 Geoffrey Rush
+4) 23.81717:	 Joan Plowright
+5) 23.543089:	 Paul Le Mat
+6) 23.398336:	 Marilyn Hassett
+7) 23.197756:	 Cybill
+8) 23.045223:	 Miranda Richardson
+9) 22.869099:	 Helen Hunt
+10) 22.78954:	 Golden Globe Award for Best Television Series – Musical or Comedy
+
+NUMBER 85
+CATEGORY: '80s NO.1 HITMAKERS
+QUESTION: "1989: "Miss You Much""
+CORRECT ANSWER: Janet Jackson
+PARSED QUESTION: 1989:miss you much 80 1 hitmak
+WATSON DID NOT FIND IN TOP 10
+1) 16.735437:	 Them Again
+2) 15.815927:	 I Love the '80s Strikes Back
+3) 12.205719:	 Sugarshock!
+4) 12.017914:	 Goatee
+5) 11.78185:	 By a Waterfall
+6) 11.688677:	 Fontana Records
+7) 11.494484:	 Acid Eaters
+8) 11.421521:	 Peppercombe Castle
+9) 11.377285:	 Hypnic jerk
+10) 11.139351:	 File:SHA-1.svg|thumbnail|right|300px|One iteration within the SHA-1 compression function
+
+NUMBER 86
+CATEGORY: 1920s NEWS FLASH!
+QUESTION: "1922: It's the end of an empire! This empire, in fact! After 600 years, it's goodbye, this, hello, Turkish Republic!"
+CORRECT ANSWER: Ottoman Empire
+PARSED QUESTION: 1922:it end empir empir fact after 600 year it goodby hello turkish republ 1920 new flash
+WATSON DID NOT FIND IN TOP 10
+1) 34.74368:	 Christophor Araratov
+2) 34.00672:	 History of Armenia
+3) 31.849123:	 Mehmed VI
+4) 31.844656:	 Turkish Military Academy
+5) 30.916904:	 Liberalism in Turkey
+6) 30.88653:	 Armenian fedayi
+7) 30.82396:	 Galactic Empire (Star Wars)
+8) 30.434477:	 Far Eastern Republic
+9) 30.094934:	 Austro-Turkish War (1663–64)
+10) 29.975605:	 Trabzon
+
+NUMBER 87
+CATEGORY: NAME THE PARENT COMPANY
+QUESTION: "Crest toothpaste"
+CORRECT ANSWER: Procter & Gamble
+PARSED QUESTION: crest toothpast name parent compani
+WATSON FOUND AT RANK: 8
+1) 29.83564:	 Crest (toothpaste)
+2) 21.821554:	 Toothpaste
+3) 17.070187:	 Air India (football club)
+4) 15.829787:	 Crest Capital
+5) 14.340595:	 MTX Audio
+6) 13.976013:	 Crested Shelduck
+7) 13.90991:	 Nyctosaurus
+8) 13.798871:	 Procter & Gamble
+9) 13.758166:	 Black-crested Bulbul
+10) 13.139649:	 Priory Vale
+
+NUMBER 88
+CATEGORY: HISTORICAL QUOTES
+QUESTION: "In 1888 this Chancellor told the Reichstag, "we Germans fear God, but nothing else in the world""
+CORRECT ANSWER: Otto von Bismarck|Von Bismarck
+PARSED QUESTION: 1888 chancellor told reichstag we german fear god noth els world histor quot
+WATSON DID NOT FIND IN TOP 10
+1) 29.998632:	 Theobald von Bethmann-Hollweg
+2) 28.2733:	 Georg Michaelis
+3) 27.26842:	 Enabling Act of 1933
+4) 27.06913:	 Wilhelm II, German Emperor
+5) 26.766357:	 Fritz Sauckel
+6) 26.574291:	 Reichstag Fire Decree
+7) 26.038143:	 Conversations with God
+8) 25.997505:	 Reichstag
+9) 24.798092:	 Fear and Trembling
+10) 24.004318:	 Heinrich Brüning
+
+NUMBER 89
+CATEGORY: POETS & POETRY
+QUESTION: "In 1787 he signed his first published poem "Axiologus"; axio- is from the Greek for "worth""
+CORRECT ANSWER: William Wordsworth
+PARSED QUESTION: 1787 he sign hi first publish poem axiologu axio from greek worth poet poetri
+WATSON DID NOT FIND IN TOP 10
+1) 39.20489:	 Ibycus
+2) 39.170715:	 Agis of Argos
+3) 38.542065:	 Johann Mayrhofer
+4) 38.421993:	 Thomas Warton
+5) 38.390907:	 Andrei Mureșanu
+6) 37.899513:	 Thomas MacGreevy
+7) 37.809605:	 David Bromige
+8) 37.699226:	 Jackson Mac Low
+9) 37.280304:	 Jorge Guillén
+10) 36.933456:	 Irish poetry
+
+NUMBER 90
+CATEGORY: CAMBODIAN HISTORY & CULTURE
+QUESTION: "Not to be confused with karma, krama is a popular accessory sold in cambodia; the word means "scarf" in this national language of Cambodia"
+CORRECT ANSWER: Khmer language
+PARSED QUESTION: confus karma krama popular accessori sold cambodia word mean scarf nation languag cambodia cambodian histori cultur
+WATSON DID NOT FIND IN TOP 10
+1) 49.61392:	 Politics of Cambodia
+2) 46.3761:	 History of Cambodia
+3) 46.15112:	 Norodom Buppha Devi
+4) 45.626728:	 Cambodia National and Provincial Resources Data Bank
+5) 40.90653:	 Economy of Cambodia
+6) 40.41732:	 Chaeng Mean Chey
+7) 39.04943:	 Khmer Rouge
+8) 38.95741:	 Vichara Dany
+9) 38.926403:	 Party of Democratic Kampuchea
+10) 38.79882:	 American Assistance for Cambodia
+
+NUMBER 91
+CATEGORY: CAMBODIAN HISTORY & CULTURE
+QUESTION: "Phnom Penh's notorious gridlock is circumvented by the nimble tuk-tuk, a motorized taxi that's also known as an auto this, a similar Asian conveyance."
+CORRECT ANSWER: Rickshaw
+PARSED QUESTION: phnom penh notori gridlock circumv nimbl tuktuk motor taxi that also known auto similar asian convey cambodian histori cultur
+WATSON DID NOT FIND IN TOP 10
+1) 45.80699:	 Norodom Buppha Devi
+2) 44.586594:	 Olympic Stadium (Phnom Penh)
+3) 39.72595:	 Transport in Cambodia
+4) 37.30018:	 Highways to a War
+5) 36.471325:	 History of Cambodia
+6) 35.612988:	 Operation Prek Ta
+7) 35.496197:	 Khmer Rouge
+8) 34.480225:	 Telecommunications in Cambodia
+9) 34.41676:	 Kantueu Muoy
+10) 34.41676:	 Kantueu Pir
+
+NUMBER 92
+CATEGORY: '80s NO.1 HITMAKERS
+QUESTION: "1980: "Rock With You""
+CORRECT ANSWER: Michael Jackson
+PARSED QUESTION: 1980:rock you 80 1 hitmak
+WATSON DID NOT FIND IN TOP 10
+1) 16.735437:	 Them Again
+2) 12.341761:	 I Love the '80s Strikes Back
+3) 12.017914:	 Goatee
+4) 11.688677:	 Fontana Records
+5) 11.377285:	 Hypnic jerk
+6) 11.139351:	 File:SHA-1.svg|thumbnail|right|300px|One iteration within the SHA-1 compression function
+7) 10.901494:	 David I. Shapiro
+8) 10.901102:	 I Love the '80s (U.S. TV series)
+9) 10.847715:	 Kim Jong-wook
+10) 10.734389:	 Belinda (Belinda Carlisle album)
+
+NUMBER 93
+CATEGORY: NOTES FROM THE CAMPAIGN TRAIL
+QUESTION: "The Pulitzer-winning "The Making of the President 1960" covered this man's successful presidential campaign"
+CORRECT ANSWER: JFK|John F. Kennedy
+PARSED QUESTION: pulitzerwin make presid 1960 cover man success presidenti campaign note from campaign trail
+WATSON DID NOT FIND IN TOP 10
+1) 31.16345:	 United States presidential election in Massachusetts, 1972
+2) 30.781485:	 Joe Lockhart
+3) 30.33375:	 Lyman J. Gage
+4) 30.291092:	 Electoral history of Ted Kennedy
+5) 30.18041:	 Lloyd Bentsen
+6) 29.639914:	 James M. Cox
+7) 28.760735:	 United States Senate Watergate Committee
+8) 28.41737:	 Henry Jones Ford
+9) 27.968613:	 David Plouffe
+10) 27.664137:	 William Henry Harrison
+
+NUMBER 94
+CATEGORY: SERVICE ORGANIZATIONS
+QUESTION: "In 1843 Isaac Dittenhoefer became the first pres. of this Jewish club whose name means "children of the covenant""
+CORRECT ANSWER: B'nai B'rith
+PARSED QUESTION: 1843 isaac dittenhoef becam first pre jewish club whose name mean children coven servic organ
+WATSON FOUND AT RANK: 1
+1) 34.88996:	 B'nai B'rith
+2) 26.87836:	 Jacob and Esau
+3) 26.752657:	 Bricket Wood
+4) 25.269949:	 Isaac K. Funk
+5) 24.965027:	 Jews as the chosen people
+6) 24.729998:	 Samuel Hirsch
+7) 24.471498:	 Isaac Norris
+8) 24.282207:	 Emperor Go-Ichijō
+9) 24.22989:	 Isaac Morley
+10) 23.922424:	 Beit Ha'Chidush
+
+NUMBER 95
+CATEGORY: THE RESIDENTS
+QUESTION: "Don Knotts took over from Norman Fell as the resident landlord on this sitcom"
+CORRECT ANSWER: Three's Company
+PARSED QUESTION: don knott took over from norman fell resid landlord sitcom resid
+WATSON FOUND AT RANK: 3
+1) 39.709946:	 Don Knotts
+2) 23.09866:	 Crinkle Crags
+3) 22.723469:	 Three's Company
+4) 22.554409:	 San Pedro, Laguna
+5) 21.294277:	 Walter Knott
+6) 21.117435:	 William de Beauchamp (1185)
+7) 20.341515:	 Burwash Hall
+8) 20.334988:	 Cliveden set
+9) 20.136808:	 New College, Toronto
+10) 20.086998:	 Rosemère, Quebec
+
+NUMBER 96
+CATEGORY: OLD YEAR'S RESOLUTIONS
+QUESTION: "U.N. Res. 242 supports "secure and recognized boundaries" for Israel & neighbors following this June 1967 war"
+CORRECT ANSWER: The Six Day War
+PARSED QUESTION: u.n re 242 support secur recogn boundari israel neighbor follow june 1967 war old year resolut
+WATSON DID NOT FIND IN TOP 10
+1) 40.149193:	 Golan Heights
+2) 39.458805:	 Image:Civil war Lebanon map 1983a.gif|thumb|Map showing power balance in Lebanon, 198
+3) 36.43285:	 Presbyterian Church (USA) disinvestment from Israel controversy
+4) 35.110397:	 Terje Rød-Larsen
+5) 34.84004:	 Israel and legitimacy
+6) 33.681644:	 Camp David Accords
+7) 32.599888:	 Alliance of Concerned Jewish Canadians
+8) 31.943125:	 United States and the United Nations
+9) 31.80956:	 Israeli–Palestinian conflict
+10) 30.948067:	 Politics of the Palestinian National Authority
+
+NUMBER 97
+CATEGORY: UCLA CELEBRITY ALUMNI
+QUESTION: "This blonde beauty who reprised her role as Amanda on the new "Melrose Place" was a psychology major"
+CORRECT ANSWER: Heather Locklear
+PARSED QUESTION: blond beauti who repris her role amanda new melros place psycholog major ucla celebr alumni
+WATSON FOUND AT RANK: 1
+1) 43.027534:	 Heather Locklear
+2) 39.33016:	 Melrose Place
+3) 34.374866:	 Lisa Rinna
+4) 32.540012:	 Courtney Thorne-Smith
+5) 32.506214:	 Legally Blonde (musical)
+6) 32.18413:	 Amy Lalonde
+7) 31.897041:	 Grant Show
+8) 31.63628:	 Donna Vivino
+9) 28.349373:	 Pearl Eaton
+10) 28.184982:	 Amanda Winn-Lee
+
+NUMBER 98
+CATEGORY: GREEK FOOD & DRINK
+QUESTION: "The name of this dish of marinated lamb, skewered & grilled, comes from the Greek for "skewer" & also starts with "s""
+CORRECT ANSWER: Souvlaki
+PARSED QUESTION: name dish marin lamb skewer grill come from greek skewer also start s greek food drink
+WATSON FOUND AT RANK: 1
+1) 78.90993:	 Souvlaki
+2) 53.71971:	 Akçaabat meatballs
+3) 48.675068:	 Kushi (skewer)
+4) 46.056183:	 Lountza
+5) 44.455215:	 Tzatziki
+6) 43.8585:	 Brazilian cuisine
+7) 42.122032:	 Serbian cuisine
+8) 41.71122:	 Taste of the Danforth
+9) 40.344337:	 Jingisukan
+10) 39.74849:	 Jangan-gu
+
+NUMBER 99
+CATEGORY: NAME THE PARENT COMPANY
+QUESTION: "Post-it notes"
+CORRECT ANSWER: 3M
+PARSED QUESTION: postit note name parent compani
+WATSON DID NOT FIND IN TOP 10
+1) 24.732714:	 Postit note
+2) 14.907982:	 Hal Film Maker
+3) 14.896659:	 Holding company
+4) 14.340595:	 MTX Audio
+5) 13.014178:	 Harry Von Tilzer
+6) 12.621132:	 MGE Energy
+7) 12.416855:	 Sampo Group
+8) 12.387903:	 Data Transmission Network
+9) 12.10443:	 Fairview Press
+10) 11.990966:	 Miracle Mart (Canada)
+
+NUMBER 100
+CATEGORY: GOLDEN GLOBE WINNERS
+QUESTION: "In 2010: As Sherlock Holmes on film"
+CORRECT ANSWER: Robert Downey, Jr.
+PARSED QUESTION: sherlock holm film golden globe winner
+WATSON DID NOT FIND IN TOP 10
+1) 34.788414:	 I. A. L. Diamond
+2) 29.520718:	 Sherlock Holmes
+3) 29.390726:	 List of actors who have played Sherlock Holmes
+4) 27.93243:	 Irene Adler
+5) 27.295961:	 Celeste Holm
+6) 26.373047:	 Jeremy Brett
+7) 26.02758:	 The Adventure of the Musgrave Ritual
+8) 25.98246:	 The Five Orange Pips
+9) 25.950409:	 Edward Hardwicke
+10) 25.332954:	 Jimmy Harry
+
