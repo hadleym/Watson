@@ -17,6 +17,8 @@ import edu.stanford.nlp.simple.Sentence;
  * as 'parts of speech' and will remove all stop words associated with the 
  * stop words array.  It then writes these preprocessed files to an
  * output directory to then be parsed by lucene. 
+ * 
+ * THIS PROCESS TAKES OVER 2 HOURS 
  */
 public class Preprocessor {
 	public HashSet<String> stopWords;

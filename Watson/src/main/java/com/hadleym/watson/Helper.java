@@ -34,7 +34,7 @@ public class Helper {
 	}
 
 	/*
-	 * Helper method for creating all 4 of the types of analyzer/scoring
+	 * Helper method for creating all 6 of the types of analyzer/scoring
 	 * combinations
 	 * 
 	 * Core NLP Branch = 'rawFiles' preprocessed with CoreNLP ( a 3 hour
@@ -43,7 +43,10 @@ public class Helper {
 	 * StandardAnalyzer Branch = 'rawFiles' indexed with Lucene
 	 * StandardAnalyzer.
 	 * 
-	 * Both of the branches calculate MRR and Precision @ 1 with both Classic
+	 * EnglishAnalyzer Model = 'rawFiles' indexed with Lucene
+	 * EnglishAnalyzer.
+	 * 
+	 * All of the branches calculate MRR and Precision @ 1 with both Classic
 	 * Analyzer(tf-idf) and BM25 Analyzer.
 	 * 
 	 */
@@ -86,7 +89,15 @@ public class Helper {
 		System.out.println("\t Evaluate both branches with both scoring methods. ");
 		System.out.println("\t Output to predetermined output files.");
 		System.out.println();
-		System.out.println("Additional Features: SEE ATTACHED README.txt");
+	}
+	
+	// verify that a directory that needs to be empty is empty.
+	public static void checkEmptyDir(File dir) {
+		if (dir.listFiles().length != 0) {
+			System.err.println("Directory [" + dir + "] is NOT empty. Please delete before attempting to index.");
+			System.err.println("Exiting...");
+			System.exit(1);
+		}
 	}
 
 }
