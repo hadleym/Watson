@@ -3,8 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.hadleym.watson</groupId>
 	<artifactId>watson</artifactId>
+	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>watson</name>
+	<name>Watson</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
