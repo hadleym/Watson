@@ -59,7 +59,7 @@ public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// this is for the files referred to as 'nlp' preprocessed files.
-		if (args.length == 0){
+		if (args.length == 0) {
 			Helper.printUsageMessage();
 			System.exit(1);
 		}
@@ -67,10 +67,10 @@ public class App {
 			Preprocessor.preprocessDir(Constants.RAW_FILE_DIR, Constants.NLP_PREPROCESS_DIR);
 			System.out.println("Preprocessing completed.");
 		} else if (args.length == 1 && args[0].equals("-index")) {
-			indexBothBranches();
+			indexAllTypes();
 			System.out.println("Indexing for both branches completed");
 		} else if (args.length == 1 && args[0].equals("-evaluate")) {
-			evaluateFull(Helper.buildAllFour());
+			evaluateFull(Helper.buildAllTypes());
 			System.out.println("Evaluation for both branches completed. See output files");
 		} else if (args.length == 3 && args[0].equals("-iwht")) {
 			index(new File(args[1]), new File(args[2]), new WhitespaceAnalyzer());
@@ -157,11 +157,12 @@ public class App {
 				exploreQuery(stdQuery, s);
 			}
 		} else if (args.length == 4 && args[0].equals("-full")) {
-			evaluateFull(Helper.buildAllFour(args[1], args[2], args[3]));
+			// evaluateFull(Helper.buildAllFour(args[1], args[2], args[3]));
 		} else if (args.length == 1 && args[0].equals("-a")) {
-			evaluateAllPrecisionAtOne(Helper.buildAllFour());
+			// evaluateAllPrecisionAtOne(Helper.buildAllFour());
 		} else if (args.length == 4 && args[0].equals("-a")) {
-			evaluateAllPrecisionAtOne(Helper.buildAllFour(args[1], args[2], args[3]));
+			// evaluateAllPrecisionAtOne(Helper.buildAllFour(args[1], args[2],
+			// args[3]));
 
 		} else {
 			Helper.printUsageMessage();
@@ -175,13 +176,15 @@ public class App {
 	// into the default directory of 'nlpIndex' and will also index the default
 	// directory 'rawFiles' into
 	// the directory 'standardIndex' for use with the StandardAnalyzer.
-	public static void indexBothBranches() {
-		System.err.println("Indexing both branches with default directories.");
+	public static void indexAllTypes() {
+		System.err.println("Indexing all branches with default directories.");
 		System.err.println("This process takes approximately 8 minutes on a non-SSD hard drive.");
+
 		File nlpSource = new File(Constants.NLP_PREPROCESS_DIR);
 		File nlpIndex = Helper.checkDirectoryAndCreate(Constants.NLP_INDEX);
 		File stdIndex = Helper.checkDirectoryAndCreate(Constants.STD_INDEX);
 		File stdSource = new File(Constants.RAW_FILE_DIR);
+		File engIndex = Helper.checkDirectoryAndCreate(Constants.ENG_INDEX);
 		if (!nlpSource.exists() || !nlpSource.isDirectory() || nlpSource.listFiles().length == 0) {
 			System.err.println("Directory [" + nlpSource
 					+ "] is either empty, doesnt exist, or is not a directory. Please correct and try again.");
@@ -198,20 +201,13 @@ public class App {
 			System.exit(1);
 		}
 
-		if (nlpIndex.listFiles().length != 0) {
-			System.err.println("Directory [" + nlpIndex + "] is NOT empty. Please delete before attempting to index.");
-			System.err.println("Exiting...");
-			System.exit(1);
-		}
-
-		if (stdIndex.listFiles().length != 0) {
-			System.err.println("Directory [" + stdIndex + "] is NOT empty. Please delete before attempting to index.");
-			System.err.println("Exiting...");
-			System.exit(1);
-		}
+		checkEmptyDir(stdIndex);
+		checkEmptyDir(nlpIndex);
+		checkEmptyDir(engIndex);
 
 		index(nlpSource, nlpIndex, new WhitespaceAnalyzer());
-		index(stdSource, stdIndex, new EnglishAnalyzer());
+		index(stdSource, stdIndex, new StandardAnalyzer());
+		index(stdSource, engIndex, new EnglishAnalyzer());
 	}
 
 	// evaluates both branches ( StandardAnalyzer and Core NLP ) with
@@ -278,8 +274,6 @@ public class App {
 		}
 	}
 
-	
-
 	public static void exploreQuery(QueryHelper helper, Scanner s) {
 		helper.executeQuestions();
 		int total = helper.total;
@@ -313,6 +307,14 @@ public class App {
 		System.out.println("indexing directory: " + inputDir.getName() + " to ouput to " + outputDir.getName());
 		DocumentIndexer indexer = new DocumentIndexer(inputDir, outputDir, analyzer);
 		indexer.indexAllFiles();
+	}
+
+	public static void checkEmptyDir(File dir) {
+		if (dir.listFiles().length != 0) {
+			System.err.println("Directory [" + dir + "] is NOT empty. Please delete before attempting to index.");
+			System.err.println("Exiting...");
+			System.exit(1);
+		}
 	}
 
 }

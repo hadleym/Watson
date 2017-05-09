@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
@@ -228,13 +229,25 @@ public class QueryHelper {
 		String analyzerString = null;
 		if (analyzer instanceof StandardAnalyzer) {
 			analyzerString = "Lucene Standard Analyzer with " + sim ;
+		} else if (analyzer instanceof EnglishAnalyzer){
+			analyzerString = "Lucene English Analyzer with " + sim;
 		} else {
-			analyzerString = "CoreNLP lemmas and Lucene Whitespace Analyzer";
+			analyzerString = "CoreNLP lemmas and Lucene Whitespace Analyzer with " + sim;
 		}
 		sb.append("Summary for " + analyzerString + '\n');
 		sb.append("Total Questions: " + total + "\nCorrect top 1 questions: " + getRA1Score() + "\nMRRScore: "
 				+ getMRRScore() + '\n');
 		return sb.toString();
+	}
+	
+	public String getIndexDir(){
+		if ( analyzer instanceof StandardAnalyzer) {
+			return Constants.STD_INDEX;
+		} else if ( analyzer instanceof EnglishAnalyzer){
+			return Constants.ENG_INDEX;
+		} else {
+			return Constants.NLP_INDEX;
+		}
 	}
 
 }

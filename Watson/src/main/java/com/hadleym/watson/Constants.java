@@ -39,6 +39,7 @@ public class Constants {
 	
 	public static final String CATEGORY_PREFIX = "[[";
 	public static final String[] IGNORE_PREFIX = { "==", "#RED" };
+	public static final String ENG_INDEX = "engIndex";
 	public static Directory getDirectory(Path p) {
 		try { 
 			return new SimpleFSDirectory(p);

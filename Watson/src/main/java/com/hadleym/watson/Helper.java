@@ -29,8 +29,8 @@ public class Helper {
 	/*
 	 * Overriden to use defaults from Constants class.
 	 */
-	public static ArrayList<QueryHelper> buildAllFour() {
-		return buildAllFour(Constants.QUESTIONS_FILE, Constants.NLP_INDEX, Constants.STD_INDEX);
+	public static ArrayList<QueryHelper> buildAllTypes() {
+		return buildAllTypes(Constants.QUESTIONS_FILE, Constants.NLP_INDEX, Constants.STD_INDEX, Constants.ENG_INDEX);
 	}
 
 	/*
@@ -47,7 +47,7 @@ public class Helper {
 	 * Analyzer(tf-idf) and BM25 Analyzer.
 	 * 
 	 */
-	public static ArrayList<QueryHelper> buildAllFour(String q, String nIndex, String sIndex) {
+	public static ArrayList<QueryHelper> buildAllTypes(String q, String nIndex, String sIndex, String eIndex) {
 		File questions = new File(q);
 		if ( questions.isDirectory() || !questions.exists()){
 			System.err.println("[questions.txt] does not exist. This file was provided with the submission.");
@@ -56,13 +56,16 @@ public class Helper {
 		}
 		File nlpIndex = Helper.checkDirectoryAndCreate(nIndex);
 		File stdIndex = Helper.checkDirectoryAndCreate(sIndex);
+		File engIndex = Helper.checkDirectoryAndCreate(eIndex);
 		ArrayList<QueryHelper> queries = new ArrayList<QueryHelper>();
-		queries.add(new QueryHelper(questions, stdIndex, new EnglishAnalyzer(), null, true, new ClassicSimilarity()));
-		queries.add(new QueryHelper(questions, stdIndex, new EnglishAnalyzer(), null, true, new BM25Similarity()));
+		queries.add(new QueryHelper(questions, stdIndex, new StandardAnalyzer(), null, true, new ClassicSimilarity()));
+		queries.add(new QueryHelper(questions, stdIndex, new StandardAnalyzer(), null, true, new BM25Similarity()));
 		queries.add(new QueryHelper(questions, nlpIndex, new WhitespaceAnalyzer(),
 				PreprocessorGenerator.standardPreprocessor(), true, new ClassicSimilarity()));
 		queries.add(new QueryHelper(questions, nlpIndex, new WhitespaceAnalyzer(),
 				PreprocessorGenerator.standardPreprocessor(), true, new BM25Similarity()));
+		queries.add(new QueryHelper(questions, engIndex, new EnglishAnalyzer(), null, true, new ClassicSimilarity()));
+		queries.add(new QueryHelper(questions, engIndex, new EnglishAnalyzer(), null, true, new BM25Similarity()));
 		return queries;
 	}
 
