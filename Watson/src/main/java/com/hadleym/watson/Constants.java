@@ -24,7 +24,6 @@ public class Constants {
 	public static final String NLP_INDEX = "nlpIndex";
 	public static final String STD_INDEX = "standardIndex";
 	public static final String QUESTIONS_FILE = "questions.txt";
-	public static final String[] FILENAMES = {"StandardAnalyzerTFIDF.txt", "StandardAnalyzerBM25.txt", "nlpCoreTFIDF.txt", "nlpCoreBM25.txt"};
 	public static final String FIELD_CONTENTS = "contents";
 	public static final String FIELD_CATEGORY = "category";
 	public static final boolean recreate = true;

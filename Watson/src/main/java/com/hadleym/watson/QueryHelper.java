@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.DirectoryReader;
@@ -208,8 +209,8 @@ public class QueryHelper {
 
 	// Prints a summary of the results from the Questions.
 	public void printSummary() {
-		
-		System.out.println("Summary for " + this );
+
+		System.out.println("Summary for " + this);
 		System.out.println("Total Questions: " + total);
 		System.out.println("Correct top 1 questions: " + getRA1Score());
 		System.out.println("MRRScore: " + getMRRScore());
@@ -217,33 +218,52 @@ public class QueryHelper {
 	}
 
 	@Override
-	public String toString(){
-		if (analyzer instanceof StandardAnalyzer) {
-			return "Lucene Standard Analyzer " + sim;
+	public String toString() {
+		if (preprocessor != null) {
+			return "CoreNLP Lemmas and " + getAnalyzerName() + " and " + getSimName();
 		} else {
-			return "CoreNLP lemmas and Lucene Whitespace Analyzer " + sim;
-		}	
+			return "Lucene " + getAnalyzerName() + " and " + getSimName();
+		}
+
 	}
+
+	public String getFilename() {
+		return toString().replace(" ", "") + ".txt";
+	}
+
 	public String getSummary() {
 		StringBuilder sb = new StringBuilder();
-		String analyzerString = null;
-		if (analyzer instanceof StandardAnalyzer) {
-			analyzerString = "Lucene Standard Analyzer with " + sim ;
-		} else if (analyzer instanceof EnglishAnalyzer){
-			analyzerString = "Lucene English Analyzer with " + sim;
-		} else {
-			analyzerString = "CoreNLP lemmas and Lucene Whitespace Analyzer with " + sim;
-		}
+		String analyzerString = toString();
 		sb.append("Summary for " + analyzerString + '\n');
 		sb.append("Total Questions: " + total + "\nCorrect top 1 questions: " + getRA1Score() + "\nMRRScore: "
 				+ getMRRScore() + '\n');
 		return sb.toString();
 	}
-	
-	public String getIndexDir(){
-		if ( analyzer instanceof StandardAnalyzer) {
+
+	public String getSimName() {
+		if (sim instanceof ClassicSimilarity) {
+			return "tf-idf";
+
+		} else
+			return "BM25";
+	}
+
+	public String getAnalyzerName() {
+		if (analyzer instanceof StandardAnalyzer) {
+			return "StandardAnalyzer";
+		} else if (analyzer instanceof EnglishAnalyzer) {
+			return "EnglishAnalyzer";
+		} else if (analyzer instanceof WhitespaceAnalyzer) {
+			return "whitespaceAnalyzer";
+		} else {
+			return "noAnalyzer";
+		}
+	}
+
+	public String getIndexDir() {
+		if (analyzer instanceof StandardAnalyzer) {
 			return Constants.STD_INDEX;
-		} else if ( analyzer instanceof EnglishAnalyzer){
+		} else if (analyzer instanceof EnglishAnalyzer) {
 			return Constants.ENG_INDEX;
 		} else {
 			return Constants.NLP_INDEX;

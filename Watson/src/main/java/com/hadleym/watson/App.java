@@ -2,13 +2,10 @@ package com.hadleym.watson;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.Console;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,21 +13,8 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.similarities.BM25Similarity;
-import org.apache.lucene.search.similarities.ClassicSimilarity;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
-
-import edu.stanford.nlp.simple.Document;
-import edu.stanford.nlp.simple.Sentence;
 
 /*
  * WATSON PROJECT
@@ -68,59 +52,10 @@ public class App {
 			System.out.println("Preprocessing completed.");
 		} else if (args.length == 1 && args[0].equals("-index")) {
 			indexAllTypes();
-			System.out.println("Indexing for both branches completed");
+			System.out.println("Indexing for all branches completed");
 		} else if (args.length == 1 && args[0].equals("-evaluate")) {
 			evaluateFull(Helper.buildAllTypes());
-			System.out.println("Evaluation for both branches completed. See output files");
-		} else if (args.length == 3 && args[0].equals("-iwht")) {
-			index(new File(args[1]), new File(args[2]), new WhitespaceAnalyzer());
-		} else if (args.length == 3 && args[0].equals("-istd")) {
-			String filesToIndex = args[1];
-			File index = new File(args[2]);
-			if (index.listFiles().length > 0) {
-				System.out.println(index.getName() + " is not empty.  Please empty index directory and retry.");
-				System.exit(1);
-			}
-			index(new File(filesToIndex), index, new StandardAnalyzer());
-		} else if (args.length == 3 && args[0].equals("-ewht"))
-		// will evaluate the nlp pre-processed files vs. the collection
-		// of questions.
-		{
-			System.out.println("Evaluating against the questions file '" + args[1] + "' and the preprocessed index '"
-					+ args[2] + "' with whitespace analyzer...");
-
-			// because this is the NLP files, we must do the preprocessing.
-			Preprocessor preprocessor = PreprocessorGenerator.standardPreprocessor();
-			String questions = args[1];
-			String index = args[2];
-			QueryHelper nlpQueryClassic = new QueryHelper(new File(questions), new File(index),
-					new WhitespaceAnalyzer(), preprocessor, true, new ClassicSimilarity());
-			nlpQueryClassic.executeQuestions();
-			nlpQueryClassic.printSummary();
-			System.out.println();
-			QueryHelper nlpQueryBM25 = new QueryHelper(new File(questions), new File(index), new WhitespaceAnalyzer(),
-					preprocessor, true, new BM25Similarity());
-			nlpQueryBM25.executeQuestions();
-			nlpQueryBM25.printSummary();
-
-		} else if (args.length == 3 && args[0].equals("-estd"))
-		// will evaluate the lucene standard analyzer index documents vs
-		// the collection of questions.
-		{
-			System.out.println("Evaluating the questions file [" + args[1] + "] with the index dir " + args[2]
-					+ " with standard analyzer...");
-			String questions = args[1];
-			String index = args[2];
-			QueryHelper stdQueryClassic = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(),
-					null, true, new ClassicSimilarity());
-			QueryHelper stdQueryBM25 = new QueryHelper(new File(questions), new File(index), new StandardAnalyzer(),
-					null, true, new BM25Similarity());
-			stdQueryClassic.executeQuestions();
-			stdQueryClassic.printSummary();
-			System.out.println();
-			stdQueryBM25.executeQuestions();
-			stdQueryBM25.printSummary();
-			System.out.println();
+			System.out.println("Evaluation for all branches completed. See output files");
 
 		} else if (args.length == 3 && args[0].equals("-explore")) {
 			// Handy 'explorer' that can be used to see what individual
@@ -201,8 +136,8 @@ public class App {
 			System.exit(1);
 		}
 
-		checkEmptyDir(stdIndex);
 		checkEmptyDir(nlpIndex);
+		checkEmptyDir(stdIndex);
 		checkEmptyDir(engIndex);
 
 		index(nlpSource, nlpIndex, new WhitespaceAnalyzer());
@@ -214,14 +149,12 @@ public class App {
 	// both scoring functions (tf-idf and BM25) and writes each to
 	// one of four text files.
 	public static void evaluateFull(ArrayList<QueryHelper> queries) {
-		String[] names = Constants.FILENAMES;
-		int pos = 0;
 		for (QueryHelper query : queries) {
 			System.out.println("Evaluating " + query + "...");
 			query.executeQuestions();
 			try {
-				System.out.println("Producing " + names[pos] + "...");
-				BufferedWriter bw = new BufferedWriter(new FileWriter(names[pos]));
+				System.out.println("Producing " + query.getFilename() + "...");
+				BufferedWriter bw = new BufferedWriter(new FileWriter(query.getFilename()));
 				bw.write(query.getSummary());
 				bw.write('\n');
 				for (Question question : query.handler.questions) {
@@ -232,8 +165,7 @@ public class App {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Finished creating " + names[pos]);
-			pos++;
+			System.out.println("Finished creating " + query.getFilename());
 		}
 		System.out.println("Evaluation finished, all files complete.");
 	}
