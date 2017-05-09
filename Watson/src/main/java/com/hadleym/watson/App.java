@@ -71,21 +71,20 @@ import com.hadleym.watson.query.Question;
 public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
-		// this is for the files referred to as 'nlp' preprocessed files.
-		if (args.length == 0) {
-			Helper.printUsageMessage();
-			System.exit(1);
-		}
 		if (args.length == 1 && args[0].equals("-pre")) {
+			// preprocessing
 			Preprocessor.preprocessDir(Constants.RAW_FILE_DIR, Constants.NLP_PREPROCESS_DIR);
 			System.out.println("Preprocessing completed.");
 		} else if (args.length == 1 && args[0].equals("-index")) {
+			// indexing
 			indexAllTypes();
 			System.out.println("Indexing for all branches completed");
 		} else if (args.length == 1 && args[0].equals("-evaluate")) {
+			// querying, evaluating
 			evaluateFull(Helper.buildAllTypes());
 			System.out.println("Evaluation for all branches completed. See output files");
 		} else {
+			// usage message
 			Helper.printUsageMessage();
 			System.exit(1);
 		}
