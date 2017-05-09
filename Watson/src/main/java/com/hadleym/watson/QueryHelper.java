@@ -143,19 +143,22 @@ public class QueryHelper {
 		return results;
 	}
 
-	public int getRA1Score() {
+	// return the Precision @ 1 score
+	public int getPA1Score() {
 		if (RA1Score == -1) {
-			calculateRA1Score();
+			calculatePA1Score();
 		}
 		return RA1Score;
 	}
 
-	public void calculateRA1Score() {
+	// calculate the Precision @ 1 Score
+	public void calculatePA1Score() {
 		if (ranks[0] > 0) {
 			RA1Score = ranks[0];
 		}
 	}
 
+	// calculate the Mean Reciprocal Rank Score
 	public void calculateMRRScore() {
 		float score = 0;
 		for (Question question : handler.questions) {
@@ -200,19 +203,12 @@ public class QueryHelper {
 		}
 	}
 
-	// print all of the questions contained for this QueryHelper.
-	public void printAllQuestions() {
-		for (Question question : handler.questions) {
-			question.printQuestion();
-		}
-	}
-
 	// Prints a summary of the results from the Questions.
 	public void printSummary() {
 
 		System.out.println("Summary for " + this);
 		System.out.println("Total Questions: " + total);
-		System.out.println("Correct top 1 questions: " + getRA1Score());
+		System.out.println("Correct top 1 questions: " + getPA1Score());
 		System.out.println("MRRScore: " + getMRRScore());
 		// printRanks();
 	}
@@ -227,19 +223,22 @@ public class QueryHelper {
 
 	}
 
+	// returns a unique filename for the given model and similarity class.
 	public String getFilename() {
 		return toString().replace(" ", "") + ".txt";
 	}
 
+	// returns the summary to be written to the output file.
 	public String getSummary() {
 		StringBuilder sb = new StringBuilder();
 		String analyzerString = toString();
 		sb.append("Summary for " + analyzerString + '\n');
-		sb.append("Total Questions: " + total + "\nCorrect top 1 questions: " + getRA1Score() + "\nMRRScore: "
+		sb.append("Total Questions: " + total + "\nCorrect top 1 questions: " + getPA1Score() + "\nMRRScore: "
 				+ getMRRScore() + '\n');
 		return sb.toString();
 	}
 
+	//returns the similarity name for human reading.
 	public String getSimName() {
 		if (sim instanceof ClassicSimilarity) {
 			return "tf-idf";
@@ -248,6 +247,7 @@ public class QueryHelper {
 			return "BM25";
 	}
 
+	// returns the name of the analyzer.
 	public String getAnalyzerName() {
 		if (analyzer instanceof StandardAnalyzer) {
 			return "StandardAnalyzer";
@@ -260,6 +260,8 @@ public class QueryHelper {
 		}
 	}
 
+	// helpful method for determining the index method of a given
+	// analyzer.
 	public String getIndexDir() {
 		if (analyzer instanceof StandardAnalyzer) {
 			return Constants.STD_INDEX;

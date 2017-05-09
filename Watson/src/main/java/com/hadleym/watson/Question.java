@@ -122,22 +122,4 @@ public class Question {
 
 	}
 
-	public void printQuestion() {
-		if (getNumber() >= 0) {
-			System.out.println("NUMBER " + getNumber());
-		}
-		System.out.println("CATEGORY: " + category);
-		System.out.println("QUESTION: \"" + question + "\"");
-		System.out.println("CORRECT ANSWER: " + answer);
-		System.out.println("PARSED QUESTION: " + getParsedQuestion());
-		if (rank >= 0) {
-			int foundrank = rank + 1;
-			System.out.println("WATSON FOUND AT RANK: " + foundrank);
-		} else {
-			System.out.println("WATSON DID NOT FIND IN TOP " + Constants.HITSPERPAGE);
-		}
-		printResults();
-		System.out.println("");
-	}
-
 }
