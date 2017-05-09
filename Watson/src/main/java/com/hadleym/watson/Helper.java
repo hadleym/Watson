@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
@@ -56,8 +57,8 @@ public class Helper {
 		File nlpIndex = Helper.checkDirectoryAndCreate(nIndex);
 		File stdIndex = Helper.checkDirectoryAndCreate(sIndex);
 		ArrayList<QueryHelper> queries = new ArrayList<QueryHelper>();
-		queries.add(new QueryHelper(questions, stdIndex, new StandardAnalyzer(), null, true, new ClassicSimilarity()));
-		queries.add(new QueryHelper(questions, stdIndex, new StandardAnalyzer(), null, true, new BM25Similarity()));
+		queries.add(new QueryHelper(questions, stdIndex, new EnglishAnalyzer(), null, true, new ClassicSimilarity()));
+		queries.add(new QueryHelper(questions, stdIndex, new EnglishAnalyzer(), null, true, new BM25Similarity()));
 		queries.add(new QueryHelper(questions, nlpIndex, new WhitespaceAnalyzer(),
 				PreprocessorGenerator.standardPreprocessor(), true, new ClassicSimilarity()));
 		queries.add(new QueryHelper(questions, nlpIndex, new WhitespaceAnalyzer(),

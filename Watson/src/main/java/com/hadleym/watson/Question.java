@@ -106,7 +106,7 @@ public class Question {
 		}
 		sb.append("CATEGORY: " + category + '\n');
 		sb.append("QUESTION: \"" + question + "\"" + '\n');
-		sb.append("CORRECT ANSWER: " + answer);
+		sb.append("CORRECT ANSWER: " + answer + '\n');
 		sb.append("PARSED QUESTION: " + getParsedQuestion() + '\n');
 		if (rank >= 0) {
 			int foundrank = rank + 1;

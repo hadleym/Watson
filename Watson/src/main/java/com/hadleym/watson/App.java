@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
@@ -210,7 +211,7 @@ public class App {
 		}
 
 		index(nlpSource, nlpIndex, new WhitespaceAnalyzer());
-		index(stdSource, stdIndex, new StandardAnalyzer());
+		index(stdSource, stdIndex, new EnglishAnalyzer());
 	}
 
 	// evaluates both branches ( StandardAnalyzer and Core NLP ) with
