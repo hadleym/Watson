@@ -9,6 +9,9 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
 
+import com.hadleym.watson.preprocessor.PreprocessorGenerator;
+import com.hadleym.watson.query.QueryHelper;
+
 public class Helper {
 
 	/*

@@ -1,4 +1,4 @@
-package com.hadleym.watson;
+package com.hadleym.watson.index;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,6 +14,8 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.SimpleFSDirectory;
+
+import com.hadleym.watson.Constants;
 
 /*
  * This class provides the functionality of indexing 

@@ -1,4 +1,4 @@
-package com.hadleym.watson;
+package com.hadleym.watson.preprocessor;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,6 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
+
+import com.hadleym.watson.Constants;
+import com.hadleym.watson.Helper;
 
 import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;

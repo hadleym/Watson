@@ -13,6 +13,11 @@ import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryparser.classic.ParseException;
 
+import com.hadleym.watson.index.DocumentIndexer;
+import com.hadleym.watson.preprocessor.Preprocessor;
+import com.hadleym.watson.query.QueryHelper;
+import com.hadleym.watson.query.Question;
+
 /*
  * WATSON PROJECT
  * Mark Hadley

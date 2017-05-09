@@ -1,4 +1,6 @@
-package com.hadleym.watson;
+package com.hadleym.watson.preprocessor;
+
+import com.hadleym.watson.Constants;
 
 // Simple class that generates a preprocessor
 public class PreprocessorGenerator {

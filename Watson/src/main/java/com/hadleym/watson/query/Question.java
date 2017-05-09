@@ -1,7 +1,9 @@
-package com.hadleym.watson;
+package com.hadleym.watson.query;
 
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+
+import com.hadleym.watson.Constants;
 
 /*
  * This is a container class specific for Jeopardy Questions

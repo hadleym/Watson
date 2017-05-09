@@ -1,4 +1,4 @@
-package com.hadleym.watson;
+package com.hadleym.watson.query;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,6 +17,9 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.search.similarities.Similarity;
+
+import com.hadleym.watson.Constants;
+import com.hadleym.watson.preprocessor.Preprocessor;
 
 /* This class takes a directory that has been indexed by lucene, 
  * a file containing the Jeopardy questions, and queries the
