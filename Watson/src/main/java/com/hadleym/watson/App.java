@@ -23,8 +23,15 @@ import com.hadleym.watson.query.Question;
  * Mark Hadley
  * CS 483 
  * 5/1/2017
- * Provide no arguments to the App class for usage information.
+ * ****************************************
+ * $ java -jar Watson.jar -usage 
+ * OR
+ * $ mvn exec:java
+ * 
+ * to see usage information.
+ * (and modify the argument in the pom.xml file)
  * OR SEE ATTACHED README.txt
+ * ****************************************
  * 
  * Simple Usage:
  * Step 1) $ java -jar Watson.jar -pre
@@ -32,20 +39,18 @@ import com.hadleym.watson.query.Question;
  * Step 3) $ java -jar Watson.jar -evaluate
  *  
  *  DETAILED USAGE:
- *  Step 1) 
+ *  Step 1) "-pre" argument
  *  Preprocess the Raw Text files.  
  *  Include them in a local directory called 'rawText'.
  *  *WARNING THIS PROCESS TAKES AROUND 2+ HOURS*
  *  
- *  Step 2)
+ *  Step 2) "-index" argument
  *  Index all three models using the -index flag.  This process takes under 10 minutes.
  *  
- *  Step 3)
+ *  Step 3) "-evaluate" argument
  *  Evaluate all three models and output 6 .txt files, two for each model (tf-idf, BM25 weighting).
  *  		
- *  Step 2) Index all 3 models.
- *  
- *  
+ * *************************************************************************  
  * This is a full end-to-end system for emulating the 'Watson' Jeopardy 
  * system.  
  * 
@@ -61,8 +66,8 @@ import com.hadleym.watson.query.Question;
  * 
  * Questions are created by parsing the 'questions.txt' file contained given with these files.
  * 
- * 
- */
+ * See attached Report.pdf for further details on process, and see attached README.txt for usage information.
+ * *************************************************************************  */
 public class App {
 
 	public static void main(String[] args) throws IOException, ParseException {
